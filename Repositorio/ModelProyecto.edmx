@@ -1,0 +1,1231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProyectoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Arbitros">
+          <Key>
+            <PropertyRef Name="idArbitro" />
+          </Key>
+          <Property Name="idArbitro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido1" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido2" Type="nchar" MaxLength="50" />
+          <Property Name="Fecha_Nacimiento" Type="date" />
+          <Property Name="Partidos" Type="int" />
+          <Property Name="TarjetasAmarillas" Type="int" />
+          <Property Name="TarjetasRojas" Type="int" />
+        </EntityType>
+        <EntityType Name="Campos">
+          <Key>
+            <PropertyRef Name="idCampo" />
+          </Key>
+          <Property Name="idCampo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idClub" Type="int" />
+          <Property Name="Nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Direccion" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Categoria_Ligas">
+          <Key>
+            <PropertyRef Name="idCategoriaLiga" />
+          </Key>
+          <Property Name="idCategoriaLiga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCategoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoriasSanciones">
+          <Key>
+            <PropertyRef Name="idCategoriaSancion" />
+          </Key>
+          <Property Name="idCategoriaSancion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Clubes">
+          <Key>
+            <PropertyRef Name="idClub" />
+          </Key>
+          <Property Name="idClub" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Localidad" Type="nchar" MaxLength="50" />
+          <Property Name="Telefono" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ComentariosLive">
+          <Key>
+            <PropertyRef Name="idComentario" />
+          </Key>
+          <Property Name="idComentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idLive" Type="int" />
+          <Property Name="texto" Type="nchar" MaxLength="500" />
+          <Property Name="minuto" Type="int" />
+        </EntityType>
+        <EntityType Name="Equipos">
+          <Key>
+            <PropertyRef Name="idEquipo" />
+          </Key>
+          <Property Name="idEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idClub" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="50" />
+          <Property Name="idLiga" Type="int" />
+          <Property Name="Puntos" Type="int" Nullable="false" />
+          <Property Name="Partidos_Jugados" Type="int" />
+          <Property Name="Partidos_Ganados" Type="int" />
+          <Property Name="Partidos_Perdidos" Type="int" />
+          <Property Name="Partidos_Empatados" Type="int" />
+          <Property Name="Puntos_Encajados" Type="int" />
+          <Property Name="Puntos_Anotados" Type="int" />
+        </EntityType>
+        <EntityType Name="EstadisticasPartidos">
+          <Key>
+            <PropertyRef Name="idEstadistica_Partido" />
+          </Key>
+          <Property Name="idEstadistica_Partido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPartido" Type="int" Nullable="false" />
+          <Property Name="idEquipo" Type="int" Nullable="false" />
+          <Property Name="Ensayos" Type="int" />
+          <Property Name="Conversiones" Type="int" />
+          <Property Name="GolpesCastigo" Type="int" />
+          <Property Name="Drops" Type="int" />
+          <Property Name="TarjetasAmarillas" Type="int" />
+          <Property Name="TarjetasRojas" Type="int" />
+        </EntityType>
+        <EntityType Name="Jugadores">
+          <Key>
+            <PropertyRef Name="idJugador" />
+          </Key>
+          <Property Name="idJugador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEquipo" Type="int" />
+          <Property Name="Nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido1" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido2" Type="nchar" MaxLength="50" />
+          <Property Name="Fecha_Nacimiento" Type="date" />
+          <Property Name="Altura" Type="int" />
+          <Property Name="Peso" Type="int" />
+          <Property Name="Puntos" Type="int" />
+          <Property Name="Partidos_Jugados" Type="int" />
+          <Property Name="Partidos_Ganados" Type="int" />
+          <Property Name="Partidos_Perdidos" Type="int" />
+          <Property Name="Partidos_Empatados" Type="int" />
+          <Property Name="TarjetasAmarillas" Type="int" />
+          <Property Name="TarjetasRojas" Type="int" />
+        </EntityType>
+        <EntityType Name="Ligas">
+          <Key>
+            <PropertyRef Name="idLiga" />
+          </Key>
+          <Property Name="idLiga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="idCategoriaLiga" Type="int" />
+          <Property Name="Año" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Live">
+          <Key>
+            <PropertyRef Name="idLive" />
+          </Key>
+          <Property Name="idLive" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TiempoTranscurrido" Type="int" />
+        </EntityType>
+        <EntityType Name="Partidos">
+          <Key>
+            <PropertyRef Name="idPartido" />
+          </Key>
+          <Property Name="idPartido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idLiga" Type="int" />
+          <Property Name="idEquipoLocal" Type="int" Nullable="false" />
+          <Property Name="idEquipoVisitante" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="idCampo" Type="int" />
+          <Property Name="idLive" Type="int" />
+          <Property Name="idArbitro" Type="int" />
+        </EntityType>
+        <EntityType Name="Sanciones_Equipo">
+          <Key>
+            <PropertyRef Name="idSancion_Equipo" />
+          </Key>
+          <Property Name="idSancion_Equipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nchar" MaxLength="500" />
+          <Property Name="multa" Type="money" Nullable="false" />
+          <Property Name="idCategoria_Sancion" Type="int" />
+          <Property Name="idEquipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SancionesJugador">
+          <Key>
+            <PropertyRef Name="idSancionJugador" />
+          </Key>
+          <Property Name="idSancionJugador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idJugador" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nchar" MaxLength="500" />
+          <Property Name="multa" Type="money" Nullable="false" />
+          <Property Name="idCategoria_Sancion" Type="int" />
+          <Property Name="idArbitro" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_ComentariosLive_Live">
+          <End Role="Live" Type="Self.Live" Multiplicity="0..1" />
+          <End Role="ComentariosLive" Type="Self.ComentariosLive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Live">
+              <PropertyRef Name="idLive" />
+            </Principal>
+            <Dependent Role="ComentariosLive">
+              <PropertyRef Name="idLive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipos_Clubes">
+          <End Role="Clubes" Type="Self.Clubes" Multiplicity="1" />
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubes">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="Equipos">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipos_Ligas">
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1" />
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligas">
+              <PropertyRef Name="idLiga" />
+            </Principal>
+            <Dependent Role="Equipos">
+              <PropertyRef Name="idLiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadisticasPartidos_Equipos">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+          <End Role="EstadisticasPartidos" Type="Self.EstadisticasPartidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="EstadisticasPartidos">
+              <PropertyRef Name="idEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadisticasPartidos_Partidos">
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="1" />
+          <End Role="EstadisticasPartidos" Type="Self.EstadisticasPartidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partidos">
+              <PropertyRef Name="idPartido" />
+            </Principal>
+            <Dependent Role="EstadisticasPartidos">
+              <PropertyRef Name="idPartido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jugadores_Equipos">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="0..1" />
+          <End Role="Jugadores" Type="Self.Jugadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Jugadores">
+              <PropertyRef Name="idEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligas_Categoria_Ligas">
+          <End Role="Categoria_Ligas" Type="Self.Categoria_Ligas" Multiplicity="0..1" />
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria_Ligas">
+              <PropertyRef Name="idCategoriaLiga" />
+            </Principal>
+            <Dependent Role="Ligas">
+              <PropertyRef Name="idCategoriaLiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Arbitros">
+          <End Role="Arbitros" Type="Self.Arbitros" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arbitros">
+              <PropertyRef Name="idArbitro" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idArbitro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Arbitros1">
+          <End Role="Arbitros" Type="Self.Arbitros" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arbitros">
+              <PropertyRef Name="idArbitro" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idArbitro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Campos">
+          <End Role="Campos" Type="Self.Campos" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campos">
+              <PropertyRef Name="idCampo" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idCampo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Equipos">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idEquipoLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Equipos1">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idEquipoVisitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Ligas">
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligas">
+              <PropertyRef Name="idLiga" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idLiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Live">
+          <End Role="Live" Type="Self.Live" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Live">
+              <PropertyRef Name="idLive" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idLive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sanciones_Equipo_CategoriasSanciones">
+          <End Role="CategoriasSanciones" Type="Self.CategoriasSanciones" Multiplicity="0..1" />
+          <End Role="Sanciones_Equipo" Type="Self.Sanciones_Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriasSanciones">
+              <PropertyRef Name="idCategoriaSancion" />
+            </Principal>
+            <Dependent Role="Sanciones_Equipo">
+              <PropertyRef Name="idCategoria_Sancion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sanciones_Equipo_Equipos">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+          <End Role="Sanciones_Equipo" Type="Self.Sanciones_Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Sanciones_Equipo">
+              <PropertyRef Name="idEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SancionesJugador_Arbitros">
+          <End Role="Arbitros" Type="Self.Arbitros" Multiplicity="0..1" />
+          <End Role="SancionesJugador" Type="Self.SancionesJugador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arbitros">
+              <PropertyRef Name="idArbitro" />
+            </Principal>
+            <Dependent Role="SancionesJugador">
+              <PropertyRef Name="idArbitro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SancionesJugador_CategoriasSanciones">
+          <End Role="CategoriasSanciones" Type="Self.CategoriasSanciones" Multiplicity="0..1" />
+          <End Role="SancionesJugador" Type="Self.SancionesJugador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriasSanciones">
+              <PropertyRef Name="idCategoriaSancion" />
+            </Principal>
+            <Dependent Role="SancionesJugador">
+              <PropertyRef Name="idCategoria_Sancion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SancionesJugador_Jugadores">
+          <End Role="Jugadores" Type="Self.Jugadores" Multiplicity="1" />
+          <End Role="SancionesJugador" Type="Self.SancionesJugador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugadores">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="SancionesJugador">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoModelStoreContainer">
+          <EntitySet Name="Arbitros" EntityType="Self.Arbitros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Campos" EntityType="Self.Campos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria_Ligas" EntityType="Self.Categoria_Ligas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoriasSanciones" EntityType="Self.CategoriasSanciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clubes" EntityType="Self.Clubes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComentariosLive" EntityType="Self.ComentariosLive" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadisticasPartidos" EntityType="Self.EstadisticasPartidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jugadores" EntityType="Self.Jugadores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ligas" EntityType="Self.Ligas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Live" EntityType="Self.Live" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partidos" EntityType="Self.Partidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sanciones_Equipo" EntityType="Self.Sanciones_Equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SancionesJugador" EntityType="Self.SancionesJugador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ComentariosLive_Live" Association="Self.FK_ComentariosLive_Live">
+            <End Role="Live" EntitySet="Live" />
+            <End Role="ComentariosLive" EntitySet="ComentariosLive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipos_Clubes" Association="Self.FK_Equipos_Clubes">
+            <End Role="Clubes" EntitySet="Clubes" />
+            <End Role="Equipos" EntitySet="Equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipos_Ligas" Association="Self.FK_Equipos_Ligas">
+            <End Role="Ligas" EntitySet="Ligas" />
+            <End Role="Equipos" EntitySet="Equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadisticasPartidos_Equipos" Association="Self.FK_EstadisticasPartidos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="EstadisticasPartidos" EntitySet="EstadisticasPartidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadisticasPartidos_Partidos" Association="Self.FK_EstadisticasPartidos_Partidos">
+            <End Role="Partidos" EntitySet="Partidos" />
+            <End Role="EstadisticasPartidos" EntitySet="EstadisticasPartidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jugadores_Equipos" Association="Self.FK_Jugadores_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Jugadores" EntitySet="Jugadores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligas_Categoria_Ligas" Association="Self.FK_Ligas_Categoria_Ligas">
+            <End Role="Categoria_Ligas" EntitySet="Categoria_Ligas" />
+            <End Role="Ligas" EntitySet="Ligas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Arbitros" Association="Self.FK_Partidos_Arbitros">
+            <End Role="Arbitros" EntitySet="Arbitros" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Arbitros1" Association="Self.FK_Partidos_Arbitros1">
+            <End Role="Arbitros" EntitySet="Arbitros" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Campos" Association="Self.FK_Partidos_Campos">
+            <End Role="Campos" EntitySet="Campos" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Equipos" Association="Self.FK_Partidos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Equipos1" Association="Self.FK_Partidos_Equipos1">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Ligas" Association="Self.FK_Partidos_Ligas">
+            <End Role="Ligas" EntitySet="Ligas" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Live" Association="Self.FK_Partidos_Live">
+            <End Role="Live" EntitySet="Live" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sanciones_Equipo_CategoriasSanciones" Association="Self.FK_Sanciones_Equipo_CategoriasSanciones">
+            <End Role="CategoriasSanciones" EntitySet="CategoriasSanciones" />
+            <End Role="Sanciones_Equipo" EntitySet="Sanciones_Equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sanciones_Equipo_Equipos" Association="Self.FK_Sanciones_Equipo_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Sanciones_Equipo" EntitySet="Sanciones_Equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SancionesJugador_Arbitros" Association="Self.FK_SancionesJugador_Arbitros">
+            <End Role="Arbitros" EntitySet="Arbitros" />
+            <End Role="SancionesJugador" EntitySet="SancionesJugador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SancionesJugador_CategoriasSanciones" Association="Self.FK_SancionesJugador_CategoriasSanciones">
+            <End Role="CategoriasSanciones" EntitySet="CategoriasSanciones" />
+            <End Role="SancionesJugador" EntitySet="SancionesJugador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SancionesJugador_Jugadores" Association="Self.FK_SancionesJugador_Jugadores">
+            <End Role="Jugadores" EntitySet="Jugadores" />
+            <End Role="SancionesJugador" EntitySet="SancionesJugador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Arbitros">
+          <Key>
+            <PropertyRef Name="idArbitro" />
+          </Key>
+          <Property Name="idArbitro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido1" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido2" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Partidos" Type="Int32" />
+          <Property Name="TarjetasAmarillas" Type="Int32" />
+          <Property Name="TarjetasRojas" Type="Int32" />
+          <NavigationProperty Name="Partidos1" Relationship="Self.FK_Partidos_Arbitros" FromRole="Arbitros" ToRole="Partidos" />
+          <NavigationProperty Name="Partidos2" Relationship="Self.FK_Partidos_Arbitros1" FromRole="Arbitros" ToRole="Partidos" />
+          <NavigationProperty Name="SancionesJugador" Relationship="Self.FK_SancionesJugador_Arbitros" FromRole="Arbitros" ToRole="SancionesJugador" />
+        </EntityType>
+        <EntityType Name="Campos">
+          <Key>
+            <PropertyRef Name="idCampo" />
+          </Key>
+          <Property Name="idCampo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idClub" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Partidos" Relationship="Self.FK_Partidos_Campos" FromRole="Campos" ToRole="Partidos" />
+        </EntityType>
+        <EntityType Name="Categoria_Ligas">
+          <Key>
+            <PropertyRef Name="idCategoriaLiga" />
+          </Key>
+          <Property Name="idCategoriaLiga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ligas" Relationship="Self.FK_Ligas_Categoria_Ligas" FromRole="Categoria_Ligas" ToRole="Ligas" />
+        </EntityType>
+        <EntityType Name="CategoriasSanciones">
+          <Key>
+            <PropertyRef Name="idCategoriaSancion" />
+          </Key>
+          <Property Name="idCategoriaSancion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Sanciones_Equipo" Relationship="Self.FK_Sanciones_Equipo_CategoriasSanciones" FromRole="CategoriasSanciones" ToRole="Sanciones_Equipo" />
+          <NavigationProperty Name="SancionesJugador" Relationship="Self.FK_SancionesJugador_CategoriasSanciones" FromRole="CategoriasSanciones" ToRole="SancionesJugador" />
+        </EntityType>
+        <EntityType Name="Clubes">
+          <Key>
+            <PropertyRef Name="idClub" />
+          </Key>
+          <Property Name="idClub" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Localidad" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Equipos" Relationship="Self.FK_Equipos_Clubes" FromRole="Clubes" ToRole="Equipos" />
+        </EntityType>
+        <EntityType Name="ComentariosLive">
+          <Key>
+            <PropertyRef Name="idComentario" />
+          </Key>
+          <Property Name="idComentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idLive" Type="Int32" />
+          <Property Name="texto" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="minuto" Type="Int32" />
+          <NavigationProperty Name="Live" Relationship="Self.FK_ComentariosLive_Live" FromRole="ComentariosLive" ToRole="Live" />
+        </EntityType>
+        <EntityType Name="Equipos">
+          <Key>
+            <PropertyRef Name="idEquipo" />
+          </Key>
+          <Property Name="idEquipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idClub" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="idLiga" Type="Int32" />
+          <Property Name="Puntos" Type="Int32" Nullable="false" />
+          <Property Name="Partidos_Jugados" Type="Int32" />
+          <Property Name="Partidos_Ganados" Type="Int32" />
+          <Property Name="Partidos_Perdidos" Type="Int32" />
+          <Property Name="Partidos_Empatados" Type="Int32" />
+          <Property Name="Puntos_Encajados" Type="Int32" />
+          <Property Name="Puntos_Anotados" Type="Int32" />
+          <NavigationProperty Name="Clubes" Relationship="Self.FK_Equipos_Clubes" FromRole="Equipos" ToRole="Clubes" />
+          <NavigationProperty Name="Ligas" Relationship="Self.FK_Equipos_Ligas" FromRole="Equipos" ToRole="Ligas" />
+          <NavigationProperty Name="EstadisticasPartidos" Relationship="Self.FK_EstadisticasPartidos_Equipos" FromRole="Equipos" ToRole="EstadisticasPartidos" />
+          <NavigationProperty Name="Jugadores" Relationship="Self.FK_Jugadores_Equipos" FromRole="Equipos" ToRole="Jugadores" />
+          <NavigationProperty Name="Sanciones_Equipo" Relationship="Self.FK_Sanciones_Equipo_Equipos" FromRole="Equipos" ToRole="Sanciones_Equipo" />
+          <NavigationProperty Name="Partidos" Relationship="ProyectoModel.FK_Partidos_Equipos" FromRole="Equipos" ToRole="Partidos" />
+          <NavigationProperty Name="Partidos1" Relationship="ProyectoModel.FK_Partidos_Equipos1" FromRole="Equipos" ToRole="Partidos" />
+        </EntityType>
+        <EntityType Name="EstadisticasPartidos">
+          <Key>
+            <PropertyRef Name="idEstadistica_Partido" />
+          </Key>
+          <Property Name="idEstadistica_Partido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPartido" Type="Int32" Nullable="false" />
+          <Property Name="idEquipo" Type="Int32" Nullable="false" />
+          <Property Name="Ensayos" Type="Int32" />
+          <Property Name="Conversiones" Type="Int32" />
+          <Property Name="GolpesCastigo" Type="Int32" />
+          <Property Name="Drops" Type="Int32" />
+          <Property Name="TarjetasAmarillas" Type="Int32" />
+          <Property Name="TarjetasRojas" Type="Int32" />
+          <NavigationProperty Name="Equipos" Relationship="Self.FK_EstadisticasPartidos_Equipos" FromRole="EstadisticasPartidos" ToRole="Equipos" />
+          <NavigationProperty Name="Partidos" Relationship="Self.FK_EstadisticasPartidos_Partidos" FromRole="EstadisticasPartidos" ToRole="Partidos" />
+        </EntityType>
+        <EntityType Name="Jugadores">
+          <Key>
+            <PropertyRef Name="idJugador" />
+          </Key>
+          <Property Name="idJugador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEquipo" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido1" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido2" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Altura" Type="Int32" />
+          <Property Name="Peso" Type="Int32" />
+          <Property Name="Puntos" Type="Int32" />
+          <Property Name="Partidos_Jugados" Type="Int32" />
+          <Property Name="Partidos_Ganados" Type="Int32" />
+          <Property Name="Partidos_Perdidos" Type="Int32" />
+          <Property Name="Partidos_Empatados" Type="Int32" />
+          <Property Name="TarjetasAmarillas" Type="Int32" />
+          <Property Name="TarjetasRojas" Type="Int32" />
+          <NavigationProperty Name="Equipos" Relationship="Self.FK_Jugadores_Equipos" FromRole="Jugadores" ToRole="Equipos" />
+          <NavigationProperty Name="SancionesJugador" Relationship="Self.FK_SancionesJugador_Jugadores" FromRole="Jugadores" ToRole="SancionesJugador" />
+        </EntityType>
+        <EntityType Name="Ligas">
+          <Key>
+            <PropertyRef Name="idLiga" />
+          </Key>
+          <Property Name="idLiga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idCategoriaLiga" Type="Int32" />
+          <NavigationProperty Name="Categoria_Ligas" Relationship="Self.FK_Ligas_Categoria_Ligas" FromRole="Ligas" ToRole="Categoria_Ligas" />
+          <NavigationProperty Name="Equipos" Relationship="Self.FK_Equipos_Ligas" FromRole="Ligas" ToRole="Equipos" />
+          <NavigationProperty Name="Partidos" Relationship="Self.FK_Partidos_Ligas" FromRole="Ligas" ToRole="Partidos" />
+          <Property Name="Año" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Live">
+          <Key>
+            <PropertyRef Name="idLive" />
+          </Key>
+          <Property Name="idLive" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TiempoTranscurrido" Type="Int32" />
+          <NavigationProperty Name="ComentariosLive" Relationship="Self.FK_ComentariosLive_Live" FromRole="Live" ToRole="ComentariosLive" />
+          <NavigationProperty Name="Partidos" Relationship="Self.FK_Partidos_Live" FromRole="Live" ToRole="Partidos" />
+        </EntityType>
+        <EntityType Name="Partidos">
+          <Key>
+            <PropertyRef Name="idPartido" />
+          </Key>
+          <Property Name="idPartido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idLiga" Type="Int32" />
+          <Property Name="idEquipoLocal" Type="Int32" Nullable="false" />
+          <Property Name="idEquipoVisitante" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="idCampo" Type="Int32" />
+          <Property Name="idLive" Type="Int32" />
+          <Property Name="idArbitro" Type="Int32" />
+          <NavigationProperty Name="Arbitros" Relationship="Self.FK_Partidos_Arbitros" FromRole="Partidos" ToRole="Arbitros" />
+          <NavigationProperty Name="Arbitros1" Relationship="Self.FK_Partidos_Arbitros1" FromRole="Partidos" ToRole="Arbitros" />
+          <NavigationProperty Name="Campos" Relationship="Self.FK_Partidos_Campos" FromRole="Partidos" ToRole="Campos" />
+          <NavigationProperty Name="EstadisticasPartidos" Relationship="Self.FK_EstadisticasPartidos_Partidos" FromRole="Partidos" ToRole="EstadisticasPartidos" />
+          <NavigationProperty Name="Ligas" Relationship="Self.FK_Partidos_Ligas" FromRole="Partidos" ToRole="Ligas" />
+          <NavigationProperty Name="Live" Relationship="Self.FK_Partidos_Live" FromRole="Partidos" ToRole="Live" />
+          <NavigationProperty Name="Equipos" Relationship="ProyectoModel.FK_Partidos_Equipos" FromRole="Partidos" ToRole="Equipos" />
+          <NavigationProperty Name="Equipos1" Relationship="ProyectoModel.FK_Partidos_Equipos1" FromRole="Partidos" ToRole="Equipos" />
+        </EntityType>
+        <EntityType Name="Sanciones_Equipo">
+          <Key>
+            <PropertyRef Name="idSancion_Equipo" />
+          </Key>
+          <Property Name="idSancion_Equipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="multa" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="idCategoria_Sancion" Type="Int32" />
+          <Property Name="idEquipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoriasSanciones" Relationship="Self.FK_Sanciones_Equipo_CategoriasSanciones" FromRole="Sanciones_Equipo" ToRole="CategoriasSanciones" />
+          <NavigationProperty Name="Equipos" Relationship="Self.FK_Sanciones_Equipo_Equipos" FromRole="Sanciones_Equipo" ToRole="Equipos" />
+        </EntityType>
+        <EntityType Name="SancionesJugador">
+          <Key>
+            <PropertyRef Name="idSancionJugador" />
+          </Key>
+          <Property Name="idSancionJugador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idJugador" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="multa" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="idCategoria_Sancion" Type="Int32" />
+          <Property Name="idArbitro" Type="Int32" />
+          <NavigationProperty Name="Arbitros" Relationship="Self.FK_SancionesJugador_Arbitros" FromRole="SancionesJugador" ToRole="Arbitros" />
+          <NavigationProperty Name="CategoriasSanciones" Relationship="Self.FK_SancionesJugador_CategoriasSanciones" FromRole="SancionesJugador" ToRole="CategoriasSanciones" />
+          <NavigationProperty Name="Jugadores" Relationship="Self.FK_SancionesJugador_Jugadores" FromRole="SancionesJugador" ToRole="Jugadores" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Partidos_Arbitros">
+          <End Role="Arbitros" Type="Self.Arbitros" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arbitros">
+              <PropertyRef Name="idArbitro" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idArbitro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Arbitros1">
+          <End Role="Arbitros" Type="Self.Arbitros" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arbitros">
+              <PropertyRef Name="idArbitro" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idArbitro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SancionesJugador_Arbitros">
+          <End Role="Arbitros" Type="Self.Arbitros" Multiplicity="0..1" />
+          <End Role="SancionesJugador" Type="Self.SancionesJugador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arbitros">
+              <PropertyRef Name="idArbitro" />
+            </Principal>
+            <Dependent Role="SancionesJugador">
+              <PropertyRef Name="idArbitro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Campos">
+          <End Role="Campos" Type="Self.Campos" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campos">
+              <PropertyRef Name="idCampo" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idCampo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligas_Categoria_Ligas">
+          <End Role="Categoria_Ligas" Type="Self.Categoria_Ligas" Multiplicity="0..1" />
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria_Ligas">
+              <PropertyRef Name="idCategoriaLiga" />
+            </Principal>
+            <Dependent Role="Ligas">
+              <PropertyRef Name="idCategoriaLiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sanciones_Equipo_CategoriasSanciones">
+          <End Role="CategoriasSanciones" Type="Self.CategoriasSanciones" Multiplicity="0..1" />
+          <End Role="Sanciones_Equipo" Type="Self.Sanciones_Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriasSanciones">
+              <PropertyRef Name="idCategoriaSancion" />
+            </Principal>
+            <Dependent Role="Sanciones_Equipo">
+              <PropertyRef Name="idCategoria_Sancion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SancionesJugador_CategoriasSanciones">
+          <End Role="CategoriasSanciones" Type="Self.CategoriasSanciones" Multiplicity="0..1" />
+          <End Role="SancionesJugador" Type="Self.SancionesJugador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriasSanciones">
+              <PropertyRef Name="idCategoriaSancion" />
+            </Principal>
+            <Dependent Role="SancionesJugador">
+              <PropertyRef Name="idCategoria_Sancion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipos_Clubes">
+          <End Role="Clubes" Type="Self.Clubes" Multiplicity="1" />
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubes">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="Equipos">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComentariosLive_Live">
+          <End Role="Live" Type="Self.Live" Multiplicity="0..1" />
+          <End Role="ComentariosLive" Type="Self.ComentariosLive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Live">
+              <PropertyRef Name="idLive" />
+            </Principal>
+            <Dependent Role="ComentariosLive">
+              <PropertyRef Name="idLive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipos_Ligas">
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1" />
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligas">
+              <PropertyRef Name="idLiga" />
+            </Principal>
+            <Dependent Role="Equipos">
+              <PropertyRef Name="idLiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadisticasPartidos_Equipos">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+          <End Role="EstadisticasPartidos" Type="Self.EstadisticasPartidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="EstadisticasPartidos">
+              <PropertyRef Name="idEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jugadores_Equipos">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="0..1" />
+          <End Role="Jugadores" Type="Self.Jugadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Jugadores">
+              <PropertyRef Name="idEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sanciones_Equipo_Equipos">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+          <End Role="Sanciones_Equipo" Type="Self.Sanciones_Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Sanciones_Equipo">
+              <PropertyRef Name="idEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadisticasPartidos_Partidos">
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="1" />
+          <End Role="EstadisticasPartidos" Type="Self.EstadisticasPartidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partidos">
+              <PropertyRef Name="idPartido" />
+            </Principal>
+            <Dependent Role="EstadisticasPartidos">
+              <PropertyRef Name="idPartido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SancionesJugador_Jugadores">
+          <End Role="Jugadores" Type="Self.Jugadores" Multiplicity="1" />
+          <End Role="SancionesJugador" Type="Self.SancionesJugador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugadores">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="SancionesJugador">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Ligas">
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligas">
+              <PropertyRef Name="idLiga" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idLiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Live">
+          <End Role="Live" Type="Self.Live" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Live">
+              <PropertyRef Name="idLive" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idLive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Arbitros" EntityType="Self.Arbitros" />
+          <EntitySet Name="Campos" EntityType="Self.Campos" />
+          <EntitySet Name="Categoria_Ligas" EntityType="Self.Categoria_Ligas" />
+          <EntitySet Name="CategoriasSanciones" EntityType="Self.CategoriasSanciones" />
+          <EntitySet Name="Clubes" EntityType="Self.Clubes" />
+          <EntitySet Name="ComentariosLive" EntityType="Self.ComentariosLive" />
+          <EntitySet Name="Equipos" EntityType="Self.Equipos" />
+          <EntitySet Name="EstadisticasPartidos" EntityType="Self.EstadisticasPartidos" />
+          <EntitySet Name="Jugadores" EntityType="Self.Jugadores" />
+          <EntitySet Name="Ligas" EntityType="Self.Ligas" />
+          <EntitySet Name="Live" EntityType="Self.Live" />
+          <EntitySet Name="Partidos" EntityType="Self.Partidos" />
+          <EntitySet Name="Sanciones_Equipo" EntityType="Self.Sanciones_Equipo" />
+          <EntitySet Name="SancionesJugador" EntityType="Self.SancionesJugador" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Partidos_Arbitros" Association="Self.FK_Partidos_Arbitros">
+            <End Role="Arbitros" EntitySet="Arbitros" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Arbitros1" Association="Self.FK_Partidos_Arbitros1">
+            <End Role="Arbitros" EntitySet="Arbitros" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SancionesJugador_Arbitros" Association="Self.FK_SancionesJugador_Arbitros">
+            <End Role="Arbitros" EntitySet="Arbitros" />
+            <End Role="SancionesJugador" EntitySet="SancionesJugador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Campos" Association="Self.FK_Partidos_Campos">
+            <End Role="Campos" EntitySet="Campos" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligas_Categoria_Ligas" Association="Self.FK_Ligas_Categoria_Ligas">
+            <End Role="Categoria_Ligas" EntitySet="Categoria_Ligas" />
+            <End Role="Ligas" EntitySet="Ligas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sanciones_Equipo_CategoriasSanciones" Association="Self.FK_Sanciones_Equipo_CategoriasSanciones">
+            <End Role="CategoriasSanciones" EntitySet="CategoriasSanciones" />
+            <End Role="Sanciones_Equipo" EntitySet="Sanciones_Equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SancionesJugador_CategoriasSanciones" Association="Self.FK_SancionesJugador_CategoriasSanciones">
+            <End Role="CategoriasSanciones" EntitySet="CategoriasSanciones" />
+            <End Role="SancionesJugador" EntitySet="SancionesJugador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipos_Clubes" Association="Self.FK_Equipos_Clubes">
+            <End Role="Clubes" EntitySet="Clubes" />
+            <End Role="Equipos" EntitySet="Equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComentariosLive_Live" Association="Self.FK_ComentariosLive_Live">
+            <End Role="Live" EntitySet="Live" />
+            <End Role="ComentariosLive" EntitySet="ComentariosLive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipos_Ligas" Association="Self.FK_Equipos_Ligas">
+            <End Role="Ligas" EntitySet="Ligas" />
+            <End Role="Equipos" EntitySet="Equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadisticasPartidos_Equipos" Association="Self.FK_EstadisticasPartidos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="EstadisticasPartidos" EntitySet="EstadisticasPartidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jugadores_Equipos" Association="Self.FK_Jugadores_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Jugadores" EntitySet="Jugadores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sanciones_Equipo_Equipos" Association="Self.FK_Sanciones_Equipo_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Sanciones_Equipo" EntitySet="Sanciones_Equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadisticasPartidos_Partidos" Association="Self.FK_EstadisticasPartidos_Partidos">
+            <End Role="Partidos" EntitySet="Partidos" />
+            <End Role="EstadisticasPartidos" EntitySet="EstadisticasPartidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SancionesJugador_Jugadores" Association="Self.FK_SancionesJugador_Jugadores">
+            <End Role="Jugadores" EntitySet="Jugadores" />
+            <End Role="SancionesJugador" EntitySet="SancionesJugador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Ligas" Association="Self.FK_Partidos_Ligas">
+            <End Role="Ligas" EntitySet="Ligas" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Live" Association="Self.FK_Partidos_Live">
+            <End Role="Live" EntitySet="Live" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Equipos" Association="ProyectoModel.FK_Partidos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Equipos1" Association="ProyectoModel.FK_Partidos_Equipos1">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Partidos_Equipos">
+          <End Type="ProyectoModel.Equipos" Role="Equipos" Multiplicity="1" />
+          <End Type="ProyectoModel.Partidos" Role="Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idEquipoLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Equipos1">
+          <End Type="ProyectoModel.Equipos" Role="Equipos" Multiplicity="1" />
+          <End Type="ProyectoModel.Partidos" Role="Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idEquipoVisitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoModelStoreContainer" CdmEntityContainer="ProyectoEntities1">
+          <EntitySetMapping Name="Arbitros">
+            <EntityTypeMapping TypeName="ProyectoModel.Arbitros">
+              <MappingFragment StoreEntitySet="Arbitros">
+                <ScalarProperty Name="idArbitro" ColumnName="idArbitro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="Partidos" ColumnName="Partidos" />
+                <ScalarProperty Name="TarjetasAmarillas" ColumnName="TarjetasAmarillas" />
+                <ScalarProperty Name="TarjetasRojas" ColumnName="TarjetasRojas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Campos">
+            <EntityTypeMapping TypeName="ProyectoModel.Campos">
+              <MappingFragment StoreEntitySet="Campos">
+                <ScalarProperty Name="idCampo" ColumnName="idCampo" />
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria_Ligas">
+            <EntityTypeMapping TypeName="ProyectoModel.Categoria_Ligas">
+              <MappingFragment StoreEntitySet="Categoria_Ligas">
+                <ScalarProperty Name="idCategoriaLiga" ColumnName="idCategoriaLiga" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriasSanciones">
+            <EntityTypeMapping TypeName="ProyectoModel.CategoriasSanciones">
+              <MappingFragment StoreEntitySet="CategoriasSanciones">
+                <ScalarProperty Name="idCategoriaSancion" ColumnName="idCategoriaSancion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clubes">
+            <EntityTypeMapping TypeName="ProyectoModel.Clubes">
+              <MappingFragment StoreEntitySet="Clubes">
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComentariosLive">
+            <EntityTypeMapping TypeName="ProyectoModel.ComentariosLive">
+              <MappingFragment StoreEntitySet="ComentariosLive">
+                <ScalarProperty Name="idComentario" ColumnName="idComentario" />
+                <ScalarProperty Name="idLive" ColumnName="idLive" />
+                <ScalarProperty Name="texto" ColumnName="texto" />
+                <ScalarProperty Name="minuto" ColumnName="minuto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipos">
+            <EntityTypeMapping TypeName="ProyectoModel.Equipos">
+              <MappingFragment StoreEntitySet="Equipos">
+                <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idLiga" ColumnName="idLiga" />
+                <ScalarProperty Name="Puntos" ColumnName="Puntos" />
+                <ScalarProperty Name="Partidos_Jugados" ColumnName="Partidos_Jugados" />
+                <ScalarProperty Name="Partidos_Ganados" ColumnName="Partidos_Ganados" />
+                <ScalarProperty Name="Partidos_Perdidos" ColumnName="Partidos_Perdidos" />
+                <ScalarProperty Name="Partidos_Empatados" ColumnName="Partidos_Empatados" />
+                <ScalarProperty Name="Puntos_Encajados" ColumnName="Puntos_Encajados" />
+                <ScalarProperty Name="Puntos_Anotados" ColumnName="Puntos_Anotados" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadisticasPartidos">
+            <EntityTypeMapping TypeName="ProyectoModel.EstadisticasPartidos">
+              <MappingFragment StoreEntitySet="EstadisticasPartidos">
+                <ScalarProperty Name="idEstadistica_Partido" ColumnName="idEstadistica_Partido" />
+                <ScalarProperty Name="idPartido" ColumnName="idPartido" />
+                <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+                <ScalarProperty Name="Ensayos" ColumnName="Ensayos" />
+                <ScalarProperty Name="Conversiones" ColumnName="Conversiones" />
+                <ScalarProperty Name="GolpesCastigo" ColumnName="GolpesCastigo" />
+                <ScalarProperty Name="Drops" ColumnName="Drops" />
+                <ScalarProperty Name="TarjetasAmarillas" ColumnName="TarjetasAmarillas" />
+                <ScalarProperty Name="TarjetasRojas" ColumnName="TarjetasRojas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jugadores">
+            <EntityTypeMapping TypeName="ProyectoModel.Jugadores">
+              <MappingFragment StoreEntitySet="Jugadores">
+                <ScalarProperty Name="idJugador" ColumnName="idJugador" />
+                <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="Puntos" ColumnName="Puntos" />
+                <ScalarProperty Name="Partidos_Jugados" ColumnName="Partidos_Jugados" />
+                <ScalarProperty Name="Partidos_Ganados" ColumnName="Partidos_Ganados" />
+                <ScalarProperty Name="Partidos_Perdidos" ColumnName="Partidos_Perdidos" />
+                <ScalarProperty Name="Partidos_Empatados" ColumnName="Partidos_Empatados" />
+                <ScalarProperty Name="TarjetasAmarillas" ColumnName="TarjetasAmarillas" />
+                <ScalarProperty Name="TarjetasRojas" ColumnName="TarjetasRojas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ligas">
+            <EntityTypeMapping TypeName="ProyectoModel.Ligas">
+              <MappingFragment StoreEntitySet="Ligas">
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="idLiga" ColumnName="idLiga" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idCategoriaLiga" ColumnName="idCategoriaLiga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Live">
+            <EntityTypeMapping TypeName="ProyectoModel.Live">
+              <MappingFragment StoreEntitySet="Live">
+                <ScalarProperty Name="idLive" ColumnName="idLive" />
+                <ScalarProperty Name="TiempoTranscurrido" ColumnName="TiempoTranscurrido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partidos">
+            <EntityTypeMapping TypeName="ProyectoModel.Partidos">
+              <MappingFragment StoreEntitySet="Partidos">
+                <ScalarProperty Name="idPartido" ColumnName="idPartido" />
+                <ScalarProperty Name="idLiga" ColumnName="idLiga" />
+                <ScalarProperty Name="idEquipoLocal" ColumnName="idEquipoLocal" />
+                <ScalarProperty Name="idEquipoVisitante" ColumnName="idEquipoVisitante" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="idCampo" ColumnName="idCampo" />
+                <ScalarProperty Name="idLive" ColumnName="idLive" />
+                <ScalarProperty Name="idArbitro" ColumnName="idArbitro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sanciones_Equipo">
+            <EntityTypeMapping TypeName="ProyectoModel.Sanciones_Equipo">
+              <MappingFragment StoreEntitySet="Sanciones_Equipo">
+                <ScalarProperty Name="idSancion_Equipo" ColumnName="idSancion_Equipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="multa" ColumnName="multa" />
+                <ScalarProperty Name="idCategoria_Sancion" ColumnName="idCategoria_Sancion" />
+                <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SancionesJugador">
+            <EntityTypeMapping TypeName="ProyectoModel.SancionesJugador">
+              <MappingFragment StoreEntitySet="SancionesJugador">
+                <ScalarProperty Name="idSancionJugador" ColumnName="idSancionJugador" />
+                <ScalarProperty Name="idJugador" ColumnName="idJugador" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="multa" ColumnName="multa" />
+                <ScalarProperty Name="idCategoria_Sancion" ColumnName="idCategoria_Sancion" />
+                <ScalarProperty Name="idArbitro" ColumnName="idArbitro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProyectoModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,60 @@
+﻿@model Proyecto.Models.Arbitros.Arbitros
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.idArbitro)
+
+<div class="col-md-12">
+    <div class="col-md-3">
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
+            </small>
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el nombre" })
+            <small>
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </small>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.Apellido1, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.Apellido1, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca primer apellido" })
+            <small>
+                @Html.ValidationMessageFor(model => model.Apellido1)
+            </small>
+        </div>
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.Apellido2, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.Apellido2, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca segundo apellido" })
+            <small>
+                @Html.ValidationMessageFor(model => model.Apellido2)
+            </small>
+        </div>
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.Fecha_Nacimiento, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.Fecha_Nacimiento, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la fecha de nacimiento" })
+            <small>
+                @Html.ValidationMessageFor(model => model.Fecha_Nacimiento)
+            </small>
+        </div>        
+</div>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMensaje))
+{
+
+    <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        @ViewBag.ErrorMensaje
+    </div>
+
+}
+
+
+

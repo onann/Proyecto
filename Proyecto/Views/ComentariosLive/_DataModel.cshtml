@@ -1,0 +1,57 @@
+﻿@model Proyecto.Models.ComentariosLive.ComentariosLive
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.idComentario)
+
+<div class="col-md-12">
+    <div class="col-md-3">
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idLive, new { @class = "control-label" })
+            </small>
+            @Html.TextBoxFor(model => model.idLive, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el idLive" })
+            <small>
+                @Html.ValidationMessageFor(model => model.idLive)
+            </small>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.minuto, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.minuto, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la minuto" })
+            <small>
+                @Html.ValidationMessageFor(model => model.minuto)
+            </small>
+        </div>
+
+
+    </div>
+    <div class="col-md-9">
+        <div class="form-group input-group-sm col-md-12">
+            <small>
+                @Html.LabelFor(m => m.texto)
+            </small>
+            @Html.TextAreaFor(m => m.texto, 8, 0, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca el texto" })
+            <small>
+                @Html.ValidationMessageFor(m => m.texto)
+            </small>
+        </div>
+
+    </div>
+</div>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMensaje))
+{
+
+    <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        @ViewBag.ErrorMensaje
+    </div>
+
+}
+
+
+

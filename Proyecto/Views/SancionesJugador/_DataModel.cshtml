@@ -1,0 +1,78 @@
+﻿@model Proyecto.Models.SancionesJugador.SancionesJugador
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.idSancionJugador)
+
+<div class="col-md-12">
+    <div class="col-md-3">
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idJugador, new { @class = "control-label" })
+            </small>
+            @Html.TextBoxFor(model => model.idJugador, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el idJugador" })
+            <small>
+                @Html.ValidationMessageFor(model => model.idJugador)
+            </small>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.Descripcion, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Descripcion" })
+            <small>
+                @Html.ValidationMessageFor(model => model.Descripcion)
+            </small>
+        </div>
+        <div class="col-md-9">
+            <div class="form-group input-group-sm col-md-12">
+                <small>
+                    @Html.LabelFor(m => m.multa)
+                </small>
+                @Html.TextAreaFor(m => m.multa, 8, 0, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca el multa" })
+                <small>
+                    @Html.ValidationMessageFor(m => m.multa)
+                </small>
+            </div>
+            <div class="col-md-9">
+                <div class="form-group input-group-sm col-md-12">
+                    <small>
+                        @Html.LabelFor(m => m.idCategoria_Sancion)
+                    </small>
+                    @Html.TextAreaFor(m => m.idCategoria_Sancion, 8, 0, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca el idCategoria_Sancion" })
+                    <small>
+                        @Html.ValidationMessageFor(m => m.idCategoria_Sancion)
+                    </small>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group input-group-sm col-md-12">
+                        <small>
+                            @Html.LabelFor(m => m.idArbitro)
+                        </small>
+                        @Html.TextAreaFor(m => m.idArbitro, 8, 0, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca el idArbitro" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.idArbitro)
+                        </small>
+                    </div>
+
+
+                </div>
+    
+
+    </div>
+</div>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMensaje))
+{
+
+    <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        @ViewBag.ErrorMensaje
+    </div>
+
+}
+
+
+

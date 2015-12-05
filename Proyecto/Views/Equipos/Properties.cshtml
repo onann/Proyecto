@@ -1,0 +1,85 @@
+﻿@model Proyecto.Models.Equipos.Equipos
+
+
+@{
+    ViewBag.Title = "Propiedades";
+    Html.RenderAction("HeadInfo", "Equipos", new { id = Model.idEquipo });
+}
+
+
+<ul id="tabs" class="nav nav-tabs na" data-tabs="tabs">
+    <li>@Html.ActionLink("Equipos", "Index", "Equipos", null, new { @class = "btn btn-primary" })</li>
+    <li class="active"><a href="#" data-toggle="tab">@ViewBag.Title</a></li>
+
+    @if (Model.idEquipo != 0)
+    {
+        <li>@Html.ActionLink("Jugadores", "listaJugadores", "Equipos", new { idEquipo = ViewBag.EquipoId }, null)</li>
+        <li>@Html.ActionLink("Estadisticas", "Estadisticas", "Equipos", new { idEquipo = ViewBag.EquipoId }, null)</li>
+        
+    }
+
+</ul>
+
+
+<br />
+
+@using (Html.BeginForm("Properties", "Equipos", new { id = Model.idEquipo }, FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(x => x.idEquipo)
+
+    <div class="col-md-12">
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(m => m.Nombre)
+            </small>
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", style = "max-width: 100%;" })
+            <small>
+                @Html.ValidationMessageFor(m => m.Nombre)
+            </small>
+        </div>
+
+        <div class="form-group">
+            <small>
+                @Html.LabelFor(m => m.idClub)
+            </small>
+            @Html.TextAreaFor(model => model.idClub, 5, 0, new { @class = "form-control", style = "max-width: 100%;" })
+            <small>
+                @Html.ValidationMessageFor(m => m.idClub)
+            </small>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(m => m.idLiga)
+            </small>
+            @Html.TextBoxFor(m => m.idLiga, new { @class = "form-control", style = "max-width: 100%;" })
+            <small>
+                @Html.ValidationMessageFor(m => m.idLiga)
+            </small>
+        </div>
+    </div>
+}
+
+<div class="row"></div>
+
+
+@*<script type="text/javascript">
+
+        var selectionWindow;
+        var strWindowFeatures = "menubar=no, location=no, resizable=no, scrollbars=yes, status=no, width=600, height=600";
+
+        function showClientList() {
+            selectionWindow = window.open("@Url.Action("Client", "Selector", null)", "showClientListWindow", strWindowFeatures, true);
+            selectionWindow.focus();
+        }
+
+        function selectClient(id, name) {
+            document.getElementById("ClientId").value = id;
+            document.getElementById("ClientName").value = name;
+            document.getElementById("showClientName").innerHTML = name;
+        }
+
+    </script>*@

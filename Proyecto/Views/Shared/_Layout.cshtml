@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("FGR", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Ligas <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("LGR1", "Clasificacion", "Ligas", new { idLiga = 10 }, null)</li>
+                            <li>@Html.ActionLink("LGR2", "Clasificacion", "Ligas", new { idLiga = 11 }, null)</li>
+                            <li>@Html.ActionLink("LGRF", "Clasificacion", "Ligas", new { idLiga = 12 }, null)</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Listado completo", "Index", "Ligas")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Equipos","Index","Equipos")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Disciplinario <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Arbitros", "Index", "Ligas")</li>
+                            <li>@Html.ActionLink("Sanciones equipos", "Index", "SancionesEquipo")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Sanciones jugadores", "Index", "SancionesJugador")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Directo", "Index", "Live")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Panel de administracion <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Introducir resultados", "Index", "Ligas")</li>
+                            <li>@Html.ActionLink("Añadir equipos", "Index", "Ligas")</li>
+                            <li>@Html.ActionLink("Añadir jugadores ETC ETC", "Index", "Ligas")</li>
+                        </ul>
+                    </li>
+                </ul>
+               @* @Html.Partial("_LoginPartial")*@
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Proyecto DAM2</p>
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

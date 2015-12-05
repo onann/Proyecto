@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Domain.Singles.sEquipos>
+@using GridMvc.Html
+
+<div class="row">
+
+    <small>
+        @Html.Grid(Model).Columns(columns =>
+                       {
+                           columns.Add(m => m.idEquipo).Titled("#");
+                           columns.Add(m => m.Nombre).Titled("Nombre");
+                           columns.Add(m => m.idLiga).Titled("idLiga");
+                           columns.Add()
+                               .Encoded(false)
+                               .Sanitized(false)
+                               //Para meter columna con iconos/botóns...
+                               .RenderValueAs(m => CustomRenderingOfColumn(m.idEquipo));
+
+                       })
+    </small>
+
+    <p></p>
+
+</div>
+
+@helper CustomRenderingOfColumn(int idEquipo)
+{
+
+
+    <div class="btn-group-xs">
+        @if (!ViewBag.SoloLectura)
+        {
+            @Ajax.ActionLink(" ", "Quitar", "Equipos", new { idLiga = ViewBag.idLiga, idEquipo = idEquipo },
+                //referenciamos a <div> de Vista Gestion.cshtml (en Clientes)
+                               new AjaxOptions { UpdateTargetId = "clasificacion", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" },
+                //clase botón con unha imagen determinada
+                         new { @class = "btn btn-default btn-sm glyphicon glyphicon-minus-sign", title = "Quitar" })
+        }
+    </div>
+
+}

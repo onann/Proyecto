@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Domain.Singles.sPartidos>
+@using GridMvc.Sorting
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Calendario";
+    Html.RenderAction("HeadInfo", "Ligas", new { id = ViewBag.LigaId });
+}
+
+
+<ul id="tabs" class="nav nav-tabs na" data-tabs="tabs">
+    <li>@Html.ActionLink("Ligas", "Index", "Ligas", null, new { @class = "btn btn-primary" })</li>
+    @*<li>@Html.ActionLink("Propiedades", "Properties", "Ligas", new { id = ViewBag.LigaId }, null)</li>*@    
+    <li>@Html.ActionLink("Clasificacion", "Clasificacion", "Ligas", new { idLiga = ViewBag.LigaId }, null)</li>
+    <li class="active"><a href="#" data-toggle="tab">Calendario</a></li>
+    <li>@Html.ActionLink("Resultados", "Resultados", "Partidos", new { idLiga = ViewBag.LigaId }, null)</li>
+   
+
+</ul>
+
+
+@using (Html.BeginForm("Clasificacion", "Ligas", FormMethod.Get, new { @class = "pull-right", role = "search" }))
+{
+
+    @Html.Hidden("liga", (long)ViewBag.LigaId)
+}
+
+
+<div style="padding: 10px 0 5px 0;">
+    <p id="warningMessage" class=" bg-warning  text-warning"></p>
+</div>
+
+
+<small>
+
+    @Html.Grid(Model).Columns(columns =>
+            {
+                columns.Add(m => m.Date).Titled("Fecha y hora");
+                columns.Add(m => m.nombreLocal).Titled("Local");
+                columns.Add(m => m.nombreVisitante).Titled("Visitante");
+                columns.Add(m => m.nombreCampo).Titled("Campo");
+                columns.Add(m => m.nombreArbitro).Titled("Arbitro");
+
+                columns.Add()
+                     .Encoded(false)
+                     .Sanitized(false)
+                     .RenderValueAs(m => CustomRenderingOfColumnFicha(m));
+
+            }).WithPaging(20).Sortable(true) @* .SetRowCssClasses(m => (m.Deleted || !m.Enabled) ? "active" : "")*@
+
+        </small>
+
+        @helper CustomRenderingOfColumnFicha(Domain.Singles.sPartidos datos)
+{
+        <div>
+
+            @*@if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()) || User.IsInRole(Domain.Definitions.eRolesUsers.Supervisor.ToString()))
+                {
+                    <div class="pull-right" style="text-align:right">
+
+                        <div class="btn-group-xs">
+
+                            @if (datos.Deleted)
+                            {
+                                @Ajax.ActionLink(" ", "RegisterEnable", "Catalogs", new { id = datos.Id },
+                                         new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
+                                    new { @class = "btn btn-default btn-xs glyphicon glyphicon-ok", title = "Habilitar" })
+                            }
+                            else
+                            {
+
+                                if (datos.Enabled)
+                                {
+                                    @Ajax.ActionLink(" ", "RegisterDisable", "Catalogs", new { id = datos.Id },
+                                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
+                                        new { @class = "btn btn-default glyphicon glyphicon-remove", title = "Deshabilitar" })
+
+                                }
+                                else
+                                {
+                                    @Ajax.ActionLink(" ", "RegisterEnable", "Catalogs", new { id = datos.Id },
+                                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
+                                        new { @class = "btn btn-default glyphicon glyphicon-ok", title = "Habilitar" })
+
+                                }
+
+                                if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
+                                {
+                                    @Ajax.ActionLink(" ", "RegisterDelete", "Catalogs", new { id = datos.Id },
+                                         new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
+                                    new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", title = "Eliminar" })
+
+                                }
+
+                            }
+
+                        </div>
+
+                    </div>
+                }*@
+
+        </div>
+
+
+}
+
+        <script>
+
+    function checkSuccess(result) {
+
+        if (result.success == true) {
+            if (result.reload) document.location.reload();
+            if (result.redirect != null) document.location.href = result.redirect;
+        };
+
+        $('#warningMessage').html(result.messaje);
+
+    }
+
+        </script>

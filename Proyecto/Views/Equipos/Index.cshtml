@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Domain.Singles.sEquipos>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Listado de Equipos";
+}
+
+
+<div style="padding: 10px 0px 5px 0px;">
+    <p id="warningMessage" class=" bg-warning  text-warning"></p>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div id="modalContent" class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="blockModal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <img src="~/Content/images/loading.gif" />
+</div>
+<!-- Modal -->
+
+
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        @using (Html.BeginForm("Index", "Equipos", FormMethod.Get, new { @class = "pull-right", role = "search" }))
+        {
+            @Html.TextBox("searchStr", null, new { @class = "form-control input-sm", placeholder = "Buscar...", size = "40" })
+        }
+        <h4>@ViewBag.Title</h4>
+    </div>
+
+    <div class="panel-body">
+        <br />
+        <small>
+            @Html.Grid(Model).Columns(columns =>
+                       {
+                           columns.Add(model => model.Nombre).Titled("Nombre").Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(model => Html.ActionLink(model.Nombre,
+                               "listaJugadores", "Equipos", new { idEquipo = model.idEquipo }, null).ToHtmlString());
+                           columns.Add(m => m.nombreClub).Titled("Club");
+                           columns.Add(m => m.nombreLiga).Titled("Liga");
+                           
+
+                           columns.Add()
+                               .Encoded(false)
+                               .Sanitized(false)
+                               .RenderValueAs(m => CustomRenderingOfColumn(m.idEquipo, m.Nombre));
+
+                       }).WithPaging(10).Sortable(true)
+        </small>
+    </div>
+</div>
+
+@Html.ActionLink("Nuevo Equipo", "Gestion", "Equipos", new { id = -1 }, new { @class = "btn btn-primary" })
+
+
+@helper CustomRenderingOfColumn(int idEquipo, string Nombre)
+{
+    <div class="btn-group-xs">
+
+        @Html.ActionLink(" ", "Gestion", "Equipos", new { id = idEquipo }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil", title = "Gestionar" })
+
+        @Ajax.ActionLink(" ", "AjaxDelete", "Equipos", new { id = idEquipo },
+                new AjaxOptions { UpdateTargetId = "modalContent", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ClearModal" },
+                new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", data_toggle = "modal", data_target = "#myModal", title = "Eliminar" })
+    </div>
+}
+
+
+<script>
+
+    function ClearModal() {
+        $('#modalContent').html('');
+    }
+
+    function CheckSuccess(result) {
+        $('#myModal').modal('hide');
+        $('#blockModal').modal('hide');
+
+        if (result.success == true) {
+            if (result.reload) document.location.reload();
+            if (result.redirect != null) document.location.href = result.redirect;
+        };
+
+        $('#warningMessage').html(result.messaje);
+    }
+
+
+    function Block() {
+        $('#blockModal').modal();
+    }
+
+</script>

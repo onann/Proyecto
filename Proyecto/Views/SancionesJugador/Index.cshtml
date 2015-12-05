@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Domain.Singles.sSancionesJugador>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Listado de Sanciones jugador";
+}
+
+
+<div style="padding: 10px 0px 5px 0px;">
+    <p id="warningMessage" class=" bg-warning  text-warning"></p>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div id="modalContent" class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="blockModal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <img src="~/Content/images/loading.gif" />
+</div>
+<!-- Modal -->
+
+
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        @using (Html.BeginForm("Index", "Clubes", FormMethod.Get, new { @class = "pull-right", role = "search" }))
+        {
+            @Html.TextBox("searchStr", null, new { @class = "form-control input-sm", placeholder = "Buscar...", size = "40" })
+        }
+        <h4>@ViewBag.Title</h4>
+    </div>
+
+    <div class="panel-body">
+        <br />
+        <small>
+            @Html.Grid(Model).Columns(columns =>
+                       {
+                           columns.Add(m => m.idSancionJugador).Titled("#");
+                           columns.Add(m => m.idJugador).Titled("idJugador");
+                           columns.Add(m => m.Descripcion).Titled("Descripcion");
+                           columns.Add(m => m.multa).Titled("multa");
+                           columns.Add(m => m.idCategoria_Sancion).Titled("idCategoria_Sancion");
+                           columns.Add(m => m.idArbitro).Titled("idArbitro");
+
+                           columns.Add()
+                               .Encoded(false)
+                               .Sanitized(false)
+                               .RenderValueAs(m => CustomRenderingOfColumn(m.idSancionJugador, m.Descripcion));
+
+                       }).WithPaging(10).Sortable(true)
+        </small>
+    </div>
+</div>
+
+@Html.ActionLink("Nueva sancion jugador", "Gestion", "SancionesJugador", new { id = -1 }, new { @class = "btn btn-primary" })
+
+
+@helper CustomRenderingOfColumn(int idCidSancionJugadorlub, string Descripcion)
+{
+    <div class="btn-group-xs">
+
+        @Html.ActionLink(" ", "Gestion", "SancionesJugador", new { id = idCidSancionJugadorlub }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil", title = "Gestionar" })
+
+        @Ajax.ActionLink(" ", "AjaxDelete", "SancionesJugador", new { id = idCidSancionJugadorlub },
+                new AjaxOptions { UpdateTargetId = "modalContent", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ClearModal" },
+                new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", data_toggle = "modal", data_target = "#myModal", title = "Eliminar" })
+    </div>
+}
+
+
+<script>
+
+    function ClearModal() {
+        $('#modalContent').html('');
+    }
+
+    function CheckSuccess(result) {
+        $('#myModal').modal('hide');
+        $('#blockModal').modal('hide');
+
+        if (result.success == true) {
+            if (result.reload) document.location.reload();
+            if (result.redirect != null) document.location.href = result.redirect;
+        };
+
+        $('#warningMessage').html(result.messaje);
+    }
+
+
+    function Block() {
+        $('#blockModal').modal();
+    }
+
+</script>

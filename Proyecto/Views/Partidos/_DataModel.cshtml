@@ -1,0 +1,95 @@
+﻿@model Proyecto.Models.Partidos.Partidos
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.idPartido)
+
+<div class="col-md-12">
+    <div class="col-md-3">
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idLiga, new { @class = "control-label" })
+            </small>
+            @Html.TextBoxFor(model => model.idLiga, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el idLiga" })
+            <small>
+                @Html.ValidationMessageFor(model => model.idLiga)
+            </small>    
+        </div>
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idEquipoLocal, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.idEquipoLocal, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idEquipoLocal" })
+            <small>
+                @Html.ValidationMessageFor(model => model.idEquipoLocal)
+            </small>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idEquipoVisitante, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.idEquipoVisitante, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idEquipoVisitante" })
+            <small>
+                @Html.ValidationMessageFor(model => model.idEquipoVisitante)
+            </small>
+        </div>
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.Date, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.Date, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Date" })
+            <small>
+                @Html.ValidationMessageFor(model => model.Date)
+            </small>
+        </div>
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idCampo, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.idCampo, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idCampo" })
+            <small>
+                @Html.ValidationMessageFor(model => model.idCampo)
+            </small>
+        </div>
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idLive, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.idLive, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idLive" })
+            <small>
+                @Html.ValidationMessageFor(model => model.idLive)
+            </small>
+        </div>
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idArbitro, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.idArbitro, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idArbitro" })
+            <small>
+                @Html.ValidationMessageFor(model => model.idArbitro)
+            </small>
+        </div>
+
+
+
+
+
+    </div>
+    
+</div>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMensaje))
+{
+
+    <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        @ViewBag.ErrorMensaje
+    </div>
+
+}
+
+
+

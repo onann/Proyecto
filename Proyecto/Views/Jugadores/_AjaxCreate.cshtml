@@ -1,0 +1,17 @@
+﻿@using (Ajax.BeginForm("AjaxCreate", "Jugadores", new AjaxOptions { UpdateTargetId = "general", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", LoadingElementId = "inLoadingProgress", OnSuccess = "CheckSuccess" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div id="datos" class="form-horizontal">
+            @Html.Partial("_DataModel")
+        </div>
+    </div>
+    <div class="row">
+        <div class="pull-right">
+            <input type="submit" value="Guardar" class="btn btn-primary";" />
+            
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}

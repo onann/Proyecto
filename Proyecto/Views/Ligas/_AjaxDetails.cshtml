@@ -1,0 +1,53 @@
+﻿@model Domain.Gestion.gLigas
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <div class="form-group input-group-sm">
+                <small>
+                    @Html.LabelFor(model => model.idLiga, new { @class = "control-label" })
+                </small>
+                @Html.TextBoxFor(model => model.idLiga, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el nombre" })
+                <small>
+                    @Html.ValidationMessageFor(model => model.idLiga)
+                </small>
+            </div>
+
+            <div class="form-group input-group-sm">
+                <small>
+                    @Html.LabelFor(model => model.nombre, new { @class = "control-label" })
+                </small>
+                @Html.TextBoxFor(model => model.nombre, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el nombre" })
+                <small>
+                    @Html.ValidationMessageFor(model => model.nombre)
+                </small>
+            </div>
+
+            <div class="form-group input-group-sm">
+                <small>
+                    @Html.LabelFor(model => model.idCategoriaLiga, new { @class = "control-label" })
+                </small>
+                @Html.TextAreaFor(model => model.idCategoriaLiga, new { @class = "form-control ckeditor", style = "max-width: 100%; height: 360px", placeholder = "Introduzca la descripcion" })
+                <small>
+                    @Html.ValidationMessageFor(model => model.idCategoriaLiga)
+                </small>
+            </div>
+
+
+        </div>
+        
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="pull-right">
+        @Ajax.ActionLink("Modificar", "AjaxEdit", new { idLiga = Model.idLiga },
+                 new AjaxOptions { UpdateTargetId = "general", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "inLoadingProgress" },
+                    new { @class = "btn btn-primary" })
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+    </div>
+</div>

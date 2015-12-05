@@ -1,0 +1,85 @@
+﻿@model Proyecto.Models.Ligas.Ligas
+
+
+@{
+    ViewBag.Title = "Propiedades";
+    Html.RenderAction("HeadInfo", "Ligas", new { id = Model.idLiga });
+}
+
+
+<ul id="tabs" class="nav nav-tabs na" data-tabs="tabs">
+    <li>@Html.ActionLink("Ligas", "Index", "Ligas", null, new { @class = "btn btn-primary" })</li>
+    <li class="active"><a href="#" data-toggle="tab">@ViewBag.Title</a></li>
+
+    @if (Model.idLiga != 0)
+    {
+        <li>@Html.ActionLink("Clasificacion", "Clasificacion", "Ligas", new { idLiga = ViewBag.LigaId }, null)</li> 
+        <li>@Html.ActionLink("Calendario", "Calendario", "Partidos", new { idLiga = ViewBag.LigaId}, null)</li>
+    <li>@Html.ActionLink("Resultados", "Resultados", "Partidos", new { idLiga = ViewBag.LigaId }, null)</li>
+    }
+
+</ul>
+
+
+<br />
+
+@using (Html.BeginForm("Properties", "Catalogs", new { id = Model.idLiga }, FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(x => x.idLiga)
+
+    <div class="col-md-12">
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(m => m.nombre)
+            </small>
+            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", style = "max-width: 100%;" })
+            <small>
+                @Html.ValidationMessageFor(m => m.nombre)
+            </small>
+        </div>
+
+        <div class="form-group">
+            <small>
+                @Html.LabelFor(m => m.idCategoriaLiga)
+            </small>
+            @Html.TextAreaFor(model => model.idCategoriaLiga, 5, 0, new { @class = "form-control", style = "max-width: 100%;" })
+            <small>
+                @Html.ValidationMessageFor(m => m.idCategoriaLiga)
+            </small>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(m => m.idLiga)
+            </small>
+            @Html.TextBoxFor(m => m.idLiga, new { @class = "form-control", style = "max-width: 100%;" })
+            <small>
+                @Html.ValidationMessageFor(m => m.idLiga)
+            </small>
+        </div>
+    </div>
+}
+
+<div class="row"></div>
+
+
+@*<script type="text/javascript">
+
+    var selectionWindow;
+    var strWindowFeatures = "menubar=no, location=no, resizable=no, scrollbars=yes, status=no, width=600, height=600";
+
+    function showClientList() {
+        selectionWindow = window.open("@Url.Action("Client", "Selector", null)", "showClientListWindow", strWindowFeatures, true);
+        selectionWindow.focus();
+    }
+
+    function selectClient(id, name) {
+        document.getElementById("ClientId").value = id;
+        document.getElementById("ClientName").value = name;
+        document.getElementById("showClientName").innerHTML = name;
+    }
+
+</script>*@

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c0af10ac3f74fa99aab2119cbba21b4" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoModel.Arbitros" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Campos" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Categoria_Ligas" Width="1.5" PointX="1.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.CategoriasSanciones" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Clubes" Width="1.5" PointX="3.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.ComentariosLive" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Equipos" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.EstadisticasPartidos" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Jugadores" Width="1.5" PointX="3.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Ligas" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Live" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Partidos" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Sanciones_Equipo" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.SancionesJugador" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="ProyectoModel.FK_Partidos_Arbitros" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Partidos_Arbitros1" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_SancionesJugador_Arbitros" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Partidos_Campos" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Ligas_Categoria_Ligas" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Sanciones_Equipo_CategoriasSanciones" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_SancionesJugador_CategoriasSanciones" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Equipos_Clubes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_ComentariosLive_Live" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Equipos_Ligas" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_EstadisticasPartidos_Equipos" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Jugadores_Equipos" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Sanciones_Equipo_Equipos" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_EstadisticasPartidos_Partidos" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_SancionesJugador_Jugadores" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Partidos_Ligas" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_Partidos_Live" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
