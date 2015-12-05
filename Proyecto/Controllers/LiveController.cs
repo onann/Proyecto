@@ -217,9 +217,5 @@ namespace Proyecto.Controllers
 
             return Json(result);
         }
-        public ActionResult prueba()
-        {
-            regurn null;
-        }
     }
 }
