@@ -6,16 +6,6 @@
 <div class="col-md-12">
     <div class="col-md-3">
 
-        @*<div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.idClub, new { @class = "control-label" })
-            </small>
-            @Html.TextBoxFor(model => model.idClub, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el idClub" })
-            <small>
-                @Html.ValidationMessageFor(model => model.idClub)
-            </small>
-        </div>*@
-
         <div class="form-group input-group-sm">
             <small>
                 @Html.LabelFor(m => m.idClub)</br>
@@ -24,6 +14,15 @@
                 <small>
                     @Html.ValidationMessageFor(m => m.idClub)
                 </small>
+        </div>
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.idLiga, new { @class = "control-label" })
+            </small>
+            @Html.DropDownListFor(model => model.idLiga, new SelectList(ViewBag.Ligas, "idLiga", "nombre"))
+            <small>
+                @Html.ValidationMessageFor(model => model.idLiga)
+            </small>
         </div>
 
         <div class="form-group input-group-sm">
@@ -35,15 +34,8 @@
                 @Html.ValidationMessageFor(model => model.Nombre)
             </small>
         </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.idLiga, new { @class = "control-label" })
-            </small>
-            @Html.DropDownListFor(model => model.idLiga, new SelectList(ViewBag.Ligas, "idLiga", "nombre"))
-            <small>
-                @Html.ValidationMessageFor(model => model.idLiga)
-            </small>
-        </div>
+        
+    </div>
     </div>
 
 

@@ -38,7 +38,8 @@
     @Html.Grid(Model).Columns(columns =>
             {
 
-                columns.Add(m => m.Nombre).Titled("Nombre");
+                columns.Add(model => model.Nombre).Titled("Nombre").Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(model => Html.ActionLink(model.Nombre,
+                               "listaJugadores", "Equipos", new { idEquipo = model.idEquipo }, null).ToHtmlString());
                 columns.Add(m => m.Partidos_Jugados).Titled("Jugados");
                 columns.Add(m => m.Partidos_Ganados).Titled("Ganados");
                 columns.Add(m => m.Partidos_Perdidos).Titled("Perdidos");

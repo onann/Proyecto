@@ -45,5 +45,8 @@ namespace Proyecto.Models.Jugadores
         public int? TarjetasAmarillas { get; set; }
         [Display(Name = "TarjetasRojas")]
         public int? TarjetasRojas { get; set; }
+
+        public virtual Equipos.Equipos equipo { get; set; }
+        public virtual string fechaIntroducida { get; set;}
     }
 }

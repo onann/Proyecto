@@ -38,7 +38,7 @@
                 columns.Add(m => m.Nombre).Titled("Nombre");
                 columns.Add(m => m.Apellido1).Titled("Apellidos");
                 columns.Add(m => m.Apellido2).Titled("");
-                columns.Add(m => m.Fecha_Nacimiento).Titled("Nacimiento");
+                columns.Add(m => m.ReturnDateForDisplay).Titled("Nacimiento");
                 columns.Add(m => m.Altura).Titled("Altura");
                 columns.Add(m => m.Peso).Titled("Peso");
                 columns.Add(m => m.TarjetasAmarillas).Titled("Tarjetas amarillas");
@@ -52,7 +52,7 @@
             }).WithPaging(20).Sortable(true) @* .SetRowCssClasses(m => (m.Deleted || !m.Enabled) ? "active" : "")*@
 
         </small>
-
+@Html.ActionLink("Nuevo jugador", "Gestion", "Jugadores", new { id = -1 , idEquipo = ViewBag.EquipoId }, new { @class = "btn btn-primary" })
         @helper CustomRenderingOfColumnFicha(Domain.Singles.sJugadores datos)
 {
         <div>

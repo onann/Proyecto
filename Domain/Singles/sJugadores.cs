@@ -23,6 +23,19 @@ namespace Domain.Singles
         public int? Partidos_Empatados { get; set; }
         public int? TarjetasAmarillas { get; set; }
         public int? TarjetasRojas { get; set; }
+        public string nombreEquipo { get; set; }
+
+        public string ReturnDateForDisplay
+        {
+            get
+            {
+
+
+
+                return this.Fecha_Nacimiento.Value.ToShortDateString();
+            }
+        }
+
 
     }
 }

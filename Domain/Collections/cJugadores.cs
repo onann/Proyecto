@@ -33,7 +33,8 @@ namespace Domain.Collections
                                 e.Partidos_Perdidos,
                                 e.Partidos_Empatados,
                                 e.TarjetasAmarillas,
-                                e.TarjetasRojas
+                                e.TarjetasRojas,
+                                //nombreequipo = e.Equipos.Nombre
                             };
                 foreach (var i in query)
                 {
@@ -49,6 +50,7 @@ namespace Domain.Collections
                     e.Partidos_Empatados = i.Partidos_Empatados;
                     e.TarjetasAmarillas = i.TarjetasAmarillas;
                     e.TarjetasRojas = i.TarjetasRojas;
+                    //e.nombreEquipo = i.nombreequipo;
                     eList.Add(e);
                 }
                 return eList;

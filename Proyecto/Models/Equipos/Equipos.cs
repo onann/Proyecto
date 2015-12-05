@@ -19,7 +19,7 @@ namespace Proyecto.Models.Equipos
         [StringLength(50)]
         [Display(Name = "Nombre")]
         public string Nombre { set; get; }
-        [Display(Name = "idLiga")]
+        [Display(Name = "Liga")]
         public int? idLiga { set; get; }
         [Required]        
         [Display(Name = "Puntos")]

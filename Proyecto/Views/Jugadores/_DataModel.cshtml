@@ -2,7 +2,6 @@
 
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.idJugador)
-
 <div class="col-md-12">
     <div class="col-md-3">
 
@@ -20,7 +19,7 @@
             <small>
                 @Html.LabelFor(model => model.idEquipo, new { @class = "control-label" })
             </small>
-            @Html.TextAreaFor(model => model.idEquipo, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idEquipo" })
+            @Html.DropDownListFor(model => model.idEquipo, new SelectList(ViewBag.Equipos, "idEquipo", "Nombre"))
             <small>
                 @Html.ValidationMessageFor(model => model.idEquipo)
             </small>
@@ -46,20 +45,11 @@
         </div>
         <div class="form-group input-group-sm">
             <small>
-                @Html.LabelFor(model => model.Fecha_Nacimiento, new { @class = "control-label" })
+                @Html.LabelFor(m => m.fechaIntroducida)
             </small>
-            @Html.TextAreaFor(model => model.Fecha_Nacimiento, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Fecha_Nacimiento" })
+            @Html.TextBoxFor(m => m.fechaIntroducida, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "dd/MM/yyyy" })
             <small>
-                @Html.ValidationMessageFor(model => model.Fecha_Nacimiento)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.Altura, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.Altura, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Altura" })
-            <small>
-                @Html.ValidationMessageFor(model => model.Altura)
+                @Html.ValidationMessageFor(m => m.fechaIntroducida)
             </small>
         </div>
         <div class="form-group input-group-sm">
@@ -73,74 +63,11 @@
         </div>
         <div class="form-group input-group-sm">
             <small>
-                @Html.LabelFor(model => model.Puntos, new { @class = "control-label" })
+                @Html.LabelFor(model => model.Altura, new { @class = "control-label" })
             </small>
-            @Html.TextAreaFor(model => model.Puntos, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Puntos" })
+            @Html.TextAreaFor(model => model.Altura, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Altura" })
             <small>
-                @Html.ValidationMessageFor(model => model.Puntos)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.Localidad, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.Localidad, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la localidad" })
-            <small>
-                @Html.ValidationMessageFor(model => model.Localidad)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.Partidos_Jugados, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.Partidos_Jugados, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Partidos_Jugados" })
-            <small>
-                @Html.ValidationMessageFor(model => model.Partidos_Jugados)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.Partidos_Ganados, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.Partidos_Ganados, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Partidos_Ganados" })
-            <small>
-                @Html.ValidationMessageFor(model => model.Partidos_Ganados)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.Partidos_Perdidos, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.Partidos_Perdidos, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Partidos_Perdidos" })
-            <small>
-                @Html.ValidationMessageFor(model => model.Partidos_Perdidos)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.Partidos_Empatados, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.Partidos_Empatados, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Partidos_Empatados" })
-            <small>
-                @Html.ValidationMessageFor(model => model.Partidos_Empatados)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.TarjetasAmarillas, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.TarjetasAmarillas, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la TarjetasAmarillas" })
-            <small>
-                @Html.ValidationMessageFor(model => model.TarjetasAmarillas)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.TarjetasRojas, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.TarjetasRojas, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la TarjetasRojas" })
-            <small>
-                @Html.ValidationMessageFor(model => model.TarjetasRojas)
+                @Html.ValidationMessageFor(model => model.Altura)
             </small>
         </div>
 

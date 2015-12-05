@@ -64,7 +64,7 @@ namespace Proyecto.Controllers
 
         // GET: /License/Gestion
 
-        public ActionResult Gestion(int id)
+        public ActionResult Gestion(int id, int idEquipo)
         {
             gJugadores item = new gJugadores();
             if (id < -1) return HttpNotFound();
@@ -75,7 +75,7 @@ namespace Proyecto.Controllers
                 item = new gJugadores(id);
                 if (!item.exist) return HttpNotFound();
             }
-
+            ViewBag.idEquipo = idEquipo;
             ViewBag.idJugador = id;
             ViewBag.NuevoJugador = !item.exist;
 
@@ -100,6 +100,9 @@ namespace Proyecto.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxCreate()
         {
+            ViewBag.Equipos = new cEquipos().showAllResults();
+            //ViewBag.idEquipo = idEquipo;
+
             if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new Jugadores());
         }
@@ -111,7 +114,7 @@ namespace Proyecto.Controllers
         public ActionResult AjaxCreate(Jugadores modelo)
         {
             if (!Request.IsAjaxRequest()) return HttpNotFound();
-
+            
             if (ModelState.IsValid)
             {
                 var result = new Domain.Definitions.cJsonResultData();
@@ -119,24 +122,24 @@ namespace Proyecto.Controllers
                 gJugadores item = new gJugadores();
                 item.Nombre = modelo.Nombre;
                 item.idEquipo = modelo.idEquipo;
-                item.Apellido1 = item.Apellido1;
+                item.Apellido1 = modelo.Apellido1;
                 item.Apellido2 = modelo.Apellido2;
-                item.Fecha_Nacimiento = modelo.Fecha_Nacimiento;
+                item.Fecha_Nacimiento = Convert.ToDateTime(modelo.fechaIntroducida);
                 item.Altura = modelo.Altura;
                 item.Peso = modelo.Peso;
-                item.Puntos = modelo.Puntos;
-                item.Partidos_Jugados = modelo.Partidos_Jugados;
-                item.Partidos_Ganados = modelo.Partidos_Ganados;
-                item.Partidos_Perdidos = modelo.Partidos_Perdidos;
-                item.Partidos_Empatados = modelo.Partidos_Empatados;
-                item.TarjetasAmarillas = modelo.TarjetasAmarillas;
-                item.TarjetasRojas = modelo.TarjetasRojas;
+                //item.Puntos = modelo.Puntos;
+                //item.Partidos_Jugados = modelo.Partidos_Jugados;
+                //item.Partidos_Ganados = modelo.Partidos_Ganados;
+                //item.Partidos_Perdidos = modelo.Partidos_Perdidos;
+                //item.Partidos_Empatados = modelo.Partidos_Empatados;
+                //item.TarjetasAmarillas = modelo.TarjetasAmarillas;
+                //item.TarjetasRojas = modelo.TarjetasRojas;
 
                 result.success = item.save();
 
                 if (result.success)
                 {
-                    result.redirect = Url.Action("Index", "Jugadores", new { id = item.idJugador });
+                    result.redirect = Url.Action("listaJugadores", "Equipos", new { idEquipo = modelo.idEquipo });
                     return Json(result);
                 }
                 else
