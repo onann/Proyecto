@@ -63,10 +63,6 @@
     <div class="btn-group-xs">
 
         @Html.ActionLink(" ", "Gestion", "Equipos", new { id = idEquipo }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil", title = "Gestionar" })
-
-        @Ajax.ActionLink(" ", "AjaxDelete", "Equipos", new { id = idEquipo },
-                new AjaxOptions { UpdateTargetId = "modalContent", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ClearModal" },
-                new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", data_toggle = "modal", data_target = "#myModal", title = "Eliminar" })
     </div>
 }
 

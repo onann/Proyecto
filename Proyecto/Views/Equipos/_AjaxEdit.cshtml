@@ -1,4 +1,4 @@
-﻿@using (Ajax.BeginForm("AjaxCreate", "CategoriaSanciones", new AjaxOptions { UpdateTargetId = "general", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", LoadingElementId = "inLoadingProgress", OnSuccess = "CheckSuccess" }))
+﻿@using (Ajax.BeginForm("AjaxEdit", "Equipos", new AjaxOptions { UpdateTargetId = "general", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", LoadingElementId = "inLoadingProgress", OnSuccess = "CheckSuccess" }))
 {
     @Html.AntiForgeryToken()
 
@@ -9,9 +9,10 @@
     </div>
     <div class="row">
         <div class="pull-right">
-            <input type="submit" value="Guardar" class="btn btn-primary";" />
-            
+            <input type="submit" value="Guardar" class="btn btn-primary" />
             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
         </div>
     </div>
 }
+
+

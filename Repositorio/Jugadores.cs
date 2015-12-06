@@ -14,11 +14,6 @@ namespace Repositorio
     
     public partial class Jugadores
     {
-        public Jugadores()
-        {
-            this.SancionesJugador = new HashSet<SancionesJugador>();
-        }
-    
         public int idJugador { get; set; }
         public Nullable<int> idEquipo { get; set; }
         public string Nombre { get; set; }
@@ -36,6 +31,5 @@ namespace Repositorio
         public Nullable<int> TarjetasRojas { get; set; }
     
         public virtual Equipos Equipos { get; set; }
-        public virtual ICollection<SancionesJugador> SancionesJugador { get; set; }
     }
 }

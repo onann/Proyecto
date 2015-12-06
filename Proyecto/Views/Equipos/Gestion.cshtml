@@ -14,14 +14,17 @@
     {
         <li class="active"><a href="#general" data-toggle="tab">Nuevo Equipo</a></li>
     }
-
+    @if (ViewBag.NuevoEquipo == false)
+    {
+        <li class="active"><a href="#general" data-toggle="tab">Modificar Equipo</a></li>
+    }
 </ul>
 
 <div style="padding: 30px 30px 0px 30px;">
 
     <div id="my-tab-content" class="tab-content">
 
-        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoEquipo ? "AjaxCreate" : "AjaxDetails", "Equipos", ViewBag.NuevoEquipo ? null : new { id = ViewBag.idEquipo@*, idCliente = ViewBag.idCliente *@})">
+        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoEquipo ? "AjaxCreate" : "AjaxEdit", "Equipos", ViewBag.NuevoEquipo ? null : new { id = ViewBag.idEquipo@*, idCliente = ViewBag.idCliente *@})">
             <img src="~/Content/images/indicator.white.gif" /> Cargando ...
         </div>
 

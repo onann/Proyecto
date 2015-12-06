@@ -37,28 +37,17 @@
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Equipos","Index","Equipos")</li>
+                    <li>@Html.ActionLink("Arbitros", "Index", "Arbitros")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Disciplinario <span class="caret"></span>
+                            Partidos <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Arbitros", "Index", "Arbitros")</li>
-                            <li>@Html.ActionLink("Sanciones equipos", "Index", "SancionesEquipo")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Sanciones jugadores", "Index", "SancionesJugador")</li>
+                            <li>@Html.ActionLink("Añadir partidos", "Index", "Arbitros")</li>
+                            <li>@Html.ActionLink("Introducir resultados", "Index", "SancionesEquipo")</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Directo", "Index", "Live")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Panel de administracion <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Introducir resultados", "Index", "Ligas")</li>
-                            <li>@Html.ActionLink("Añadir equipos", "Index", "Ligas")</li>
-                            <li>@Html.ActionLink("Añadir jugadores ETC ETC", "Index", "Ligas")</li>
-                        </ul>
-                    </li>
+                    <li>@Html.ActionLink("Directo", "Index", "Live")</li>                    
                 </ul>
                @* @Html.Partial("_LoginPartial")*@
             </div>

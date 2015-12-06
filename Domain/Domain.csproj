@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="Collections\cArbitros.cs" />
     <Compile Include="Collections\cCampos.cs" />
-    <Compile Include="Collections\cCategoriasSanciones.cs" />
     <Compile Include="Collections\cCategoria_Ligas.cs" />
     <Compile Include="Collections\cClubes.cs" />
     <Compile Include="Collections\cComentariosLive.cs" />
@@ -69,12 +68,9 @@
     <Compile Include="Collections\cLigas.cs" />
     <Compile Include="Collections\cLive.cs" />
     <Compile Include="Collections\cPartidos.cs" />
-    <Compile Include="Collections\cSancionesJugador.cs" />
-    <Compile Include="Collections\cSanciones_Equipo.cs" />
     <Compile Include="Definitions.cs" />
     <Compile Include="Gestion\gArbitros.cs" />
     <Compile Include="Gestion\gCampos.cs" />
-    <Compile Include="Gestion\gCategoriasSanciones.cs" />
     <Compile Include="Gestion\gCategoria_Ligas.cs" />
     <Compile Include="Gestion\gClubes.cs" />
     <Compile Include="Gestion\gComentariosLive.cs" />
@@ -84,11 +80,8 @@
     <Compile Include="Gestion\gLigas.cs" />
     <Compile Include="Gestion\gLive.cs" />
     <Compile Include="Gestion\gPartidos.cs" />
-    <Compile Include="Gestion\gSancionesJugador.cs" />
-    <Compile Include="Gestion\gSanciones_Equipo.cs" />
     <Compile Include="Singles\sArbitros.cs" />
     <Compile Include="Singles\sCampos.cs" />
-    <Compile Include="Singles\sCategoriasSanciones.cs" />
     <Compile Include="Singles\sCategoria_Ligas.cs" />
     <Compile Include="Singles\sClubes.cs" />
     <Compile Include="Singles\sComentariosLive.cs" />
@@ -99,8 +92,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Singles\sLive.cs" />
     <Compile Include="Singles\sPartidos.cs" />
-    <Compile Include="Singles\sSancionesJugador.cs" />
-    <Compile Include="Singles\sSanciones_Equipo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

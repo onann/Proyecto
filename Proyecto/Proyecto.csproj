@@ -179,7 +179,6 @@
     <Compile Include="Controllers\ArbitrosController.cs" />
     <Compile Include="Controllers\CamposController.cs" />
     <Compile Include="Controllers\CategoriaLigasController.cs" />
-    <Compile Include="Controllers\CategoriaSancionesController.cs" />
     <Compile Include="Controllers\ClubesController.cs" />
     <Compile Include="Controllers\ComentariosLiveController.cs" />
     <Compile Include="Controllers\EquiposController.cs" />
@@ -190,15 +189,12 @@
     <Compile Include="Controllers\LiveController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PartidosController.cs" />
-    <Compile Include="Controllers\SancionesEquipoController.cs" />
-    <Compile Include="Controllers\SancionesJugadorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Arbitros\Arbitros.cs" />
     <Compile Include="Models\Campos\Campos.cs" />
-    <Compile Include="Models\CategoriaSanciones\CategoriaSanciones.cs" />
     <Compile Include="Models\Categoria_Ligas\Categoria_Ligas.cs" />
     <Compile Include="Models\Clubes\Clubes.cs" />
     <Compile Include="Models\ComentariosLive\ComentariosLive.cs" />
@@ -210,8 +206,6 @@
     <Compile Include="Models\Live\Live.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Partidos\Partidos.cs" />
-    <Compile Include="Models\SancionesJugador\SancionesJugador.cs" />
-    <Compile Include="Models\Sanciones_Equipo\Sanciones_Equipo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -313,10 +307,6 @@
     <Content Include="Views\CategoriaLigas\_DataModel.cshtml" />
     <Content Include="Views\CategoriaLigas\Gestion.cshtml" />
     <Content Include="Views\CategoriaLigas\Index.cshtml" />
-    <Content Include="Views\CategoriaSanciones\_AjaxCreate.cshtml" />
-    <Content Include="Views\CategoriaSanciones\_DataModel.cshtml" />
-    <Content Include="Views\CategoriaSanciones\Gestion.cshtml" />
-    <Content Include="Views\CategoriaSanciones\Index.cshtml" />
     <Content Include="Views\ComentariosLive\_AjaxCreate.cshtml" />
     <Content Include="Views\ComentariosLive\_DataModel.cshtml" />
     <Content Include="Views\ComentariosLive\Gestion.cshtml" />
@@ -341,14 +331,6 @@
     <Content Include="Views\Partidos\_DataModel.cshtml" />
     <Content Include="Views\Partidos\Gestion.cshtml" />
     <Content Include="Views\Partidos\Index.cshtml" />
-    <Content Include="Views\SancionesEquipo\_AjaxCreate.cshtml" />
-    <Content Include="Views\SancionesEquipo\_DataModel.cshtml" />
-    <Content Include="Views\SancionesEquipo\Gestion.cshtml" />
-    <Content Include="Views\SancionesEquipo\Index.cshtml" />
-    <Content Include="Views\SancionesJugador\_AjaxCreate.cshtml" />
-    <Content Include="Views\SancionesJugador\_DataModel.cshtml" />
-    <Content Include="Views\SancionesJugador\Gestion.cshtml" />
-    <Content Include="Views\SancionesJugador\Index.cshtml" />
     <Content Include="Views\Ligas\_AjaxDetails.cshtml" />
     <Content Include="Views\Equipos\_AjaxByClient.cshtml" />
     <Content Include="Views\Equipos\_Lista.cshtml" />
@@ -362,6 +344,7 @@
     <Content Include="Views\Equipos\listaJugadores.cshtml" />
     <Content Include="Views\Equipos\Estadisticas.cshtml" />
     <Content Include="Views\Equipos\Campos.cshtml" />
+    <Content Include="Views\Equipos\_AjaxEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

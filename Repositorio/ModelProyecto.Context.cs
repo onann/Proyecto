@@ -28,7 +28,6 @@ namespace Repositorio
         public virtual DbSet<Arbitros> Arbitros { get; set; }
         public virtual DbSet<Campos> Campos { get; set; }
         public virtual DbSet<Categoria_Ligas> Categoria_Ligas { get; set; }
-        public virtual DbSet<CategoriasSanciones> CategoriasSanciones { get; set; }
         public virtual DbSet<Clubes> Clubes { get; set; }
         public virtual DbSet<ComentariosLive> ComentariosLive { get; set; }
         public virtual DbSet<Equipos> Equipos { get; set; }
@@ -37,8 +36,6 @@ namespace Repositorio
         public virtual DbSet<Ligas> Ligas { get; set; }
         public virtual DbSet<Live> Live { get; set; }
         public virtual DbSet<Partidos> Partidos { get; set; }
-        public virtual DbSet<Sanciones_Equipo> Sanciones_Equipo { get; set; }
-        public virtual DbSet<SancionesJugador> SancionesJugador { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

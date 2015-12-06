@@ -149,12 +149,14 @@ namespace Proyecto.Controllers
         // GET: /License/AjaxEdit
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult AjaxEdit(int idEquipo)
+        public ActionResult AjaxEdit(int id)
         {
             if (!Request.IsAjaxRequest()) return HttpNotFound();
 
-            gEquipos item = new gEquipos(idEquipo);
+            gEquipos item = new gEquipos(id);
             if (!item.exist) return HttpNotFound();
+            ViewBag.Clubes = new cClubes().showAllResults();
+            ViewBag.Ligas = new cLigas().showAllResults();
 
             return PartialView("_AjaxEdit", obtenerModelo(item));
         }
@@ -315,6 +317,8 @@ namespace Proyecto.Controllers
             model.Nombre = item.Nombre;
 
             ViewBag.EquipoId = item.idEquipo;
+            ViewBag.Clubes = new cClubes().showAllResults();
+            ViewBag.Ligas = new cLigas().showAllResults();
 
             return View(model);
         }

@@ -18,7 +18,6 @@ namespace Repositorio
         {
             this.EstadisticasPartidos = new HashSet<EstadisticasPartidos>();
             this.Jugadores = new HashSet<Jugadores>();
-            this.Sanciones_Equipo = new HashSet<Sanciones_Equipo>();
             this.Partidos = new HashSet<Partidos>();
             this.Partidos1 = new HashSet<Partidos>();
             this.Campos = new HashSet<Campos>();
@@ -40,7 +39,6 @@ namespace Repositorio
         public virtual Ligas Ligas { get; set; }
         public virtual ICollection<EstadisticasPartidos> EstadisticasPartidos { get; set; }
         public virtual ICollection<Jugadores> Jugadores { get; set; }
-        public virtual ICollection<Sanciones_Equipo> Sanciones_Equipo { get; set; }
         public virtual ICollection<Partidos> Partidos { get; set; }
         public virtual ICollection<Partidos> Partidos1 { get; set; }
         public virtual ICollection<Campos> Campos { get; set; }

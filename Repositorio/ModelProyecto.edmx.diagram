@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="ProyectoModel.Arbitros" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoModel.Campos" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoModel.Categoria_Ligas" Width="1.5" PointX="1.5" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.CategoriasSanciones" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoModel.Clubes" Width="1.5" PointX="3.75" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoModel.ComentariosLive" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoModel.Equipos" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
@@ -17,24 +16,17 @@
         <EntityTypeShape EntityType="ProyectoModel.Ligas" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoModel.Live" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoModel.Partidos" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Sanciones_Equipo" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.SancionesJugador" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Arbitros" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Arbitros1" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoModel.FK_SancionesJugador_Arbitros" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Campos" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Ligas_Categoria_Ligas" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoModel.FK_Sanciones_Equipo_CategoriasSanciones" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoModel.FK_SancionesJugador_CategoriasSanciones" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Equipos_Clubes" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_ComentariosLive_Live" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Equipos_Ligas" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_EstadisticasPartidos_Equipos" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Jugadores_Equipos" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoModel.FK_Sanciones_Equipo_Equipos" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_EstadisticasPartidos_Partidos" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoModel.FK_SancionesJugador_Jugadores" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Ligas" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Live" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Equipos" />

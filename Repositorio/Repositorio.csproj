@@ -62,9 +62,6 @@
     <Compile Include="Campos.cs">
       <DependentUpon>ModelProyecto.tt</DependentUpon>
     </Compile>
-    <Compile Include="CategoriasSanciones.cs">
-      <DependentUpon>ModelProyecto.tt</DependentUpon>
-    </Compile>
     <Compile Include="Categoria_Ligas.cs">
       <DependentUpon>ModelProyecto.tt</DependentUpon>
     </Compile>
@@ -108,12 +105,6 @@
       <DependentUpon>ModelProyecto.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SancionesJugador.cs">
-      <DependentUpon>ModelProyecto.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Sanciones_Equipo.cs">
-      <DependentUpon>ModelProyecto.tt</DependentUpon>
-    </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>ModelProyecto.tt</DependentUpon>
     </Compile>
