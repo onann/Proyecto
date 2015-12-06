@@ -143,5 +143,37 @@ namespace Domain.Collections
             catch { return new List<Singles.sCampos>(); }
         }
 
+        public IEnumerable<sCampos> camposEquipo(long idEquipo)
+        {
+            ProyectoEntities1 db = new ProyectoEntities1();
+            var list = new List<sCampos>();
+
+            try
+            {
+                var query = from r in db.Campos
+                            where r.idEquipo == idEquipo
+                            select r;
+
+
+                var item = new sCampos();
+                foreach (var i in query)
+                {
+                    item.idCampo = i.idCampo;
+                    item.idEquipo = i.idEquipo;
+                    item.Nombre = i.Nombre;
+                    item.Direccion = i.Direccion;
+
+
+                }
+                list.Add(item);
+            }
+            catch (Exception ex)
+            {
+                list = new List<sCampos>();
+            }
+
+            return list;
+        }
+
     }
 }

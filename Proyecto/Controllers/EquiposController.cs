@@ -361,6 +361,14 @@ namespace Proyecto.Controllers
             return View(new cEstadisticasPartidos().estadisticasEquipo(idEquipo));
         }
 
-        
+        public ActionResult Campos(int idEquipo)
+        {
+            ViewBag.EquipoId = idEquipo;
+            //ViewBag.ItemId = item;
+
+            return View(new cCampos().camposEquipo(idEquipo));
+        }
+
+
     }
 }

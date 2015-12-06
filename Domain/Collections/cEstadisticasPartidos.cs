@@ -259,13 +259,3 @@ namespace Domain.Collections
         }
     }
 }
-
-
-//estadisticaEquipo.totalPuntos += i.Ensayos * 5 + i.Conversiones * 2 + i.Drops * 3 + i.GolpesCastigo * 3;
-//                    estadisticaEquipo.Ensayos += i.Ensayos;
-//                    estadisticaEquipo.Conversiones += i.Conversiones;
-//                    estadisticaEquipo.Drops += i.Drops;
-//                    estadisticaEquipo.GolpesCastigo += i.GolpesCastigo;
-//                    estadisticaEquipo.TarjetasAmarillas += i.TarjetasAmarillas;
-//                    estadisticaEquipo.TarjetasRojas += i.TarjetasRojas;
-//                    estadisticaEquipo.Add(item);

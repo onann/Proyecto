@@ -7,11 +7,11 @@
 
         <div class="form-group input-group-sm">
             <small>
-                @Html.LabelFor(model => model.idClub, new { @class = "control-label" })
+                @Html.LabelFor(model => model.idEquipo, new { @class = "control-label" })
             </small>
-            @Html.TextBoxFor(model => model.idClub, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el idClub" })
+            @Html.DropDownListFor(model => model.idEquipo, new SelectList(ViewBag.Equipos, "idEquipo", "Nombre"))
             <small>
-                @Html.ValidationMessageFor(model => model.idClub)
+                @Html.ValidationMessageFor(model => model.idEquipo)
             </small>
         </div>
 

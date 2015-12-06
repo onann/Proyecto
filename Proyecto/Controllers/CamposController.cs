@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Domain.Gestion;
 using Proyecto.Models.Campos;
 using System.Web.Routing;
+using Domain.Collections;
 
 namespace Proyecto.Controllers
 {
@@ -88,6 +89,8 @@ namespace Proyecto.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxCreate()
         {
+
+            ViewBag.Equipos = new cEquipos().showAllResults();
             if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new Campos());
         }
