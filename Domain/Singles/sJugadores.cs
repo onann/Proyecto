@@ -29,9 +29,6 @@ namespace Domain.Singles
         {
             get
             {
-
-
-
                 return this.Fecha_Nacimiento.Value.ToShortDateString();
             }
         }

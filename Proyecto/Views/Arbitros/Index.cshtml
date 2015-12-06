@@ -39,11 +39,10 @@
         <small>
             @Html.Grid(Model).Columns(columns =>
                        {
-                           columns.Add(m => m.idArbitro).Titled("#");
                            columns.Add(m => m.Nombre).Titled("Nombre");
-                           columns.Add(m => m.Apellido1).Titled("Apellido1");
-                           columns.Add(m => m.Apellido2).Titled("Apellido2");
-                           columns.Add(m => m.Fecha_Nacimiento).Titled("Fecha_Nacimiento");
+                           columns.Add(m => m.Apellido1).Titled("Apellidos");
+                           columns.Add(m => m.Apellido2).Titled("");
+                           columns.Add(m => m.ReturnDateForDisplay).Titled("Fecha de nacimiento");
                            columns.Add(m => m.Partidos).Titled("Partidos");
                            columns.Add(m => m.TarjetasAmarillas).Titled("TarjetasAmarillas");
                            columns.Add(m => m.TarjetasRojas).Titled("TarjetasRojas");

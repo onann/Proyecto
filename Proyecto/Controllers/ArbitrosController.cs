@@ -112,7 +112,7 @@ namespace Proyecto.Controllers
                 item.Nombre = modelo.Nombre;
                 item.Apellido1 = modelo.Apellido1;
                 item.Apellido2 = modelo.Apellido2;
-                item.Fecha_Nacimiento = modelo.Fecha_Nacimiento;
+                item.Fecha_Nacimiento = Convert.ToDateTime(modelo.fechaIntroducida);
                 item.Partidos = modelo.Partidos;
                 item.TarjetasAmarillas = modelo.TarjetasAmarillas;
                 item.TarjetasRojas = modelo.TarjetasRojas;

@@ -12,7 +12,7 @@ namespace Proyecto.Models.Campos
         [Display(Name = "idCampo")]
         public int idCampo { get; set; }
         [Display(Name = "idClub")]
-        public int? idClub { get; set; }
+        public int idEquipo { get; set; }
         [Required]
         [StringLength(50)]
         [Display(Name = "Nombre")]

@@ -15,7 +15,7 @@ namespace Domain.Gestion
 
         public int idCampo { get { return _campos.idCampo; } }
         public string nombre { get { return _campos.Nombre; } set { _campos.Nombre = value; } }
-        public int? idClub { get { return _campos.idCampo; } set { _campos.idClub = value; } }
+        public int idEquipo { get { return _campos.idEquipo; } set { _campos.idEquipo = value; } }
         public string Direccion { get { return _campos.Direccion; } set { _campos.Direccion = value; } }
         public bool exist { get { return _exist; } }
 

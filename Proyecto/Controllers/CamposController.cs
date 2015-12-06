@@ -17,7 +17,7 @@ namespace Proyecto.Controllers
 
             Campos modelo = new Campos();
             modelo.idCampo = item.idCampo;
-            modelo.idClub = item.idClub;
+            modelo.idEquipo = item.idEquipo;
             modelo.Nombre = item.nombre;
             modelo.Direccion = item.Direccion;
 
@@ -105,7 +105,7 @@ namespace Proyecto.Controllers
                 var result = new Domain.Definitions.cJsonResultData();
 
                 gCampos item = new gCampos();
-                item.idClub = modelo.idClub;
+                item.idEquipo = modelo.idEquipo;
                 item.nombre = modelo.Nombre;
                 item.Direccion = modelo.Direccion;
 
@@ -158,7 +158,7 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    item.idClub = modelo.idClub;
+                    item.idEquipo = modelo.idEquipo;
                     item.nombre = modelo.Nombre;
                     item.Direccion = modelo.Direccion;
 

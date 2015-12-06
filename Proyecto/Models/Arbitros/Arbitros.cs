@@ -17,19 +17,22 @@ namespace Proyecto.Models.Arbitros
         public string Nombre { get; set; }
         [Required]
         [StringLength(50)]
-        [Display(Name = "Apellido1")]
+        [Display(Name = "Primer apellido")]
         public string Apellido1 { get; set; }
         [StringLength(50)]
-        [Display(Name = "Apellido2")]
+        [Display(Name = "Segundo apellido")]
         public string Apellido2 { get; set; }
-        [Display(Name = "Fecha_Nacimiento")]
+        [Display(Name = "Fecha de nacimiento")]
         public DateTime? Fecha_Nacimiento { get; set; }
         [Display(Name = "Partidos")]
         public int? Partidos { get; set; }
-        [Display(Name = "TarjetasAmarillas")]
+        [Display(Name = "Tarjetas amarillas")]
         public int? TarjetasAmarillas { get; set; }
-        [Display(Name = "TarjetasRojas")]
+        [Display(Name = "Tarjetas rojas")]
         public int? TarjetasRojas { get; set; }
-        
+
+        [Display(Name = "Fecha de nacimiento")]
+        public virtual string fechaIntroducida { get; set; }
+
     }
 }

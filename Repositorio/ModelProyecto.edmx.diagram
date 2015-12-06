@@ -39,6 +39,7 @@
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Live" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Equipos" />
         <AssociationConnector Association="ProyectoModel.FK_Partidos_Equipos1" />
+        <AssociationConnector Association="ProyectoModel.FK_Campos_Equipos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

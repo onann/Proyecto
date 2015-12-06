@@ -23,7 +23,7 @@
             <PropertyRef Name="idCampo" />
           </Key>
           <Property Name="idCampo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idClub" Type="int" />
+          <Property Name="idEquipo" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="Direccion" Type="nchar" MaxLength="50" />
         </EntityType>
@@ -170,6 +170,18 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Campos_Equipos">
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+          <End Role="Campos" Type="Self.Campos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Campos">
+              <PropertyRef Name="idEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ComentariosLive_Live">
           <End Role="Live" Type="Self.Live" Multiplicity="0..1" />
           <End Role="ComentariosLive" Type="Self.ComentariosLive" Multiplicity="*" />
@@ -414,6 +426,10 @@
           <EntitySet Name="Sanciones_Equipo" EntityType="Self.Sanciones_Equipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SancionesJugador" EntityType="Self.SancionesJugador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Campos_Equipos" Association="Self.FK_Campos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Campos" EntitySet="Campos" />
+          </AssociationSet>
           <AssociationSet Name="FK_ComentariosLive_Live" Association="Self.FK_ComentariosLive_Live">
             <End Role="Live" EntitySet="Live" />
             <End Role="ComentariosLive" EntitySet="ComentariosLive" />
@@ -516,10 +532,11 @@
             <PropertyRef Name="idCampo" />
           </Key>
           <Property Name="idCampo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idClub" Type="Int32" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Partidos" Relationship="Self.FK_Partidos_Campos" FromRole="Campos" ToRole="Partidos" />
+          <Property Name="idEquipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipos" Relationship="ProyectoModel.FK_Campos_Equipos" FromRole="Campos" ToRole="Equipos" />
         </EntityType>
         <EntityType Name="Categoria_Ligas">
           <Key>
@@ -581,6 +598,7 @@
           <NavigationProperty Name="Sanciones_Equipo" Relationship="Self.FK_Sanciones_Equipo_Equipos" FromRole="Equipos" ToRole="Sanciones_Equipo" />
           <NavigationProperty Name="Partidos" Relationship="ProyectoModel.FK_Partidos_Equipos" FromRole="Equipos" ToRole="Partidos" />
           <NavigationProperty Name="Partidos1" Relationship="ProyectoModel.FK_Partidos_Equipos1" FromRole="Equipos" ToRole="Partidos" />
+          <NavigationProperty Name="Campos" Relationship="ProyectoModel.FK_Campos_Equipos" FromRole="Equipos" ToRole="Campos" />
         </EntityType>
         <EntityType Name="EstadisticasPartidos">
           <Key>
@@ -994,6 +1012,10 @@
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="Partidos" EntitySet="Partidos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Campos_Equipos" Association="ProyectoModel.FK_Campos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="Campos" EntitySet="Campos" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Partidos_Equipos">
           <End Type="ProyectoModel.Equipos" Role="Equipos" Multiplicity="1" />
@@ -1016,6 +1038,18 @@
             </Principal>
             <Dependent Role="Partidos">
               <PropertyRef Name="idEquipoVisitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Campos_Equipos">
+          <End Type="ProyectoModel.Equipos" Role="Equipos" Multiplicity="1" />
+          <End Type="ProyectoModel.Campos" Role="Campos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="idEquipo" />
+            </Principal>
+            <Dependent Role="Campos">
+              <PropertyRef Name="idEquipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1042,8 +1076,8 @@
           <EntitySetMapping Name="Campos">
             <EntityTypeMapping TypeName="ProyectoModel.Campos">
               <MappingFragment StoreEntitySet="Campos">
+                <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
                 <ScalarProperty Name="idCampo" ColumnName="idCampo" />
-                <ScalarProperty Name="idClub" ColumnName="idClub" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
               </MappingFragment>

@@ -21,7 +21,7 @@ namespace Domain.Collections
                             select new
                             {
                                 e.idCampo,
-                                e.idClub,
+                                e.idEquipo,
                                 e.Nombre,
                                 e.Direccion
                             };
@@ -29,7 +29,7 @@ namespace Domain.Collections
                 {
                     Singles.sCampos e = new Singles.sCampos();
                     e.idCampo = i.idCampo;
-                    e.idClub = i.idClub;
+                    e.idEquipo = i.idEquipo;
                     e.Nombre = i.Nombre;
                     e.Direccion = i.Direccion;
                     eList.Add(e);
@@ -48,13 +48,13 @@ namespace Domain.Collections
             {
                 var query = from l in db.Campos
                             where (l.idCampo.ToString().Contains(searchStr) ||
-                                l.idClub.ToString().Contains(searchStr) ||
+                                l.idEquipo.ToString().Contains(searchStr) ||
                                 l.Nombre.Contains(searchStr) ||
                                 l.Direccion.Contains(searchStr))
                             select new
                             {
                                 l.idCampo,
-                                l.idClub,
+                                l.idEquipo,
                                 l.Nombre,
                                 l.Direccion
                             };
@@ -63,7 +63,7 @@ namespace Domain.Collections
                 {
                     Singles.sCampos l = new Singles.sCampos();
                     l.idCampo = i.idCampo;
-                    l.idClub = i.idClub;
+                    l.idEquipo = i.idEquipo;
                     l.Nombre = i.Nombre;
                     l.Direccion = i.Direccion;
 
@@ -86,7 +86,7 @@ namespace Domain.Collections
                             select new
                             {
                                 l.idCampo,
-                                l.idClub,
+                                l.idEquipo,
                                 l.Nombre,
                                 l.Direccion
                             };
@@ -95,7 +95,7 @@ namespace Domain.Collections
                 {
                     Singles.sCampos l = new Singles.sCampos();
                     l.idCampo = i.idCampo;
-                    l.idClub = i.idClub;
+                    l.idEquipo = i.idEquipo;
                     l.Nombre = i.Nombre;
                     l.Direccion = i.Direccion;
 
@@ -116,13 +116,13 @@ namespace Domain.Collections
             {
                 var query = from l in db.Campos
                             where (l.idCampo.ToString().Contains(searchStr) ||
-                                l.idClub.ToString().Contains(searchStr) ||
+                                l.idEquipo.ToString().Contains(searchStr) ||
                                 l.Nombre.Contains(searchStr) ||
                                 l.Direccion.Contains(searchStr))
                             select new
                             {
                                 l.idCampo,
-                                l.idClub,
+                                l.idEquipo,
                                 l.Nombre,
                                 l.Direccion
                             };
@@ -131,7 +131,7 @@ namespace Domain.Collections
                 {
                     Singles.sCampos l = new Singles.sCampos();
                     l.idCampo = i.idCampo;
-                    l.idClub = i.idClub;
+                    l.idEquipo = i.idEquipo;
                     l.Nombre = i.Nombre;
                     l.Direccion = i.Direccion;
 

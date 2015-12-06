@@ -36,11 +36,11 @@
         </div>
         <div class="form-group input-group-sm">
             <small>
-                @Html.LabelFor(model => model.Fecha_Nacimiento, new { @class = "control-label" })
+                @Html.LabelFor(model => model.fechaIntroducida, new { @class = "control-label" })
             </small>
-            @Html.TextAreaFor(model => model.Fecha_Nacimiento, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la fecha de nacimiento" })
+            @Html.TextAreaFor(model => model.fechaIntroducida, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la fecha de nacimiento" })
             <small>
-                @Html.ValidationMessageFor(model => model.Fecha_Nacimiento)
+                @Html.ValidationMessageFor(model => model.fechaIntroducida)
             </small>
         </div>        
 </div>
