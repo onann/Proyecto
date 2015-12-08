@@ -345,6 +345,8 @@
     <Content Include="Views\Equipos\Estadisticas.cshtml" />
     <Content Include="Views\Equipos\Campos.cshtml" />
     <Content Include="Views\Equipos\_AjaxEdit.cshtml" />
+    <Content Include="Views\Ligas\Selector.cshtml" />
+    <Content Include="Views\Partidos\introResultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

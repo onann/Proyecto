@@ -206,8 +206,34 @@ namespace Domain.Collections
 
             return list;
         }
-    }
+        public IEnumerable<sLigas> listaNombres()
+        {
+            ProyectoEntities1 db = new ProyectoEntities1();
+            var list = new List<sLigas>();
+
+            try
+            {
+                var query = from l in db.Ligas
+                            select l;
 
 
+                foreach (var i in query)
+                {                    
+                    var item = new sLigas();
+                    item.idLiga = i.idLiga;
+                    item.idCategoriaLiga = i.idCategoriaLiga;
+                    item.nombre = i.nombre;
+                    list.Add(item);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                list = new List<sLigas>();
+            }
+
+            return list;
+        }
+    }   
 
 }

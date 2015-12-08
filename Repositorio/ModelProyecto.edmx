@@ -94,13 +94,6 @@
           <Property Name="Fecha_Nacimiento" Type="date" />
           <Property Name="Altura" Type="int" />
           <Property Name="Peso" Type="int" />
-          <Property Name="Puntos" Type="int" />
-          <Property Name="Partidos_Jugados" Type="int" />
-          <Property Name="Partidos_Ganados" Type="int" />
-          <Property Name="Partidos_Perdidos" Type="int" />
-          <Property Name="Partidos_Empatados" Type="int" />
-          <Property Name="TarjetasAmarillas" Type="int" />
-          <Property Name="TarjetasRojas" Type="int" />
         </EntityType>
         <EntityType Name="Ligas">
           <Key>
@@ -130,6 +123,7 @@
           <Property Name="idCampo" Type="int" />
           <Property Name="idLive" Type="int" />
           <Property Name="idArbitro" Type="int" />
+          <Property Name="isJugado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -504,13 +498,6 @@
           <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
           <Property Name="Altura" Type="Int32" />
           <Property Name="Peso" Type="Int32" />
-          <Property Name="Puntos" Type="Int32" />
-          <Property Name="Partidos_Jugados" Type="Int32" />
-          <Property Name="Partidos_Ganados" Type="Int32" />
-          <Property Name="Partidos_Perdidos" Type="Int32" />
-          <Property Name="Partidos_Empatados" Type="Int32" />
-          <Property Name="TarjetasAmarillas" Type="Int32" />
-          <Property Name="TarjetasRojas" Type="Int32" />
           <NavigationProperty Name="Equipos" Relationship="Self.FK_Jugadores_Equipos" FromRole="Jugadores" ToRole="Equipos" />
         </EntityType>
         <EntityType Name="Ligas">
@@ -554,6 +541,7 @@
           <NavigationProperty Name="Live" Relationship="Self.FK_Partidos_Live" FromRole="Partidos" ToRole="Live" />
           <NavigationProperty Name="Equipos" Relationship="ProyectoModel.FK_Partidos_Equipos" FromRole="Partidos" ToRole="Equipos" />
           <NavigationProperty Name="Equipos1" Relationship="ProyectoModel.FK_Partidos_Equipos1" FromRole="Partidos" ToRole="Equipos" />
+          <Property Name="isJugado" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -920,14 +908,7 @@
                 <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
                 <ScalarProperty Name="Altura" ColumnName="Altura" />
                 <ScalarProperty Name="Peso" ColumnName="Peso" />
-                <ScalarProperty Name="Puntos" ColumnName="Puntos" />
-                <ScalarProperty Name="Partidos_Jugados" ColumnName="Partidos_Jugados" />
-                <ScalarProperty Name="Partidos_Ganados" ColumnName="Partidos_Ganados" />
-                <ScalarProperty Name="Partidos_Perdidos" ColumnName="Partidos_Perdidos" />
-                <ScalarProperty Name="Partidos_Empatados" ColumnName="Partidos_Empatados" />
-                <ScalarProperty Name="TarjetasAmarillas" ColumnName="TarjetasAmarillas" />
-                <ScalarProperty Name="TarjetasRojas" ColumnName="TarjetasRojas" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ligas">
@@ -951,6 +932,7 @@
           <EntitySetMapping Name="Partidos">
             <EntityTypeMapping TypeName="ProyectoModel.Partidos">
               <MappingFragment StoreEntitySet="Partidos">
+                <ScalarProperty Name="isJugado" ColumnName="isJugado" />
                 <ScalarProperty Name="idPartido" ColumnName="idPartido" />
                 <ScalarProperty Name="idLiga" ColumnName="idLiga" />
                 <ScalarProperty Name="idEquipoLocal" ColumnName="idEquipoLocal" />

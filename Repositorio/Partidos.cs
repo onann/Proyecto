@@ -27,6 +27,7 @@ namespace Repositorio
         public Nullable<int> idCampo { get; set; }
         public Nullable<int> idLive { get; set; }
         public Nullable<int> idArbitro { get; set; }
+        public bool isJugado { get; set; }
     
         public virtual Arbitros Arbitros { get; set; }
         public virtual Arbitros Arbitros1 { get; set; }

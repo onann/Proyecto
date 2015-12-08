@@ -21,12 +21,14 @@ namespace Domain.Gestion
         public int? idCampo { get { return _partidos.idCampo; } set { _partidos.idCampo = value; } }
         public int? idLive { get { return _partidos.idLive; } set { _partidos.idLive = value; } }
         public int? idArbitro { get { return _partidos.idArbitro; } set { _partidos.idArbitro = value; } }
+        public bool isJugado { get { return _partidos.isJugado; } set { _partidos.isJugado = value; } }
         public bool exist { get { return _exist; } }
 
         private void nuevoPartido()
         {
             _partidos = new Partidos();
             _exist = false;
+            isJugado = false; //probar
         }
 
         public gPartidos()
@@ -74,6 +76,46 @@ namespace Domain.Gestion
                 return false;
             }
 
+        }
+
+        public int getIdLocal(int idPartido)
+        {
+            try
+            {
+                var query = (from d in _db.Partidos where d.idPartido == idPartido select d.idEquipoLocal).SingleOrDefault();
+                if (query != null)
+                {
+                    return query;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        public int getIdVisitante(int idPartido)
+        {
+            try
+            {
+                var query = (from d in _db.Partidos where d.idPartido == idPartido select d.idEquipoVisitante).SingleOrDefault();
+                if (query != null)
+                {
+                    return query;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
     }
 }

@@ -413,5 +413,18 @@ namespace AMS.Controllers
         }
         */
 
+        public ActionResult FillEquipos(int idLiga)
+        {
+            //ProyectoEntities1 db = new ProyectoEntities1();
+            //var equipos = db.Equipos.Where(c => c.idLiga == idLiga);
+            var equipos = new cEquipos().List(idLiga);
+            return Json(equipos, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult selector()
+        {
+            return View(new cLigas().listaNombres());
+        }
+
     }
 }

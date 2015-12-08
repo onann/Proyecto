@@ -258,6 +258,8 @@ namespace Domain.Collections
 
         }
 
+        
+
         //public List<Singles.sEquipos> mostrarEquiposLiga(long idLiga)
         //{
         //    ProyectoEntities1 db = new ProyectoEntities1();

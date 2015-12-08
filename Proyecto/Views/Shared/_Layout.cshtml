@@ -43,8 +43,8 @@
                             Partidos <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Añadir partidos", "Index", "Arbitros")</li>
-                            <li>@Html.ActionLink("Introducir resultados", "Index", "SancionesEquipo")</li>
+                            <li>@Html.ActionLink("Añadir partido", "selector", "Ligas", new { id = -1 }, null)</li>
+                            <li>@Html.ActionLink("Introducir resultados", "introResultados", "Partidos")</li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Directo", "Index", "Live")</li>                    

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Gestionar Club";
+    ViewBag.Title = "Gestionar estadisticas del partido";
 }
 
 <div style="padding: 10px 0px 5px 0px;">
@@ -8,11 +8,11 @@
 
 <ul id="tabs" class="nav nav-tabs na" data-tabs="tabs">
 
-    <li>@Html.ActionLink("Clubes", "Index", "Clubes", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.ActionLink("EstadisticasPartidos", "Index", "EstadisticasPartidos", null, new { @class = "btn btn-primary" })</li>
 
-    @if (ViewBag.NuevoClub == true)
+    @if (ViewBag.NuevaEstadisticaPartido == true)
     {
-        <li class="active"><a href="#general" data-toggle="tab">Nuevo Club</a></li>
+        <li class="active"><a href="#general" data-toggle="tab">NuevaEstadisticaPartido</a></li>
     }
 
 </ul>
@@ -21,7 +21,7 @@
 
     <div id="my-tab-content" class="tab-content">
 
-        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoClub ? "AjaxCreate" : "AjaxDetails", "Clubes", ViewBag.NuevoClub ? null : new { id = ViewBag.idClub@*, idCliente = ViewBag.idCliente *@})">
+        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevaEstadisticaPartido ? "AjaxCreate" : "AjaxDetails", "EstadisticasPartidos", ViewBag.NuevaEstadisticaPartido ? new {id = ViewBag.idPartido} : new { id = ViewBag.idPartido@*, idCliente = ViewBag.idCliente *@})">
             <img src="~/Content/images/indicator.white.gif" /> Cargando ...
         </div>
 

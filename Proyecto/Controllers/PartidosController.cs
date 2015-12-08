@@ -8,6 +8,7 @@ using Domain.Gestion;
 using Proyecto.Models.Partidos;
 using System.Web.Routing;
 using Domain.Collections;
+//using Repositorio;
 
 namespace Proyecto.Controllers
 {
@@ -25,6 +26,7 @@ namespace Proyecto.Controllers
             modelo.idCampo = item.idCampo;
             modelo.idLive = item.idLive;
             modelo.idArbitro = item.idArbitro;
+            modelo.isJugado = item.isJugado;
             return modelo;
         }
 
@@ -56,7 +58,7 @@ namespace Proyecto.Controllers
 
         // GET: /License/Gestion
 
-        public ActionResult Gestion(int id)
+        public ActionResult Gestion(int id, int idLiga)
         {
             gPartidos item = new gPartidos();
             if (id < -1) return HttpNotFound();
@@ -67,7 +69,7 @@ namespace Proyecto.Controllers
                 item = new gPartidos(id);
                 if (!item.exist) return HttpNotFound();
             }
-
+            ViewBag.idLiga = idLiga;
             ViewBag.idPartido = id;
             ViewBag.NuevoPartido = !item.exist;
 
@@ -90,9 +92,15 @@ namespace Proyecto.Controllers
         // GET: /License/AjaxCreate
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult AjaxCreate()
+        public ActionResult AjaxCreate(int id)
         {
-            if (!Request.IsAjaxRequest()) return HttpNotFound();
+
+            ViewBag.Equipos = new cEquipos().List(id);
+            ViewBag.Campos = new cCampos().showAllResults();
+            ViewBag.Arbitros = new cArbitros().showAllResults();
+            ViewBag.idLiga = id;
+
+            //if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new Partidos());
         }
 
@@ -116,6 +124,7 @@ namespace Proyecto.Controllers
                 item.idCampo = modelo.idCampo;
                 item.idLive = modelo.idLive;
                 item.idArbitro = modelo.idArbitro;
+                item.isJugado = modelo.isJugado;
 
                 result.success = item.save();
 
@@ -173,6 +182,7 @@ namespace Proyecto.Controllers
                     item.idCampo = modelo.idCampo;
                     item.idLive = modelo.idLive;
                     item.idArbitro = modelo.idArbitro;
+                    item.isJugado = modelo.isJugado;
 
                     result.success = item.save();
 
@@ -251,6 +261,11 @@ namespace Proyecto.Controllers
             //ViewBag.ItemId = item;
 
             return View(new cPartidos().ListResultados(idLiga));
+        }
+
+        public ActionResult introResultados()
+        {
+            return View(new cPartidos().listaSinJugar());
         }
     }
 }

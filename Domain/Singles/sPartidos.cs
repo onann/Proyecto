@@ -21,6 +21,6 @@ namespace Domain.Singles
         public string nombreCampo { get; set; }
         public string nombreArbitro { get; set; }
         public string resultado { get; set; }
-
+        public bool isJugado { get; set; }
     }
 }

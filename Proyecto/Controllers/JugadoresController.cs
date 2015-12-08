@@ -26,13 +26,6 @@ namespace Proyecto.Controllers
             modelo.Fecha_Nacimiento = item.Fecha_Nacimiento;
             modelo.Altura = item.Altura;
             modelo.Peso = item.Peso;
-            modelo.Puntos = item.Puntos;
-            modelo.Partidos_Jugados = item.Partidos_Jugados;
-            modelo.Partidos_Ganados = item.Partidos_Ganados;
-            modelo.Partidos_Perdidos = item.Partidos_Perdidos;
-            modelo.Partidos_Empatados = item.Partidos_Empatados;
-            modelo.TarjetasAmarillas = item.TarjetasAmarillas;
-            modelo.TarjetasRojas = item.TarjetasRojas;
             return modelo;
         }
 
@@ -191,13 +184,6 @@ namespace Proyecto.Controllers
                     item.Fecha_Nacimiento = modelo.Fecha_Nacimiento;
                     item.Altura = modelo.Altura;
                     item.Peso = modelo.Peso;
-                    item.Puntos = modelo.Puntos;
-                    item.Partidos_Jugados = modelo.Partidos_Jugados;
-                    item.Partidos_Ganados = modelo.Partidos_Ganados;
-                    item.Partidos_Perdidos = modelo.Partidos_Perdidos;
-                    item.Partidos_Empatados = modelo.Partidos_Empatados;
-                    item.TarjetasAmarillas = modelo.TarjetasAmarillas;
-                    item.TarjetasRojas = modelo.TarjetasRojas;
 
                     result.success = item.save();
 

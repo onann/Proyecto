@@ -21,7 +21,7 @@
 
     <div id="my-tab-content" class="tab-content">
 
-        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoPartido ? "AjaxCreate" : "AjaxDetails", "Partidos", ViewBag.NuevoPartido ? null : new { id = ViewBag.idPartido@*, idCliente = ViewBag.idCliente *@})">
+        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoPartido ? "AjaxCreate" : "AjaxDetails", "Partidos", ViewBag.NuevoPartido ? new {id = ViewBag.idLiga} : new { id = ViewBag.idPartido@*, idCliente = ViewBag.idCliente *@})">
             <img src="~/Content/images/indicator.white.gif" /> Cargando ...
         </div>
 

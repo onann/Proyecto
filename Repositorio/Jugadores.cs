@@ -22,13 +22,6 @@ namespace Repositorio
         public Nullable<System.DateTime> Fecha_Nacimiento { get; set; }
         public Nullable<int> Altura { get; set; }
         public Nullable<int> Peso { get; set; }
-        public Nullable<int> Puntos { get; set; }
-        public Nullable<int> Partidos_Jugados { get; set; }
-        public Nullable<int> Partidos_Ganados { get; set; }
-        public Nullable<int> Partidos_Perdidos { get; set; }
-        public Nullable<int> Partidos_Empatados { get; set; }
-        public Nullable<int> TarjetasAmarillas { get; set; }
-        public Nullable<int> TarjetasRojas { get; set; }
     
         public virtual Equipos Equipos { get; set; }
     }

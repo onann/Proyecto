@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Domain.Gestion;
 using Proyecto.Models.EstadisticasPartidos;
 using System.Web.Routing;
+using Domain.Collections;
 
 namespace Proyecto.Controllers
 {
@@ -58,7 +59,7 @@ namespace Proyecto.Controllers
 
         // GET: /License/Gestion
 
-        public ActionResult Gestion(int id)
+        public ActionResult Gestion(int id, int idPartido)
         {
             gEstadisticasPartidos item = new gEstadisticasPartidos();
             if (id < -1) return HttpNotFound();
@@ -70,7 +71,7 @@ namespace Proyecto.Controllers
                 if (!item.exist) return HttpNotFound();
             }
 
-            ViewBag.idEstadistica_Partido = id;
+            ViewBag.idPartido = idPartido;
             ViewBag.NuevaEstadisticaPartido = !item.exist;
 
             return View();
@@ -92,8 +93,14 @@ namespace Proyecto.Controllers
         // GET: /License/AjaxCreate
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult AjaxCreate()
+        public ActionResult AjaxCreate(int id)
         {
+            gPartidos partido = new gPartidos(id);
+            ViewBag.idPartido = id; //recibimos el id partido
+            ViewBag.idEquipoVisitante = partido.getIdLocal(id);
+            ViewBag.idEquipoLocal = partido.getIdVisitante(id);
+
+
             if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new EstadisticasPartidos());
         }
@@ -120,13 +127,30 @@ namespace Proyecto.Controllers
                 item.TarjetasAmarillas = modelo.TarjetasAmarillas;
                 item.TarjetasRojas = modelo.TarjetasRojas;
 
+                gEstadisticasPartidos item2 = new gEstadisticasPartidos();
+                item2.idPartido = modelo.idPartido2;
+                item2.idEquipo = modelo.idEquipo2;
+                item2.Ensayos = modelo.Ensayos2;
+                item2.Conversiones = modelo.Conversiones2;
+                item2.GolpesCastigo = modelo.GolpesCastigo2;
+                item2.Drops = modelo.Drops2;
+                item2.TarjetasAmarillas = modelo.TarjetasAmarillas2;
+                item2.TarjetasRojas = modelo.TarjetasRojas2;
+
 
                 result.success = item.save();
-
                 if (result.success)
                 {
-                    result.redirect = Url.Action("Index", "EstadisticasPartidos", new { id = item.idEstadistica_Partido });
-                    return Json(result);
+                    result.success = item2.save();
+                    if (result.success)
+                    {
+                        result.redirect = Url.Action("Index", "EstadisticasPartidos", new { id = item.idEstadistica_Partido });
+                        return Json(result);
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMensaje = "La estadistica no ha podido ser creada.";
+                    }
                 }
                 else
                 {

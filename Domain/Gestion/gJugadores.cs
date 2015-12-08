@@ -21,13 +21,6 @@ namespace Domain.Gestion
         public DateTime? Fecha_Nacimiento { get { return _jugadores.Fecha_Nacimiento; } set { _jugadores.Fecha_Nacimiento = value; } }
         public int? Altura{ get { return _jugadores.Altura; } set { _jugadores.Altura = value; } }
         public int? Peso { get { return _jugadores.Peso; } set { _jugadores.Peso = value; } }
-        public int? Puntos { get { return _jugadores.Puntos; } set { _jugadores.Puntos = value; } }
-        public int? Partidos_Jugados { get { return _jugadores.Partidos_Jugados; } set { _jugadores.Partidos_Jugados = value; } }
-        public int? Partidos_Ganados { get { return _jugadores.Partidos_Ganados; } set { _jugadores.Partidos_Ganados = value; } }
-        public int? Partidos_Perdidos { get { return _jugadores.Partidos_Perdidos; } set { _jugadores.Partidos_Perdidos = value; } }
-        public int? Partidos_Empatados { get { return _jugadores.Partidos_Empatados; } set { _jugadores.Partidos_Empatados = value; } }
-        public int? TarjetasAmarillas { get { return _jugadores.TarjetasAmarillas; } set { _jugadores.TarjetasAmarillas = value; } }
-        public int? TarjetasRojas { get { return _jugadores.TarjetasRojas; } set { _jugadores.TarjetasRojas = value; } }
         public bool exist { get { return _exist; } }
 
         private void nuevoJugador()

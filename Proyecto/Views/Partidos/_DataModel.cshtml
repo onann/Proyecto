@@ -5,22 +5,15 @@
 
 <div class="col-md-12">
     <div class="col-md-3">
+        @Html.TextBoxFor(m => m.idLiga, new { @Value = ViewBag.idLiga, @type = "hidden" })
 
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.idLiga, new { @class = "control-label" })
-            </small>
-            @Html.TextBoxFor(model => model.idLiga, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el idLiga" })
-            <small>
-                @Html.ValidationMessageFor(model => model.idLiga)
-            </small>    
-        </div>
+
 
         <div class="form-group input-group-sm">
             <small>
                 @Html.LabelFor(model => model.idEquipoLocal, new { @class = "control-label" })
             </small>
-            @Html.TextAreaFor(model => model.idEquipoLocal, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idEquipoLocal" })
+            @Html.DropDownListFor(model => model.idEquipoLocal, new SelectList(ViewBag.Equipos, "idEquipo", "Nombre"))
             <small>
                 @Html.ValidationMessageFor(model => model.idEquipoLocal)
             </small>
@@ -30,7 +23,7 @@
             <small>
                 @Html.LabelFor(model => model.idEquipoVisitante, new { @class = "control-label" })
             </small>
-            @Html.TextAreaFor(model => model.idEquipoVisitante, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idEquipoVisitante" })
+            @Html.DropDownListFor(model => model.idEquipoVisitante, new SelectList(ViewBag.Equipos, "idEquipo", "Nombre"))
             <small>
                 @Html.ValidationMessageFor(model => model.idEquipoVisitante)
             </small>
@@ -48,36 +41,23 @@
             <small>
                 @Html.LabelFor(model => model.idCampo, new { @class = "control-label" })
             </small>
-            @Html.TextAreaFor(model => model.idCampo, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idCampo" })
+            @Html.DropDownListFor(model => model.idCampo, new SelectList(ViewBag.Campos, "idCampo", "Nombre"))
             <small>
                 @Html.ValidationMessageFor(model => model.idCampo)
             </small>
         </div>
         <div class="form-group input-group-sm">
             <small>
-                @Html.LabelFor(model => model.idLive, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.idLive, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idLive" })
-            <small>
-                @Html.ValidationMessageFor(model => model.idLive)
-            </small>
-        </div>
-        <div class="form-group input-group-sm">
-            <small>
                 @Html.LabelFor(model => model.idArbitro, new { @class = "control-label" })
             </small>
-            @Html.TextAreaFor(model => model.idArbitro, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la idArbitro" })
+            @Html.DropDownListFor(model => model.idArbitro, new SelectList(ViewBag.Arbitros, "idArbitro", "Nombre"))
             <small>
                 @Html.ValidationMessageFor(model => model.idArbitro)
             </small>
         </div>
 
-
-
-
-
     </div>
-    
+
 </div>
 
 
@@ -90,6 +70,4 @@
     </div>
 
 }
-
-
 

@@ -8,6 +8,16 @@
 
         <div class="form-group input-group-sm">
             <small>
+                @Html.LabelFor(m => m.idLiga)</br>
+            </small>
+            @Html.DropDownListFor(model => model.idLiga, new SelectList(ViewBag.Ligas, "idLiga", "nombre"))
+            <small>
+                @Html.ValidationMessageFor(m => m.idLiga)
+            </small>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <small>
                 @Html.LabelFor(m => m.idClub)</br>
             </small>
             @Html.DropDownListFor(model => model.idClub, new SelectList(ViewBag.Clubes, "idClub", "Nombre"))

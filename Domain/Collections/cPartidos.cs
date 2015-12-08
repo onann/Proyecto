@@ -27,7 +27,8 @@ namespace Domain.Collections
                                 e.Date,
                                 e.idCampo,
                                 e.idLive,
-                                e.idArbitro
+                                e.idArbitro,
+                                e.isJugado
                             };
                 foreach (var i in query)
                 {
@@ -39,6 +40,7 @@ namespace Domain.Collections
                     e.Date = i.Date;
                     e.idLive = i.idLive;
                     e.idArbitro = i.idArbitro;
+                    e.isJugado = i.isJugado;
                     eList.Add(e);
                 }
                 return eList;
@@ -67,7 +69,8 @@ namespace Domain.Collections
                                 l.idEquipoVisitante,
                                 l.Date,
                                 l.idLive,
-                                l.idArbitro
+                                l.idArbitro,
+                                l.isJugado
                             };
 
                 foreach (var i in query)
@@ -79,6 +82,7 @@ namespace Domain.Collections
                     l.Date = i.Date;
                     l.idLive = i.idLive;
                     l.idArbitro = i.idArbitro;
+                    l.isJugado = i.isJugado;
 
                     lList.Add(l);
                 }
@@ -103,7 +107,8 @@ namespace Domain.Collections
                                 l.idEquipoVisitante,
                                 l.Date,
                                 l.idLive,
-                                l.idArbitro
+                                l.idArbitro,
+                                l.isJugado,
                             };
 
                 foreach (var i in query)
@@ -115,6 +120,7 @@ namespace Domain.Collections
                     l.Date = i.Date;
                     l.idLive = i.idLive;
                     l.idArbitro = i.idArbitro;
+                    l.isJugado = i.isJugado;
 
                     lList.Add(l);
                 }
@@ -145,7 +151,8 @@ namespace Domain.Collections
                                 l.idEquipoVisitante,
                                 l.Date,
                                 l.idLive,
-                                l.idArbitro
+                                l.idArbitro,
+                                l.isJugado
                             };
 
                 foreach (var i in query)
@@ -157,6 +164,7 @@ namespace Domain.Collections
                     l.Date = i.Date;
                     l.idLive = i.idLive;
                     l.idArbitro = i.idArbitro;
+                    l.isJugado = i.isJugado;
 
                     lList.Add(l);
                 }
@@ -195,6 +203,7 @@ namespace Domain.Collections
                     item.nombreVisitante = i.Equipos1.Nombre;
                     item.nombreCampo = i.Campos.Nombre;
                     item.nombreArbitro = i.Arbitros.Nombre;
+                    item.isJugado = i.isJugado;
 
                     list.Add(item);
                 }
@@ -237,11 +246,12 @@ namespace Domain.Collections
                     item.nombreVisitante = i.Equipos1.Nombre;
                     item.nombreCampo = i.Campos.Nombre;
                     item.nombreArbitro = i.Arbitros.Nombre;
+                    item.isJugado = i.isJugado;
 
                     string resultado = "";
                     var queryResultadoLocal = from r in db.EstadisticasPartidos
                                          where r.idPartido == i.idPartido
-                                         where r.idEquipo == i.idEquipoLocal
+                                         where r.idEquipo == i.idEquipoLocal                                             
                                          select r;
                     foreach (var p in queryResultadoLocal)
                     {
@@ -258,6 +268,50 @@ namespace Domain.Collections
                         resultado = resultado + " - " + total;
                     }
                     item.resultado = resultado;
+
+                    list.Add(item);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                list = new List<sPartidos>();
+            }
+
+            return list;
+        }
+
+        public IEnumerable<sPartidos> listaSinJugar()
+        {
+            ProyectoEntities1 db = new ProyectoEntities1();
+            var list = new List<sPartidos>();
+
+            try
+            {
+                var query = from r in db.Partidos
+                            where r.isJugado == false
+                            where r.Date <= DateTime.Now
+                            orderby r.Date
+                            select r;
+
+
+                foreach (var i in query)
+                {
+                    var item = new sPartidos();
+
+                    item.idPartido = i.idPartido;
+                    item.idLiga = i.idLiga;
+                    item.idEquipoLocal = i.idEquipoLocal;
+                    item.idEquipoVisitante = i.idEquipoVisitante;
+                    item.Date = i.Date;
+                    item.idCampo = i.idCampo;
+                    item.idLive = i.idLive;
+                    item.idArbitro = i.idArbitro;
+                    item.nombreLocal = i.Equipos.Nombre;
+                    item.nombreVisitante = i.Equipos1.Nombre;
+                    item.nombreCampo = i.Campos.Nombre;
+                    item.nombreArbitro = i.Arbitros.Nombre;
+                    item.isJugado = i.isJugado;
 
                     list.Add(item);
                 }
