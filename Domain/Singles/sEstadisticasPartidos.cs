@@ -18,6 +18,7 @@ namespace Domain.Singles
         public int? TarjetasAmarillas { get; set; }
         public int? TarjetasRojas { get; set; }
         public int? totalPuntos { get; set; }
+        public int marcador { get; set; }
 
 
     }

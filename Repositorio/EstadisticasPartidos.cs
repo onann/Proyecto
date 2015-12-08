@@ -23,6 +23,7 @@ namespace Repositorio
         public Nullable<int> Drops { get; set; }
         public Nullable<int> TarjetasAmarillas { get; set; }
         public Nullable<int> TarjetasRojas { get; set; }
+        public int Marcador { get; set; }
     
         public virtual Equipos Equipos { get; set; }
         public virtual Partidos Partidos { get; set; }

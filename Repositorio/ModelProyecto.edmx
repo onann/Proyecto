@@ -81,6 +81,7 @@
           <Property Name="Drops" Type="int" />
           <Property Name="TarjetasAmarillas" Type="int" />
           <Property Name="TarjetasRojas" Type="int" />
+          <Property Name="Marcador" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Jugadores">
           <Key>
@@ -485,6 +486,7 @@
           <Property Name="TarjetasRojas" Type="Int32" />
           <NavigationProperty Name="Equipos" Relationship="Self.FK_EstadisticasPartidos_Equipos" FromRole="EstadisticasPartidos" ToRole="Equipos" />
           <NavigationProperty Name="Partidos" Relationship="Self.FK_EstadisticasPartidos_Partidos" FromRole="EstadisticasPartidos" ToRole="Partidos" />
+          <Property Name="Marcador" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Jugadores">
           <Key>
@@ -885,6 +887,7 @@
           <EntitySetMapping Name="EstadisticasPartidos">
             <EntityTypeMapping TypeName="ProyectoModel.EstadisticasPartidos">
               <MappingFragment StoreEntitySet="EstadisticasPartidos">
+                <ScalarProperty Name="Marcador" ColumnName="Marcador" />
                 <ScalarProperty Name="idEstadistica_Partido" ColumnName="idEstadistica_Partido" />
                 <ScalarProperty Name="idPartido" ColumnName="idPartido" />
                 <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />

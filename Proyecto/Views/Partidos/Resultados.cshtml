@@ -35,7 +35,7 @@
 
     @Html.Grid(Model).Columns(columns =>
             {
-                columns.Add(m => m.Date).Titled("Fecha y hora");
+                columns.Add(m => m.ReturnDateForDisplay).Titled("Fecha y hora");
                 columns.Add(m => m.nombreLocal).Titled("Local");
                 columns.Add(m => m.nombreVisitante).Titled("Visitante");
                 columns.Add(m => m.resultado).Titled("Resultado");

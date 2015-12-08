@@ -91,10 +91,10 @@ namespace Proyecto.Controllers
         // GET: /License/AjaxCreate
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult AjaxCreate()
+        public ActionResult AjaxCreate(int id)
         {
             ViewBag.Equipos = new cEquipos().showAllResults();
-            //ViewBag.idEquipo = idEquipo;
+            ViewBag.idEquipo = id;
 
             if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new Jugadores());
@@ -110,36 +110,51 @@ namespace Proyecto.Controllers
             
             if (ModelState.IsValid)
             {
-                var result = new Domain.Definitions.cJsonResultData();
-
-                gJugadores item = new gJugadores();
-                item.Nombre = modelo.Nombre;
-                item.idEquipo = modelo.idEquipo;
-                item.Apellido1 = modelo.Apellido1;
-                item.Apellido2 = modelo.Apellido2;
-                item.Fecha_Nacimiento = Convert.ToDateTime(modelo.fechaIntroducida);
-                item.Altura = modelo.Altura;
-                item.Peso = modelo.Peso;
-                //item.Puntos = modelo.Puntos;
-                //item.Partidos_Jugados = modelo.Partidos_Jugados;
-                //item.Partidos_Ganados = modelo.Partidos_Ganados;
-                //item.Partidos_Perdidos = modelo.Partidos_Perdidos;
-                //item.Partidos_Empatados = modelo.Partidos_Empatados;
-                //item.TarjetasAmarillas = modelo.TarjetasAmarillas;
-                //item.TarjetasRojas = modelo.TarjetasRojas;
-
-                result.success = item.save();
-
-                if (result.success)
+                DateTime today = DateTime.Today;
+                int age = today.Year - Convert.ToDateTime(modelo.fechaIntroducida).Year;
+                if (age < 18)
                 {
-                    result.redirect = Url.Action("listaJugadores", "Equipos", new { idEquipo = modelo.idEquipo });
-                    return Json(result);
+                    ViewBag.ErrorMensaje = "El jugador tiene que ser mayor de edad.";
                 }
                 else
                 {
-                    ViewBag.ErrorMensaje = "El jugador no ha podido ser creado.";
-                }
+                    if ((modelo.Altura > 230 || modelo.Altura < 140) || (modelo.Peso > 160) || (modelo.Peso < 45))
+                    {
+                        ViewBag.ErrorMensaje = "La altura o peso son incorrectas.";
+                    }
+                    else
+                    {
+                        var result = new Domain.Definitions.cJsonResultData();
 
+                        gJugadores item = new gJugadores();
+                        item.Nombre = modelo.Nombre;
+                        item.idEquipo = modelo.idEquipo;
+                        item.Apellido1 = modelo.Apellido1;
+                        item.Apellido2 = modelo.Apellido2;
+                        item.Fecha_Nacimiento = Convert.ToDateTime(modelo.fechaIntroducida);
+                        item.Altura = modelo.Altura;
+                        item.Peso = modelo.Peso;
+                        //item.Puntos = modelo.Puntos;
+                        //item.Partidos_Jugados = modelo.Partidos_Jugados;
+                        //item.Partidos_Ganados = modelo.Partidos_Ganados;
+                        //item.Partidos_Perdidos = modelo.Partidos_Perdidos;
+                        //item.Partidos_Empatados = modelo.Partidos_Empatados;
+                        //item.TarjetasAmarillas = modelo.TarjetasAmarillas;
+                        //item.TarjetasRojas = modelo.TarjetasRojas;
+
+                        result.success = item.save();
+
+                        if (result.success)
+                        {
+                            result.redirect = Url.Action("listaJugadores", "Equipos", new { idEquipo = modelo.idEquipo });
+                            return Json(result);
+                        }
+                        else
+                        {
+                            ViewBag.ErrorMensaje = "El jugador no ha podido ser creado.";
+                        }
+                    }
+                }
             }
 
             return PartialView("_AjaxCreate", modelo);

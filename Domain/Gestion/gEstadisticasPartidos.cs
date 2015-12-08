@@ -22,6 +22,7 @@ namespace Domain.Gestion
         public int? Drops { get { return _estadisticasPartidos.Drops; } set { _estadisticasPartidos.Drops = value; } }
         public int? TarjetasAmarillas { get { return _estadisticasPartidos.TarjetasAmarillas; } set { _estadisticasPartidos.TarjetasAmarillas = value; } }
         public int? TarjetasRojas { get { return _estadisticasPartidos.TarjetasRojas; } set { _estadisticasPartidos.TarjetasRojas = value; } }
+        public int Marcador { get { return _estadisticasPartidos.Marcador; } set { _estadisticasPartidos.Marcador = value; } }
         public bool exist { get { return _exist; } }
 
         private void nuevaEstadisticaPartido()

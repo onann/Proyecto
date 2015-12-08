@@ -30,6 +30,8 @@ namespace Proyecto.Models.EstadisticasPartidos
         public int? TarjetasAmarillas { get; set; }
         [Display(Name = "TarjetasRojas")]
         public int? TarjetasRojas { get; set; }
+        [Display(Name = "Marcador")]
+        public int Marcador { get; set; }
 
         [Display(Name = "idEstadistica_Partido2")]
         public int idEstadistica_Partido2 { get; set; }
@@ -51,5 +53,7 @@ namespace Proyecto.Models.EstadisticasPartidos
         public int? TarjetasAmarillas2 { get; set; }
         [Display(Name = "TarjetasRojas2")]
         public int? TarjetasRojas2 { get; set; }
+        [Display(Name = "Marcador2")]
+        public int Marcador2{ get; set; }
     }
 }

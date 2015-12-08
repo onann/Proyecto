@@ -110,36 +110,45 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AjaxCreate(Partidos modelo)
         {
+            ViewBag.Equipos = new cEquipos().List((int)modelo.idLiga);
+            ViewBag.Campos = new cCampos().showAllResults();
+            ViewBag.Arbitros = new cArbitros().showAllResults();
+            ViewBag.idLiga = (int)modelo.idLiga;
             if (!Request.IsAjaxRequest()) return HttpNotFound();
 
             if (ModelState.IsValid)
             {
                 var result = new Domain.Definitions.cJsonResultData();
-
-                gPartidos item = new gPartidos();
-                item.idLiga = modelo.idLiga;
-                item.idEquipoLocal = modelo.idEquipoLocal;
-                item.idEquipoVisitante = modelo.idEquipoVisitante;
-                item.Date = modelo.Date;
-                item.idCampo = modelo.idCampo;
-                item.idLive = modelo.idLive;
-                item.idArbitro = modelo.idArbitro;
-                item.isJugado = modelo.isJugado;
-
-                result.success = item.save();
-
-                if (result.success)
+                if (modelo.idEquipoLocal == modelo.idEquipoVisitante)
                 {
-                    result.redirect = Url.Action("Index", "Partidos", new { id = item.idPartido });
-                    return Json(result);
+
+                    ViewBag.ErrorMensaje = "Los equipos no pueden enfrentarse a si mismos.";
                 }
                 else
                 {
-                    ViewBag.ErrorMensaje = "El partido no ha podido ser creado.";
-                }
+                    gPartidos item = new gPartidos();
+                    item.idLiga = modelo.idLiga;
+                    item.idEquipoLocal = modelo.idEquipoLocal;
+                    item.idEquipoVisitante = modelo.idEquipoVisitante;
+                    item.Date = modelo.Date;
+                    item.idCampo = modelo.idCampo;
+                    item.idLive = modelo.idLive;
+                    item.idArbitro = modelo.idArbitro;
+                    item.isJugado = modelo.isJugado;
 
+                    result.success = item.save();
+
+                    if (result.success)
+                    {
+                        result.redirect = Url.Action("Index", "Partidos", new { id = item.idPartido });
+                        return Json(result);
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMensaje = "El partido no ha podido ser creado.";
+                    }
+                }                
             }
-
             return PartialView("_AjaxCreate", modelo);
         }
 

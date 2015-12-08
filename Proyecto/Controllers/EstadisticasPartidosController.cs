@@ -27,6 +27,7 @@ namespace Proyecto.Controllers
             modelo.Drops = item.Drops;
             modelo.TarjetasAmarillas = item.TarjetasAmarillas;
             modelo.TarjetasRojas = item.TarjetasRojas;
+            modelo.Marcador = item.Marcador;
 
             return modelo;
         }
@@ -112,51 +113,69 @@ namespace Proyecto.Controllers
         public ActionResult AjaxCreate(EstadisticasPartidos modelo)
         {
             if (!Request.IsAjaxRequest()) return HttpNotFound();
-
-            if (ModelState.IsValid)
+            if (modelo.Conversiones > modelo.Ensayos || modelo.Conversiones2 > modelo.Ensayos2)
             {
-                var result = new Domain.Definitions.cJsonResultData();
-
-                gEstadisticasPartidos item = new gEstadisticasPartidos();
-                item.idPartido = modelo.idPartido;
-                item.idEquipo = modelo.idEquipo;
-                item.Ensayos = modelo.Ensayos;
-                item.Conversiones = modelo.Conversiones;
-                item.GolpesCastigo = modelo.GolpesCastigo;
-                item.Drops = modelo.Drops;
-                item.TarjetasAmarillas = modelo.TarjetasAmarillas;
-                item.TarjetasRojas = modelo.TarjetasRojas;
-
-                gEstadisticasPartidos item2 = new gEstadisticasPartidos();
-                item2.idPartido = modelo.idPartido2;
-                item2.idEquipo = modelo.idEquipo2;
-                item2.Ensayos = modelo.Ensayos2;
-                item2.Conversiones = modelo.Conversiones2;
-                item2.GolpesCastigo = modelo.GolpesCastigo2;
-                item2.Drops = modelo.Drops2;
-                item2.TarjetasAmarillas = modelo.TarjetasAmarillas2;
-                item2.TarjetasRojas = modelo.TarjetasRojas2;
-
-
-                result.success = item.save();
-                if (result.success)
+                gPartidos partido = new gPartidos(modelo.idPartido);
+                ViewBag.idPartido = modelo.idPartido; //recibimos el id partido
+                ViewBag.idEquipoVisitante = partido.getIdLocal(modelo.idPartido);
+                ViewBag.idEquipoLocal = partido.getIdVisitante(modelo.idPartido);
+                ViewBag.ErrorMensaje = "No puede haber mas conversiones que ensayos.";
+            }
+            else
+            {
+                if (ModelState.IsValid)
                 {
-                    result.success = item2.save();
+                    var result = new Domain.Definitions.cJsonResultData();
+
+                    gEstadisticasPartidos item = new gEstadisticasPartidos();
+                    item.idPartido = modelo.idPartido;
+                    item.idEquipo = modelo.idEquipo;
+                    item.Ensayos = modelo.Ensayos ?? 0;
+                    item.Conversiones = modelo.Conversiones ?? 0;
+                    item.GolpesCastigo = modelo.GolpesCastigo ?? 0;
+                    item.Drops = modelo.Drops ?? 0;
+                    item.TarjetasAmarillas = modelo.TarjetasAmarillas ?? 0;
+                    item.TarjetasRojas = modelo.TarjetasRojas ?? 0;
+                    item.Marcador = (int)(((modelo.Ensayos ?? 0) * 5) + ((modelo.Conversiones ?? 0) * 2) + ((modelo.Drops ?? 0) * 3) + ((modelo.GolpesCastigo ?? 0) * 3));
+
+                    gEstadisticasPartidos item2 = new gEstadisticasPartidos();
+                    item2.idPartido = modelo.idPartido2;
+                    item2.idEquipo = modelo.idEquipo2;
+                    item2.Ensayos = modelo.Ensayos2 ?? 0;
+                    item2.Conversiones = modelo.Conversiones2 ?? 0;
+                    item2.GolpesCastigo = modelo.GolpesCastigo2 ?? 0;
+                    item2.Drops = modelo.Drops2 ?? 0;
+                    item2.TarjetasAmarillas = modelo.TarjetasAmarillas2 ?? 0;
+                    item2.TarjetasRojas = modelo.TarjetasRojas2 ?? 0;
+                    item2.Marcador = (int)(((modelo.Ensayos2 ?? 0) * 5) + ((modelo.Conversiones2 ?? 0) * 2) + ((modelo.Drops2 ?? 0) * 3) + ((modelo.GolpesCastigo2 ?? 0) * 3));
+
+
+                    result.success = item.save();
                     if (result.success)
                     {
-                        result.redirect = Url.Action("Index", "EstadisticasPartidos", new { id = item.idEstadistica_Partido });
-                        return Json(result);
+                        result.success = item2.save();
+                        if (result.success)
+                        {
+                            gEquipos equipo1 = new gEquipos(item.idEquipo);
+                            gEquipos equipo2 = new gEquipos(item2.idEquipo);
+                            equipo1.guardarEstadisticas(item.idPartido);
+                            equipo2.guardarEstadisticas(item2.idPartido);
+                            gPartidos partido = new gPartidos(item.idPartido);
+                            partido.isJugado = true;
+                            partido.save();
+                            result.redirect = Url.Action("Index", "Home", new { id = item.idEstadistica_Partido });
+                            return Json(result);
+                        }
+                        else
+                        {
+                            ViewBag.ErrorMensaje = "La estadistica no ha podido ser creada.";
+                        }
                     }
                     else
                     {
                         ViewBag.ErrorMensaje = "La estadistica no ha podido ser creada.";
                     }
                 }
-                else
-                {
-                    ViewBag.ErrorMensaje = "La estadistica no ha podido ser creada.";
-                }
-
             }
 
             return PartialView("_AjaxCreate", modelo);

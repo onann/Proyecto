@@ -28,7 +28,8 @@ namespace Domain.Collections
                                 l.GolpesCastigo,
                                 l.Drops,
                                 l.TarjetasAmarillas,
-                                l.TarjetasRojas
+                                l.TarjetasRojas,
+                                l.Marcador
 
                             };
 
@@ -45,6 +46,7 @@ namespace Domain.Collections
                     l.Drops = i.Drops;
                     l.TarjetasAmarillas = i.TarjetasAmarillas;
                     l.TarjetasRojas = i.TarjetasRojas;
+                    l.marcador = i.Marcador;
                     eList.Add(l);
                 }
                 return eList;
@@ -67,7 +69,8 @@ namespace Domain.Collections
                                  l.GolpesCastigo.ToString().Contains(searchStr) ||
                                       l.Drops.ToString().Contains(searchStr) ||
                                        l.TarjetasAmarillas.ToString().Contains(searchStr) ||
-                                        l.TarjetasRojas.ToString().Contains(searchStr))
+                                        l.TarjetasRojas.ToString().Contains(searchStr) ||
+                                        l.Marcador.ToString().Contains(searchStr))
 
                             select new
                             {
@@ -79,7 +82,8 @@ namespace Domain.Collections
                                 l.GolpesCastigo,
                                 l.Drops,
                                 l.TarjetasAmarillas,
-                                l.TarjetasRojas
+                                l.TarjetasRojas,
+                                l.Marcador
                             };
 
                 foreach (var i in query)
@@ -94,6 +98,7 @@ namespace Domain.Collections
                     l.Drops = i.Drops;
                     l.TarjetasAmarillas = i.TarjetasAmarillas;
                     l.TarjetasRojas = i.TarjetasRojas;
+                    l.marcador = i.Marcador;
 
                     lList.Add(l);
                 }
@@ -121,7 +126,8 @@ namespace Domain.Collections
                                 l.GolpesCastigo,
                                 l.Drops,
                                 l.TarjetasAmarillas,
-                                l.TarjetasRojas
+                                l.TarjetasRojas,
+                                l.Marcador
                             };
 
                 foreach (var i in query)
@@ -136,6 +142,7 @@ namespace Domain.Collections
                     l.Drops = i.Drops;
                     l.TarjetasAmarillas = i.TarjetasAmarillas;
                     l.TarjetasRojas = i.TarjetasRojas;
+                    l.marcador = i.Marcador;
 
                     lList.Add(l);
                 }
@@ -160,7 +167,8 @@ namespace Domain.Collections
                                  l.GolpesCastigo.ToString().Contains(searchStr) ||
                                       l.Drops.ToString().Contains(searchStr) ||
                                        l.TarjetasAmarillas.ToString().Contains(searchStr) ||
-                                        l.TarjetasRojas.ToString().Contains(searchStr))
+                                        l.TarjetasRojas.ToString().Contains(searchStr) ||
+                                        l.Marcador.ToString().Contains(searchStr))
 
                             select new
                             {
@@ -172,7 +180,8 @@ namespace Domain.Collections
                                 l.GolpesCastigo,
                                 l.Drops,
                                 l.TarjetasAmarillas,
-                                l.TarjetasRojas
+                                l.TarjetasRojas,
+                                l.Marcador
                             };
 
                 foreach (var i in query)
@@ -187,6 +196,7 @@ namespace Domain.Collections
                     l.Drops = i.Drops;
                     l.TarjetasAmarillas = i.TarjetasAmarillas;
                     l.TarjetasRojas = i.TarjetasRojas;
+                    l.marcador = i.Marcador;
 
                     lList.Add(l);
                 }
@@ -203,9 +213,6 @@ namespace Domain.Collections
 
             try
             {
-                //var query = from r in db.EstadisticasPartidos
-                //            where r.idEquipo == idEquipo
-                //            select new;
                 var query2 = db.EstadisticasPartidos
              .Where(r => r.idEquipo == idEquipo)
              .GroupBy(r => r.idPartido)
@@ -220,24 +227,10 @@ namespace Domain.Collections
                      TarjetasAmarillas = g.Sum(s => s.Drops)
                  });
 
-
-                var query3 = from r in db.EstadisticasPartidos
-                             where r.idEquipo == idEquipo
-                            group r by new {r.Ensayos, r.Conversiones, r.Drops, r.GolpesCastigo, r.TarjetasRojas, r.TarjetasAmarillas} into g
-                            select new
-                            {
-                                Ensayos = g.Sum(s => s.Ensayos ),
-                                Conversiones = g.Sum(s => s.Conversiones),
-                                Drops = g.Sum(s => s.Drops),
-                                GolpesCastigo = g.Sum(s => s.GolpesCastigo),
-                                TarjetasRojas = g.Sum(s => s.TarjetasAmarillas),
-                                TarjetasAmarillas = g.Sum(s => s.Drops)
-
-                            };
-
                 var item = new sEstadisticasPartidos();
                 foreach (var i in query2)
-                {                    
+                {          
+                    item.marcador = (int)((i.Ensayos * 5) + (i.Conversiones * 2) + (i.Drops * 3) + (i.GolpesCastigo * 3));
                     item.totalPuntos = ((i.Ensayos * 5) + (i.Conversiones * 2) + (i.Drops * 3) + (i.GolpesCastigo * 3));
                     item.Ensayos = i.Ensayos;
                     item.Conversiones = i.Conversiones;

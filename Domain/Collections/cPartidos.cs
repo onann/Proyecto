@@ -312,6 +312,7 @@ namespace Domain.Collections
                     item.nombreCampo = i.Campos.Nombre;
                     item.nombreArbitro = i.Arbitros.Nombre;
                     item.isJugado = i.isJugado;
+                    item.nombreLiga = i.Ligas.nombre;
 
                     list.Add(item);
                 }

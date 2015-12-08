@@ -22,5 +22,13 @@ namespace Domain.Singles
         public string nombreArbitro { get; set; }
         public string resultado { get; set; }
         public bool isJugado { get; set; }
+        public string nombreLiga { get; set; }
+        public string ReturnDateForDisplay
+        {
+            get
+            {
+                return this.Date.Value.ToShortDateString();
+            }
+        }
     }
 }

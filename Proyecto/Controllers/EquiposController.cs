@@ -287,7 +287,7 @@ namespace Proyecto.Controllers
             if (item.exist)
             {
                 ViewBag.MessageTitle = item.Nombre;
-                ViewBag.MessageContent = item.Nombre;
+                ViewBag.MessageContent = item.getNombreLiga();
             }
             else
             {

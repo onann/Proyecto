@@ -23,7 +23,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Ligas <span class="caret"></span>
@@ -32,8 +32,6 @@
                             <li>@Html.ActionLink("LGR1", "Clasificacion", "Ligas", new { idLiga = 10 }, null)</li>
                             <li>@Html.ActionLink("LGR2", "Clasificacion", "Ligas", new { idLiga = 11 }, null)</li>
                             <li>@Html.ActionLink("LGRF", "Clasificacion", "Ligas", new { idLiga = 12 }, null)</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Listado completo", "Index", "Ligas")</li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Equipos","Index","Equipos")</li>
