@@ -16,7 +16,7 @@ namespace Domain.Gestion
          public int idComentario { get { return _comentariosLive.idComentario; } }
         public int? idLive { get { return _comentariosLive.idLive; } set { _comentariosLive.idLive = value; } }
         public string texto { get { return _comentariosLive.texto; } set { _comentariosLive.texto = value; } }
-        public int? minuto { get { return _comentariosLive.minuto; } set { _comentariosLive.minuto = value; } }
+        public DateTime? horaPublicacion { get { return _comentariosLive.horaPublicacion; } set { _comentariosLive.horaPublicacion = value; } }
         public bool exist { get { return _exist; } }
 
         private void nuevoComentarioLive()
@@ -66,7 +66,6 @@ namespace Domain.Gestion
             }
             catch (Exception ex)
             {
-                //logger.Error("Error al borrar la  Liga", ex);
                 return false;
             }
 

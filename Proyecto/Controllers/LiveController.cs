@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Domain.Gestion;
 using Proyecto.Models.Live;
 using System.Web.Routing;
+using Domain.Collections;
 
 namespace Proyecto.Controllers
 {
@@ -18,38 +19,30 @@ namespace Proyecto.Controllers
             Live modelo = new Live();
             modelo.idLive = item.idLive;
             modelo.TiempoTranscurrido = item.TiempoTranscurrido;
+            modelo.idLocal = item.idLocal;
+            modelo.idVisitante = item.idVisitante;
+            modelo.marcadorLocal = item.marcadorLocal;
+            modelo.marcadorVisitante = item.marcadorVisitante;
+            modelo.Date = item.Date;
+            modelo.idCampo = item.idCampo;
+            modelo.idArbitro = item.idArbitro;
+            
             return modelo;
         }
-
-
-        // GET: Clubes
         public ActionResult Index(string searchStr)
         {
             Domain.Collections.cLive coleccion = new Domain.Collections.cLive();
-
-            //if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-            //{
             return View(searchStr != null ? coleccion.showAllResults(searchStr) : coleccion.showAllResults());
-            //}
-            //else
-            //{
-            //    return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
-            //}
         }
 
-        // GET: /License/Selector
-
-        public ActionResult Selector(string searchStr /*,long idCliente*/)
+        public ActionResult Selector(string searchStr)
         {
-            //ViewBag.idCliente = idCliente;
             Domain.Collections.cLive coleccion = new Domain.Collections.cLive();
             ViewBag.Title = "Seleccionar Live";
             return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
         }
 
-        // GET: /License/Gestion
-
-        public ActionResult Gestion(int id)
+        public ActionResult Gestion(int id, int idPartido)
         {
             gLive item = new gLive();
             if (id < -1) return HttpNotFound();
@@ -63,11 +56,10 @@ namespace Proyecto.Controllers
 
             ViewBag.idLive = id;
             ViewBag.NuevoLive = !item.exist;
+            ViewBag.idPartido = idPartido;
 
             return View();
         }
-
-        // GET: /License/AjaxDetails/
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDetails(int id)
@@ -80,48 +72,23 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxDetails", item);
         }
 
-        // GET: /License/AjaxCreate
-
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult AjaxCreate()
+        public ActionResult crearAsignarLive(int id)
         {
-            if (!Request.IsAjaxRequest()) return HttpNotFound();
-            return PartialView("_AjaxCreate", new Live());
+            gLive live = new gLive();
+            gPartidos partido = new gPartidos(id);
+            live.idArbitro = partido.idArbitro;
+            live.idCampo = partido.idCampo;
+            live.idLocal = partido.idEquipoLocal;
+            live.idVisitante = partido.idEquipoVisitante;
+            live.save();
+            
+
+            partido.idLive = live.idLive;
+            partido.save();
+
+            return RedirectToAction("partidosLive", "Partidos");
         }
 
-        // POST: /License/AjaxCreate
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AjaxCreate(Live modelo)
-        {
-            if (!Request.IsAjaxRequest()) return HttpNotFound();
-
-            if (ModelState.IsValid)
-            {
-                var result = new Domain.Definitions.cJsonResultData();
-
-                gLive item = new gLive();
-                item.TiempoTranscurrido = modelo.TiempoTranscurrido;
-
-                result.success = item.save();
-
-                if (result.success)
-                {
-                    result.redirect = Url.Action("Index", "Live", new { id = item.idLive });
-                    return Json(result);
-                }
-                else
-                {
-                    ViewBag.ErrorMensaje = "El live no ha podido ser creado.";
-                }
-
-            }
-
-            return PartialView("_AjaxCreate", modelo);
-        }
-
-        // GET: /License/AjaxEdit
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxEdit(int idLive)
@@ -133,8 +100,6 @@ namespace Proyecto.Controllers
 
             return PartialView("_AjaxEdit", obtenerModelo(item));
         }
-
-        // POST: /License/AjaxEdit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -173,8 +138,6 @@ namespace Proyecto.Controllers
         }
 
 
-        // GET: /License/AjaxDelete
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDelete(int id)
         {
@@ -187,9 +150,6 @@ namespace Proyecto.Controllers
 
             return PartialView("_Delete");
         }
-
-
-        // POST: /License/AjaxDelete
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -216,6 +176,85 @@ namespace Proyecto.Controllers
             }
 
             return Json(result);
+        }
+
+        public ActionResult selectorPartidos()
+        {
+            return View(new cPartidos().listaSinJugar());
+        }
+
+        public ActionResult borrarLive(int id, int idPartido)
+        {
+            gLive live = new gLive(id);
+            live.Quitar(id);
+            gPartidos partido = new gPartidos(idPartido);
+            partido.idLive = null;
+            partido.save();
+
+            return RedirectToAction("partidosLive", "Partidos");           
+
+
+        }
+
+        public ActionResult partidoEnDirecto(int idLive)
+        {
+            gLive directo = new gLive(idLive);
+
+            gPartidos partido = new gPartidos(directo.getIdPartido());
+            Live modelo = new Live();
+            gEquipos equipoLocal = new gEquipos(partido.idEquipoLocal);
+            gEquipos equipoVisitante = new gEquipos(partido.idEquipoVisitante);
+
+
+            modelo.idLive = directo.idLive;
+            modelo.nombreLocal = equipoLocal.Nombre;
+            modelo.nombreVisitante = equipoVisitante.Nombre;
+            modelo.marcadorLocal = directo.marcadorLocal;
+            modelo.marcadorVisitante = directo.marcadorVisitante;
+            modelo.TiempoTranscurrido = directo.TiempoTranscurrido;
+            ViewBag.idPartido = directo.getIdPartido();
+            ViewBag.idLive = idLive;
+
+
+            return View("partidoEnDirecto", modelo);
+        }
+
+        public ActionResult partidoEnDirecto2(int idLive)
+        {
+            gLive directo = new gLive(idLive);
+
+            gPartidos partido = new gPartidos(directo.getIdPartido());
+            Live modelo = new Live();
+            gEquipos equipoLocal = new gEquipos(partido.idEquipoLocal);
+            gEquipos equipoVisitante = new gEquipos(partido.idEquipoVisitante);
+
+
+            modelo.idLive = directo.idLive;
+            modelo.nombreLocal = equipoLocal.Nombre;
+            modelo.nombreVisitante = equipoVisitante.Nombre;
+            modelo.marcadorLocal = directo.marcadorLocal;
+            modelo.marcadorVisitante = directo.marcadorVisitante;
+            modelo.TiempoTranscurrido = directo.TiempoTranscurrido;
+            ViewBag.idPartido = directo.getIdPartido();
+            ViewBag.idLive = idLive;
+
+
+            return PartialView("partidoEnDirecto", modelo);
+        }
+
+        public ActionResult Comentarios(int idLive)
+        {
+            ViewBag.idLive = idLive;
+            return PartialView(new cComentariosLive().listaComentariosLive(idLive));
+        }
+
+        public ActionResult finalizarLive(int idLive)
+        {
+            gLive live = new gLive(idLive);
+            live.getIdPartido();
+
+            return RedirectToAction("Gestion", "EstadisticasPartidos", new { id = -1, idPartido = live.getIdPartido() }) ;
+
         }
     }
 }

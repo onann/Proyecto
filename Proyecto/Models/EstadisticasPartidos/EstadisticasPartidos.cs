@@ -22,13 +22,13 @@ namespace Proyecto.Models.EstadisticasPartidos
         public int? Ensayos { get; set; }
         [Display(Name = "Conversiones")]
         public int? Conversiones { get; set; }
-        [Display(Name = "GolpesCastigo")]
+        [Display(Name = "Golpes de castigo")]
         public int? GolpesCastigo { get; set; }
         [Display(Name = "Drops")]
         public int? Drops { get; set; }
-        [Display(Name = "TarjetasAmarillas")]
+        [Display(Name = "Tarjetas amarillas")]
         public int? TarjetasAmarillas { get; set; }
-        [Display(Name = "TarjetasRojas")]
+        [Display(Name = "Tarjetas rojas")]
         public int? TarjetasRojas { get; set; }
         [Display(Name = "Marcador")]
         public int Marcador { get; set; }
@@ -41,17 +41,17 @@ namespace Proyecto.Models.EstadisticasPartidos
         [Required]
         [Display(Name = "idEquipo2")]
         public int idEquipo2 { get; set; }
-        [Display(Name = "Ensayos2")]
+        [Display(Name = "Ensayos")]
         public int? Ensayos2 { get; set; }
-        [Display(Name = "Conversiones2")]
+        [Display(Name = "Conversiones")]
         public int? Conversiones2 { get; set; }
-        [Display(Name = "GolpesCastigo2")]
+        [Display(Name = "Golpes de castigo")]
         public int? GolpesCastigo2 { get; set; }
-        [Display(Name = "Drops2")]
+        [Display(Name = "Drops")]
         public int? Drops2 { get; set; }
-        [Display(Name = "TarjetasAmarillas2")]
+        [Display(Name = "Tarjetas amarillas")]
         public int? TarjetasAmarillas2 { get; set; }
-        [Display(Name = "TarjetasRojas2")]
+        [Display(Name = "Tarjetas rojas")]
         public int? TarjetasRojas2 { get; set; }
         [Display(Name = "Marcador2")]
         public int Marcador2{ get; set; }

@@ -33,32 +33,20 @@ namespace Proyecto.Controllers
         }
 
 
-        // GET: Clubes
         public ActionResult Index(string searchStr)
         {
             Domain.Collections.cEstadisticasPartidos coleccion = new Domain.Collections.cEstadisticasPartidos();
 
-            //if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-            //{
-                return View(searchStr != null ? coleccion.showAllResults(searchStr) : coleccion.showAllResults());
-            //}
-            //else
-            //{
-            //    return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
-            //}
+            return View(searchStr != null ? coleccion.showAllResults(searchStr) : coleccion.showAllResults());
         }
 
-        // GET: /License/Selector
 
-        public ActionResult Selector(string searchStr /*,long idCliente*/)
+        public ActionResult Selector(string searchStr)
         {
-            //ViewBag.idCliente = idCliente;
             Domain.Collections.cEstadisticasPartidos coleccion = new Domain.Collections.cEstadisticasPartidos();
             ViewBag.Title = "Seleccionar EstadisticasPartidos";
             return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
         }
-
-        // GET: /License/Gestion
 
         public ActionResult Gestion(int id, int idPartido)
         {
@@ -78,8 +66,6 @@ namespace Proyecto.Controllers
             return View();
         }
 
-        // GET: /License/AjaxDetails/
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDetails(int id)
         {
@@ -91,22 +77,22 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxDetails", item);
         }
 
-        // GET: /License/AjaxCreate
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxCreate(int id)
         {
             gPartidos partido = new gPartidos(id);
-            ViewBag.idPartido = id; //recibimos el id partido
+            ViewBag.idPartido = id;
             ViewBag.idEquipoVisitante = partido.getIdLocal(id);
             ViewBag.idEquipoLocal = partido.getIdVisitante(id);
 
+            gEquipos equipo = new gEquipos(partido.getIdLocal(id));
+            gEquipos equipo2 = new gEquipos(partido.getIdVisitante(id));
+            ViewBag.nombreLocal = equipo.Nombre;
+            ViewBag.nombreVisitante = equipo2.Nombre;
 
             if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new EstadisticasPartidos());
         }
-
-        // POST: /License/AjaxCreate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -116,7 +102,7 @@ namespace Proyecto.Controllers
             if (modelo.Conversiones > modelo.Ensayos || modelo.Conversiones2 > modelo.Ensayos2)
             {
                 gPartidos partido = new gPartidos(modelo.idPartido);
-                ViewBag.idPartido = modelo.idPartido; //recibimos el id partido
+                ViewBag.idPartido = modelo.idPartido;
                 ViewBag.idEquipoVisitante = partido.getIdLocal(modelo.idPartido);
                 ViewBag.idEquipoLocal = partido.getIdVisitante(modelo.idPartido);
                 ViewBag.ErrorMensaje = "No puede haber mas conversiones que ensayos.";
@@ -160,10 +146,19 @@ namespace Proyecto.Controllers
                             gEquipos equipo2 = new gEquipos(item2.idEquipo);
                             equipo1.guardarEstadisticas(item.idPartido);
                             equipo2.guardarEstadisticas(item2.idPartido);
+
                             gPartidos partido = new gPartidos(item.idPartido);
                             partido.isJugado = true;
+
                             partido.save();
-                            result.redirect = Url.Action("Index", "Home", new { id = item.idEstadistica_Partido });
+
+                            gArbitros arbitro = new gArbitros((int)partido.getIdArbitro());
+                            arbitro.Partidos += 1;
+                            arbitro.TarjetasAmarillas += (modelo.TarjetasAmarillas + modelo.TarjetasAmarillas2);
+                            arbitro.TarjetasRojas += (modelo.TarjetasRojas + modelo.TarjetasRojas2);
+                            arbitro.save();
+                            result.redirect = Url.Action("introResultados", "Partidos", null);
+                            
                             return Json(result);
                         }
                         else
@@ -181,8 +176,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxCreate", modelo);
         }
 
-        // GET: /License/AjaxEdit
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxEdit(int idEstadistica_Partido)
         {
@@ -193,8 +186,6 @@ namespace Proyecto.Controllers
 
             return PartialView("_AjaxEdit", obtenerModelo(item));
         }
-
-        // POST: /License/AjaxEdit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -238,9 +229,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxEdit", modelo);
         }
 
-
-        // GET: /License/AjaxDelete
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDelete(int id)
         {
@@ -254,34 +242,84 @@ namespace Proyecto.Controllers
             return PartialView("_Delete");
         }
 
-
-        // POST: /License/AjaxDelete
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDeleteConfirmed(int id)
         {
             if (!Request.IsAjaxRequest()) return HttpNotFound();
 
             var result = new Domain.Definitions.cJsonResultData();
 
-            gEstadisticasPartidos gEstadistica = new gEstadisticasPartidos(id);
-            if (!gEstadistica.exist)
-            {
-                result.messaje = "La estadistica seleccionada no es valida";
-            }
-            else
-            {
-                gEstadistica.Quitar(id);
-                result.success = gEstadistica.save();
-                Console.WriteLine(result);
-                Console.WriteLine(result.success);
-                result.reload = result.success;
+            gPartidos partido = new gPartidos(id);
+            gEquipos equipo1 = new gEquipos(partido.getIdLocal(partido.idPartido));
+            equipo1.restarEstadisticas(partido.idPartido);
+            gEquipos equipo2 = new gEquipos(partido.getIdVisitante(partido.idPartido));
+            equipo2.restarEstadisticas(partido.idPartido);
 
-                if (!result.success) result.messaje = "La estadistica seleccionada  no ha podido ser borrada";
-            }
+            gArbitros arbitro = new gArbitros((int)partido.getIdArbitro());
+            arbitro.Partidos -= 1;
 
+            var estadisticas = partido.getEstadisticasPartido();
+            foreach (var i in estadisticas)
+            {
+                gEstadisticasPartidos gEstadistica = new gEstadisticasPartidos(i);
+                if (!gEstadistica.exist)
+                {
+                    result.messaje = "La estadistica seleccionada no es valida";
+                }
+                else
+                {
+
+                    arbitro.TarjetasAmarillas -= (gEstadistica.TarjetasAmarillas);
+                    arbitro.TarjetasRojas -= (gEstadistica.TarjetasRojas);
+                    arbitro.save();
+
+                    gEstadistica.Quitar(i);
+                    result.success = gEstadistica.save();
+                    result.reload = result.success;
+                    if (!result.success) result.messaje = "La estadistica seleccionada  no ha podido ser borrada";
+                    
+                }
+
+                
+            }
+            partido.isJugado = false;
+            partido.save();
             return Json(result);
+        }
+
+             
+        public ActionResult borrarResultado(int id)
+        {
+
+            gPartidos partido = new gPartidos(id);
+            gEquipos equipo1 = new gEquipos(partido.getIdLocal(partido.idPartido));
+            equipo1.restarEstadisticas(partido.idPartido);
+            gEquipos equipo2 = new gEquipos(partido.getIdVisitante(partido.idPartido));
+            equipo2.restarEstadisticas(partido.idPartido);
+
+            gArbitros arbitro = new gArbitros((int)partido.getIdArbitro());
+            arbitro.Partidos -= 1;
+
+            var estadisticas = partido.getEstadisticasPartido();
+            foreach (var i in estadisticas)
+            {
+                gEstadisticasPartidos gEstadistica = new gEstadisticasPartidos(i);
+               
+
+                    arbitro.TarjetasAmarillas -= (gEstadistica.TarjetasAmarillas);
+                    arbitro.TarjetasRojas -= (gEstadistica.TarjetasRojas);
+                    arbitro.save();
+
+                    gEstadistica.Quitar(i);
+                    gEstadistica.save();
+                    
+                    
+              
+                
+            }
+            partido.isJugado = false;
+            partido.save();
+            return RedirectToAction("Resultados", "Partidos", new { idLiga = partido.idLiga });
         }
     }
 }

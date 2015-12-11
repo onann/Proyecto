@@ -9,20 +9,6 @@
     <p id="warningMessage" class=" bg-warning  text-warning"></p>
 </div>
 
-<!-- Modal -->
-<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div id="modalContent" class="modal-content">
-
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="blockModal" role="dialog" data-backdrop="static" data-keyboard="false">
-    <img src="~/Content/images/loading.gif" />
-</div>
-<!-- Modal -->
-
 
 <div class="panel panel-default">
 
@@ -37,7 +23,7 @@
     <div class="panel-body">
         <br />
         <small>
-            @Html.Grid(Model).Columns(columns =>
+            @Html.Grid(Model).EmptyText("No hay datos que mostrar").Columns(columns =>
                        {
                            columns.Add(model => model.Nombre).Titled("Nombre").Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(model => Html.ActionLink(model.Nombre,
                                "listaJugadores", "Equipos", new { idEquipo = model.idEquipo }, null).ToHtmlString());
@@ -62,7 +48,7 @@
 {
     <div class="btn-group-xs">
 
-        @Html.ActionLink(" ", "Gestion", "Equipos", new { id = idEquipo }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil", title = "Gestionar" })
+        @Html.ActionLink(" ", "Gestion", "Equipos", new { id = idEquipo }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil", title = "Editar equipo" })
     </div>
 }
 

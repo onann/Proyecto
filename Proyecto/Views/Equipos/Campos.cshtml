@@ -27,7 +27,7 @@
 
 <small>
 
-    @Html.Grid(Model).Columns(columns =>
+    @Html.Grid(Model).EmptyText("No hay datos que mostrar").Columns(columns =>
             {
 
                 columns.Add(m => m.idCampo).Titled("#");
@@ -39,7 +39,7 @@
                      .Sanitized(false)
                      .RenderValueAs(m => CustomRenderingOfColumnFicha(m));
 
-            }).WithPaging(20).Sortable(true) @* .SetRowCssClasses(m => (m.Deleted || !m.Enabled) ? "active" : "")*@
+            }).WithPaging(20).Sortable(true)
 
 
     @Html.ActionLink("Nuevo campo", "Gestion", "Campos", new { id = -1, idEquipo = ViewBag.EquipoId }, new { @class = "btn btn-primary" })
@@ -47,54 +47,6 @@
 
         @helper CustomRenderingOfColumnFicha(Domain.Singles.sCampos datos)
         {
-            <div>
-
-                @*@if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()) || User.IsInRole(Domain.Definitions.eRolesUsers.Supervisor.ToString()))
-                    {
-                        <div class="pull-right" style="text-align:right">
-
-                            <div class="btn-group-xs">
-
-                                @if (datos.Deleted)
-                                {
-                                    @Ajax.ActionLink(" ", "RegisterEnable", "Catalogs", new { id = datos.Id },
-                                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                        new { @class = "btn btn-default btn-xs glyphicon glyphicon-ok", title = "Habilitar" })
-                                }
-                                else
-                                {
-
-                                    if (datos.Enabled)
-                                    {
-                                        @Ajax.ActionLink(" ", "RegisterDisable", "Catalogs", new { id = datos.Id },
-                                                 new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                            new { @class = "btn btn-default glyphicon glyphicon-remove", title = "Deshabilitar" })
-
-                                    }
-                                    else
-                                    {
-                                        @Ajax.ActionLink(" ", "RegisterEnable", "Catalogs", new { id = datos.Id },
-                                                 new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                            new { @class = "btn btn-default glyphicon glyphicon-ok", title = "Habilitar" })
-
-                                    }
-
-                                    if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-                                    {
-                                        @Ajax.ActionLink(" ", "RegisterDelete", "Catalogs", new { id = datos.Id },
-                                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                        new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", title = "Eliminar" })
-
-                                    }
-
-                                }
-
-                            </div>
-
-                        </div>
-                    }*@
-
-            </div>
 
 
 }

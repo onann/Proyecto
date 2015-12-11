@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Domain.Gestion;
 using Proyecto.Models.ComentariosLive;
 using System.Web.Routing;
+using Domain.Collections;
 
 namespace Proyecto.Controllers
 {
@@ -19,39 +20,25 @@ namespace Proyecto.Controllers
             modelo.idComentario = item.idComentario;
             modelo.idLive = item.idLive;
             modelo.texto = item.texto;
-            modelo.minuto = item.minuto;
+            modelo.horaPublicacion = item.horaPublicacion;
             return modelo;
         }
 
-
-        // GET: Clubes
         public ActionResult Index(string searchStr)
         {
             Domain.Collections.cComentariosLive coleccion = new Domain.Collections.cComentariosLive();
-
-            //if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-            //{
             return View(searchStr != null ? coleccion.showAllResults(searchStr) : coleccion.showAllResults());
-            //}
-            //else
-            //{
-            //    return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
-            //}
         }
 
-        // GET: /License/Selector
-
-        public ActionResult Selector(string searchStr /*,long idCliente*/)
+        public ActionResult Selector(string searchStr)
         {
-            //ViewBag.idCliente = idCliente;
             Domain.Collections.cComentariosLive coleccion = new Domain.Collections.cComentariosLive();
             ViewBag.Title = "Seleccionar ComentarioLive";
             return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
         }
 
-        // GET: /License/Gestion
 
-        public ActionResult Gestion(int id)
+        public ActionResult Gestion(int id, int idLive)
         {
             gComentariosLive item = new gComentariosLive();
             if (id < -1) return HttpNotFound();
@@ -62,14 +49,13 @@ namespace Proyecto.Controllers
                 item = new gComentariosLive(id);
                 if (!item.exist) return HttpNotFound();
             }
-
-            ViewBag.idCometarioLive = id;
+            ViewBag.idLive = idLive;
+            ViewBag.idComentarioLive = id;
             ViewBag.NuevoComentarioLive = !item.exist;
 
             return View();
         }
 
-        // GET: /License/AjaxDetails/
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDetails(int id)
@@ -82,16 +68,18 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxDetails", item);
         }
 
-        // GET: /License/AjaxCreate
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult AjaxCreate()
+        public ActionResult AjaxCreate(int id)
         {
+            ViewBag.idLive = id;
+            gLive live = new gLive(id);
+            ViewBag.marcadorLocal = live.marcadorLocal ?? 0;
+            ViewBag.marcadorVisitante = live.marcadorVisitante ?? 0;
             if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new ComentariosLive());
         }
 
-        // POST: /License/AjaxCreate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -105,14 +93,18 @@ namespace Proyecto.Controllers
 
                 gComentariosLive item = new gComentariosLive();
                 item.idLive = modelo.idLive;
-                item.minuto = modelo.minuto;
+                item.horaPublicacion = DateTime.Now;
                 item.texto = modelo.texto;
+                gLive live = new gLive((int)(modelo.idLive));
+                    live.marcadorLocal = modelo.marcadorLocal;
+                    live.marcadorVisitante = modelo.marcadorVisitatne;
+                    live.save();
 
                 result.success = item.save();
 
                 if (result.success)
                 {
-                    result.redirect = Url.Action("Index", "ComentariosLive", new { id = item.idComentario  });
+                    result.redirect = Url.Action("partidoEnDirecto", "Live", new { idLive = item.idLive });
                     return Json(result);
                 }
                 else
@@ -125,7 +117,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxCreate", modelo);
         }
 
-        // GET: /License/AjaxEdit
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxEdit(int idComentario)
@@ -138,7 +129,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxEdit", obtenerModelo(item));
         }
 
-        // POST: /License/AjaxEdit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -158,7 +148,7 @@ namespace Proyecto.Controllers
                 else
                 {
                     item.idLive = modelo.idLive;
-                    item.minuto = modelo.minuto;
+                    item.horaPublicacion = modelo.horaPublicacion;
                     item.texto = modelo.texto;
 
                     result.success = item.save();
@@ -179,7 +169,6 @@ namespace Proyecto.Controllers
         }
 
 
-        // GET: /License/AjaxDelete
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDelete(int id)
@@ -194,8 +183,6 @@ namespace Proyecto.Controllers
             return PartialView("_Delete");
         }
 
-
-        // POST: /License/AjaxDelete
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -222,6 +209,16 @@ namespace Proyecto.Controllers
             }
 
             return Json(result);
+        }
+
+            public ActionResult borrarComentario(int id)
+        {
+            gComentariosLive gComentario = new gComentariosLive(id);
+            int idLive = (int)gComentario.idLive;
+                gComentario.Quitar(id);              
+            
+
+            return RedirectToAction("partidoEnDirecto", "Live", new { idLive });
         }
     }
 }

@@ -29,33 +29,19 @@ namespace Proyecto.Controllers
             return modelo;
         }
 
-
-        // GET: Clubes
         public ActionResult Index(string searchStr)
         {
             Domain.Collections.cJugadores coleccion = new Domain.Collections.cJugadores();
 
-            //if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-            //{
             return View(searchStr != null ? coleccion.showAllResults(searchStr) : coleccion.showAllResults());
-            //}
-            //else
-            //{
-            //    return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
-            //}
         }
 
-        // GET: /License/Selector
-
-        public ActionResult Selector(string searchStr /*,long idCliente*/)
+        public ActionResult Selector(string searchStr)
         {
-            //ViewBag.idCliente = idCliente;
             Domain.Collections.cJugadores coleccion = new Domain.Collections.cJugadores();
             ViewBag.Title = "Seleccionar Jugador";
             return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
         }
-
-        // GET: /License/Gestion
 
         public ActionResult Gestion(int id, int idEquipo)
         {
@@ -75,8 +61,6 @@ namespace Proyecto.Controllers
             return View();
         }
 
-        // GET: /License/AjaxDetails/
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDetails(int id)
         {
@@ -88,8 +72,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxDetails", item);
         }
 
-        // GET: /License/AjaxCreate
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxCreate(int id)
         {
@@ -99,8 +81,6 @@ namespace Proyecto.Controllers
             if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new Jugadores());
         }
-
-        // POST: /License/AjaxCreate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -134,13 +114,6 @@ namespace Proyecto.Controllers
                         item.Fecha_Nacimiento = Convert.ToDateTime(modelo.fechaIntroducida);
                         item.Altura = modelo.Altura;
                         item.Peso = modelo.Peso;
-                        //item.Puntos = modelo.Puntos;
-                        //item.Partidos_Jugados = modelo.Partidos_Jugados;
-                        //item.Partidos_Ganados = modelo.Partidos_Ganados;
-                        //item.Partidos_Perdidos = modelo.Partidos_Perdidos;
-                        //item.Partidos_Empatados = modelo.Partidos_Empatados;
-                        //item.TarjetasAmarillas = modelo.TarjetasAmarillas;
-                        //item.TarjetasRojas = modelo.TarjetasRojas;
 
                         result.success = item.save();
 
@@ -160,8 +133,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxCreate", modelo);
         }
 
-        // GET: /License/AjaxEdit
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxEdit(int idJugador)
         {
@@ -172,8 +143,6 @@ namespace Proyecto.Controllers
 
             return PartialView("_AjaxEdit", obtenerModelo(item));
         }
-
-        // POST: /License/AjaxEdit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -217,9 +186,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxEdit", modelo);
         }
 
-
-        // GET: /License/AjaxDelete
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDelete(int id)
         {
@@ -232,9 +198,6 @@ namespace Proyecto.Controllers
 
             return PartialView("_Delete");
         }
-
-
-        // POST: /License/AjaxDelete
 
         [HttpPost]
         [ValidateAntiForgeryToken]

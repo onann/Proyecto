@@ -28,7 +28,7 @@ namespace Domain.Gestion
         {
             _partidos = new Partidos();
             _exist = false;
-            isJugado = false; //probar
+            isJugado = false;
         }
 
         public gPartidos()
@@ -117,5 +117,71 @@ namespace Domain.Gestion
                 return 0;
             }
         }
+
+        public int? getIdArbitro()
+        {
+            try
+            {
+                var query = (from d in _db.Partidos where d.idPartido == idPartido select d.idArbitro).SingleOrDefault();
+                if (query != null)
+                {
+                    return query;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        public IQueryable<int> getEstadisticasPartido()
+        {
+            try
+            {
+                var query = (from d in _db.EstadisticasPartidos where d.idPartido == _partidos.idPartido select d.idEstadistica_Partido);
+
+                return query;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public IQueryable<int> getEstadisticasPartidoLocal()
+        {
+            try
+            {
+                var query = (from d in _db.EstadisticasPartidos where d.idPartido == _partidos.idPartido select d.idEstadistica_Partido);
+
+                return query;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public IQueryable<int> getEstadisticasPartidoVisitante()
+        {
+            try
+            {
+                var query = (from d in _db.EstadisticasPartidos where d.idPartido == _partidos.idPartido select d.idEstadistica_Partido);
+
+                return query;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+
+        
     }
 }

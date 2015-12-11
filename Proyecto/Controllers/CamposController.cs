@@ -26,32 +26,20 @@ namespace Proyecto.Controllers
         }
 
 
-        // GET: Campos
         public ActionResult Index(string searchStr)
         {
             Domain.Collections.cCampos coleccion = new Domain.Collections.cCampos();
-
-            //if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-            //{
             return View(searchStr != null ? coleccion.showAllResults(searchStr) : coleccion.showAllResults());
-            //}
-            //else
-            //{
-            //    return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
-            //}
         }
 
-        // GET: /License/Selector
 
-        public ActionResult Selector(string searchStr /*,long idCliente*/)
+        public ActionResult Selector(string searchStr)
         {
-            //ViewBag.idCliente = idCliente;
             Domain.Collections.cCampos coleccion = new Domain.Collections.cCampos();
             ViewBag.Title = "Seleccionar Campo";
             return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
         }
 
-        // GET: /License/Gestion
 
         public ActionResult Gestion(int id)
         {
@@ -71,7 +59,6 @@ namespace Proyecto.Controllers
             return View();
         }
 
-        // GET: /License/AjaxDetails/
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDetails(int id)
@@ -84,7 +71,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxDetails", item);
         }
 
-        // GET: /License/AjaxCreate
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxCreate()
@@ -95,7 +81,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxCreate", new Campos());
         }
 
-        // POST: /License/AjaxCreate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -129,7 +114,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxCreate", modelo);
         }
 
-        // GET: /License/AjaxEdit
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxEdit(int idCampo)
@@ -142,7 +126,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxEdit", obtenerModelo(item));
         }
 
-        // POST: /License/AjaxEdit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -183,7 +166,6 @@ namespace Proyecto.Controllers
         }
 
 
-        // GET: /License/AjaxDelete
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDelete(int id)
@@ -199,7 +181,6 @@ namespace Proyecto.Controllers
         }
 
 
-        // POST: /License/AjaxDelete
 
         [HttpPost]
         [ValidateAntiForgeryToken]

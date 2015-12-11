@@ -82,12 +82,9 @@ namespace Domain.Gestion
         
         public void guardarEstadisticas(int idPartido)
         {
-            _equipos.Partidos_Jugados = (from d in _db.Partidos     //introducir control de la variable isJugado para sumar solo los partidos que ya tienen resultado. Sería un metodo a ejecutar antes
+            _equipos.Partidos_Jugados = (from d in _db.Partidos    
                                          where d.idEquipoLocal == idEquipo || d.idEquipoVisitante == idEquipo
                                          select d).Count();
-            var queryIdsPartidosJugados = (from d in _db.Partidos
-                                         where d.idEquipoLocal == idEquipo || d.idEquipoVisitante == idEquipo
-                                         select d.idPartido);
             
                 int marcadorMiEquipo = (from d in _db.EstadisticasPartidos
                              where d.idPartido == idPartido
@@ -142,6 +139,57 @@ namespace Domain.Gestion
                         where d.idLiga == _equipos.idLiga
                         select d.nombre).FirstOrDefault();
             return query;
+        }
+
+        public void restarEstadisticas(int idPartido)
+        {
+            _equipos.Partidos_Jugados -= 1;
+            int marcadorMiEquipo = (from d in _db.EstadisticasPartidos
+                                    where d.idPartido == idPartido
+                                    where d.idEquipo == _equipos.idEquipo
+                                    select d.Marcador).FirstOrDefault();
+            int marcadorContrario = (from d in _db.EstadisticasPartidos
+                                     where d.idPartido == idPartido
+                                     where d.idEquipo != _equipos.idEquipo
+                                     select d.Marcador).FirstOrDefault();
+
+            if (marcadorMiEquipo > marcadorContrario)
+            {
+                _equipos.Partidos_Ganados -= 1;
+                _equipos.Puntos -= 4;
+            }
+            else
+            {
+                if (marcadorMiEquipo < marcadorContrario)
+                {
+                    _equipos.Partidos_Perdidos -= 1;
+                }
+                else
+                {
+                    _equipos.Partidos_Empatados -= 1;
+                    _equipos.Puntos -= 2;
+                }
+
+            }
+            _equipos.Puntos_Encajados -= marcadorContrario; 
+            _equipos.Puntos_Anotados -= marcadorMiEquipo;
+
+            if (((marcadorContrario - marcadorMiEquipo) <= 7) && ((marcadorContrario - marcadorMiEquipo) > 0))
+            {
+                _equipos.Puntos -= 1;
+            }
+            int? numeroEnsayos = (from d in _db.EstadisticasPartidos
+                                  where d.idPartido == idPartido
+                                  where d.idEquipo == _equipos.idEquipo
+                                  select d.Ensayos).Sum();
+
+            if (numeroEnsayos >= 4)
+            {
+                _equipos.Puntos -= 1;
+            }
+
+
+            save();
         }
     }
 }

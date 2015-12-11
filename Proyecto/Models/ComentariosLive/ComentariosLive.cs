@@ -9,17 +9,19 @@ namespace Proyecto.Models.ComentariosLive
 {
     public class ComentariosLive
     {
-        [StringLength(50)]
+        
         [Display(Name = "idComentario")]
         public int idComentario { get; set; }
-        [StringLength(50)]
         [Display(Name = "idLive")]
         public int? idLive { get; set; }
-        [StringLength(50)]
-        [Display(Name = "texto")]
+        [Display(Name = "Comentario")]
         public string texto { get; set; }
-        [StringLength(50)]
-        [Display(Name = "minuto")]
-        public int? minuto { get; set; }
+        [Display(Name = "Hora")]
+        public DateTime? horaPublicacion { get; set; }
+        [Display(Name = "Nuevo marcador local")]
+         public int? marcadorLocal { get; set; }
+        [Display(Name = "Nuevo marcador visitante")]
+         public int? marcadorVisitatne { get; set; }
+    
     }
 }

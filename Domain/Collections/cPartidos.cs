@@ -183,6 +183,7 @@ namespace Domain.Collections
             {
                 var query = from r in db.Partidos
                             where r.idLiga == idLiga
+                            where r.isJugado == false
                             orderby r.Date
                             select r;
 
@@ -226,6 +227,7 @@ namespace Domain.Collections
             {
                 var query = from r in db.Partidos
                             where r.idLiga == idLiga
+                            where r.isJugado == true
                             orderby r.Date
                             select r;
 
@@ -291,6 +293,7 @@ namespace Domain.Collections
                 var query = from r in db.Partidos
                             where r.isJugado == false
                             where r.Date <= DateTime.Now
+                            where r.idLive == null
                             orderby r.Date
                             select r;
 
@@ -326,7 +329,50 @@ namespace Domain.Collections
             return list;
         }
 
-        
+        public IEnumerable<sPartidos> listaConLive()
+        {
+            ProyectoEntities1 db = new ProyectoEntities1();
+            var list = new List<sPartidos>();
+
+            try
+            {
+                var query = from r in db.Partidos
+                            where r.idLive != null
+                            where r.isJugado == false
+                            orderby r.Date
+                            select r;
+
+
+                foreach (var i in query)
+                {
+                    var item = new sPartidos();
+
+                    item.idPartido = i.idPartido;
+                    item.idLiga = i.idLiga;
+                    item.idEquipoLocal = i.idEquipoLocal;
+                    item.idEquipoVisitante = i.idEquipoVisitante;
+                    item.Date = i.Date;
+                    item.idCampo = i.idCampo;
+                    item.idLive = i.idLive;
+                    item.idArbitro = i.idArbitro;
+                    item.nombreLocal = i.Equipos.Nombre;
+                    item.nombreVisitante = i.Equipos1.Nombre;
+                    item.nombreCampo = i.Campos.Nombre;
+                    item.nombreArbitro = i.Arbitros.Nombre;
+                    item.isJugado = i.isJugado;
+                    item.nombreLiga = i.Ligas.nombre;
+
+                    list.Add(item);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                list = new List<sPartidos>();
+            }
+
+            return list;
+        }
         
     }
 }

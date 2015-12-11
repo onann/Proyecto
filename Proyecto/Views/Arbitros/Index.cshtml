@@ -37,7 +37,7 @@
     <div class="panel-body">
         <br />
         <small>
-            @Html.Grid(Model).Columns(columns =>
+            @Html.Grid(Model).EmptyText("No hay datos que mostrar").Columns(columns =>
                        {
                            columns.Add(m => m.Nombre).Titled("Nombre");
                            columns.Add(m => m.Apellido1).Titled("Apellidos");
@@ -64,12 +64,6 @@
 @helper CustomRenderingOfColumn(int idClub, string Nombre)
 {
     <div class="btn-group-xs">
-
-        @*@Html.ActionLink(" ", "Gestion", "Arbitros", new { id = idClub }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil", title = "Gestionar" })
-
-        @Ajax.ActionLink(" ", "AjaxDelete", "Arbitros", new { id = idClub },
-                new AjaxOptions { UpdateTargetId = "modalContent", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ClearModal" },
-                new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", data_toggle = "modal", data_target = "#myModal", title = "Eliminar" })*@
     </div>
 }
 

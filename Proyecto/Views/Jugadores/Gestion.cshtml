@@ -20,12 +20,8 @@
 <div style="padding: 30px 30px 0px 30px;">
 
     <div id="my-tab-content" class="tab-content">
-
-        @*<div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoJugador ? "AjaxCreate" : "AjaxDetails", "Jugadores",ViewBag.NuevoJugador ? new { idEquipo = ViewBag.idEquipo } : new { id = ViewBag.idJugador, idEquipo = ViewBag.idEquipo })">
-        <img src="~/Content/images/indicator.white.gif" /> Cargando ...
-        </div>*@
-        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoJugador ? "AjaxCreate" : "AjaxDetails", "Jugadores", ViewBag.NuevoJugador ? new {id = ViewBag.idEquipo} : new { id = ViewBag.idJugador@*, idEquipo = ViewBag.idEquipo *@})">
-            <img src="~/Content/images/indicator.white.gif" /> Cargando ...
+        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoJugador ? "AjaxCreate" : "AjaxDetails", "Jugadores", ViewBag.NuevoJugador ? new {id = ViewBag.idEquipo} : new { id = ViewBag.idJugador})">
+            
         </div>
 
     </div>

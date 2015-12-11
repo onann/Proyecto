@@ -9,8 +9,7 @@
 
 
 <ul id="tabs" class="nav nav-tabs na" data-tabs="tabs">
-    <li>@Html.ActionLink("Ligas", "Index", "Ligas", null, new { @class = "btn btn-primary" })</li>
-    @*<li>@Html.ActionLink("Propiedades", "Properties", "Ligas", new { id = ViewBag.LigaId }, null)</li>*@    
+    <li>@Html.ActionLink("Ligas", "Index", "Ligas", null, new { @class = "btn btn-primary" })</li>   
     <li>@Html.ActionLink("Clasificacion", "Clasificacion", "Ligas", new { idLiga = ViewBag.LigaId }, null)</li>
     <li class="active"><a href="#" data-toggle="tab">Calendario</a></li>
     <li>@Html.ActionLink("Resultados", "Resultados", "Partidos", new { idLiga = ViewBag.LigaId }, null)</li>
@@ -33,7 +32,7 @@
 
 <small>
 
-    @Html.Grid(Model).Columns(columns =>
+    @Html.Grid(Model).EmptyText("No hay datos que mostrar").Columns(columns =>
             {
                 columns.Add(m => m.ReturnDateForDisplay).Titled("Fecha");
                 columns.Add(m => m.nombreLocal).Titled("Local");
@@ -44,62 +43,17 @@
                 columns.Add()
                      .Encoded(false)
                      .Sanitized(false)
-                     .RenderValueAs(m => CustomRenderingOfColumnFicha(m));
+                     .RenderValueAs(m => CustomRenderingOfColumnFicha(m.idPartido));
 
-            }).WithPaging(20).Sortable(true) @* .SetRowCssClasses(m => (m.Deleted || !m.Enabled) ? "active" : "")*@
+            }).WithPaging(20).Sortable(true)
 
         </small>
 
-        @helper CustomRenderingOfColumnFicha(Domain.Singles.sPartidos datos)
+        @helper CustomRenderingOfColumnFicha(int idPartido)
 {
-        <div>
-
-            @*@if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()) || User.IsInRole(Domain.Definitions.eRolesUsers.Supervisor.ToString()))
-                {
-                    <div class="pull-right" style="text-align:right">
-
-                        <div class="btn-group-xs">
-
-                            @if (datos.Deleted)
-                            {
-                                @Ajax.ActionLink(" ", "RegisterEnable", "Catalogs", new { id = datos.Id },
-                                         new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                    new { @class = "btn btn-default btn-xs glyphicon glyphicon-ok", title = "Habilitar" })
-                            }
-                            else
-                            {
-
-                                if (datos.Enabled)
-                                {
-                                    @Ajax.ActionLink(" ", "RegisterDisable", "Catalogs", new { id = datos.Id },
-                                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                        new { @class = "btn btn-default glyphicon glyphicon-remove", title = "Deshabilitar" })
-
-                                }
-                                else
-                                {
-                                    @Ajax.ActionLink(" ", "RegisterEnable", "Catalogs", new { id = datos.Id },
-                                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                        new { @class = "btn btn-default glyphicon glyphicon-ok", title = "Habilitar" })
-
-                                }
-
-                                if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-                                {
-                                    @Ajax.ActionLink(" ", "RegisterDelete", "Catalogs", new { id = datos.Id },
-                                         new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                    new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", title = "Eliminar" })
-
-                                }
-
-                            }
-
-                        </div>
-
-                    </div>
-                }*@
-
-        </div>
+    <div class="btn-group-xs">
+        @Html.ActionLink(" ", "borrarPartidoNoJugado", "Partidos", new { id = idPartido }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", title = "Borrar live" })
+    </div>
 
 
 }

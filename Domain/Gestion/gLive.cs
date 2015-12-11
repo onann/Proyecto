@@ -15,6 +15,14 @@ namespace Domain.Gestion
 
         public int idLive { get { return _live.idLive; } }
         public int? TiempoTranscurrido { get { return _live.TiempoTranscurrido; } set { _live.TiempoTranscurrido = value; } }
+        public int? idLocal { get { return _live.idLocal; } set { _live.idLocal = value; } }
+        public int? idVisitante { get { return _live.idVisitante; } set { _live.idVisitante = value; } }
+        public int? marcadorLocal { get { return _live.marcadorLocal; } set { _live.marcadorLocal = value; } }
+        public int? marcadorVisitante { get { return _live.marcadorVisitante; } set { _live.marcadorVisitante = value; } }
+        public DateTime? Date { get { return _live.Date; } set { _live.Date = value; } }
+        public int? idCampo { get { return _live.idCampo; } set { _live.idCampo = value; } }
+        public int? idArbitro { get { return _live.idArbitro; } set { _live.idArbitro = value; } }
+
         public bool exist { get { return _exist; } }
 
         private void nuevoLive()
@@ -52,10 +60,10 @@ namespace Domain.Gestion
         {
             try
             {
-                var query = (from d in _db.Clubes where d.idClub == idClub select d).SingleOrDefault();
+                var query = (from d in _db.Live where d.idLive == idLive select d).SingleOrDefault();
                 if (query != null)
                 {
-                    _db.Clubes.Remove(query);
+                    _db.Live.Remove(query);
                     _db.SaveChanges();
                     return true;
                 }
@@ -67,6 +75,11 @@ namespace Domain.Gestion
                 return false;
             }
 
+        }
+
+        public int getIdPartido()
+        {
+            return (from d in _db.Partidos where d.idLive == idLive select d.idPartido).SingleOrDefault();
         }
     }
 }

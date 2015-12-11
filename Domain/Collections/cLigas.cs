@@ -145,8 +145,6 @@ namespace Domain.Collections
 
                 if (!string.IsNullOrEmpty(search)) query = query.Where(x => x.nombre.Contains(search));
 
-                //if (!showDeleted) query = query.Where(x => x.Status != (byte)Definitions.eCoreStatus.Deleted);
-
                 foreach (var i in query)
                 {
                     var item = new sLigas();
@@ -188,12 +186,12 @@ namespace Domain.Collections
                     item.Nombre = i.Nombre;
                     item.idLiga = i.idLiga;
                     item.Puntos = i.Puntos;
-                    item.Partidos_Jugados = i.Partidos_Jugados;
-                    item.Partidos_Ganados = i.Partidos_Ganados;
-                    item.Partidos_Perdidos = i.Partidos_Perdidos;
-                    item.Partidos_Empatados = i.Partidos_Empatados;
-                    item.Puntos_Encajados = i.Puntos_Encajados;
-                    item.Puntos_Anotados = i.Puntos_Anotados;
+                    item.Partidos_Jugados = i.Partidos_Jugados ?? 0;
+                    item.Partidos_Ganados = i.Partidos_Ganados ?? 0;
+                    item.Partidos_Perdidos = i.Partidos_Perdidos ?? 0;
+                    item.Partidos_Empatados = i.Partidos_Empatados ?? 0;
+                    item.Puntos_Encajados = i.Puntos_Encajados ?? 0;
+                    item.Puntos_Anotados = i.Puntos_Anotados ?? 0;
 
                     list.Add(item);
                 }

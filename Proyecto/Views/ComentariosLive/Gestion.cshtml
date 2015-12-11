@@ -8,7 +8,6 @@
 
 <ul id="tabs" class="nav nav-tabs na" data-tabs="tabs">
 
-    <li>@Html.ActionLink("ComentariosLive", "Index", "ComentariosLive", null, new { @class = "btn btn-primary" })</li>
 
     @if (ViewBag.NuevoComentarioLive == true)
     {
@@ -21,8 +20,10 @@
 
     <div id="my-tab-content" class="tab-content">
 
-        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoComentarioLive ? "AjaxCreate" : "AjaxDetails", "ComentariosLive", ViewBag.NuevoComentarioLive ? null : new { id = ViewBag.idComentario@*, idCliente = ViewBag.idCliente *@})">
-            <img src="~/Content/images/indicator.white.gif" /> Cargando ...
+        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevoComentarioLive ? "AjaxCreate" : "AjaxDetails", "ComentariosLive", ViewBag.NuevoComentarioLive ? new { id = ViewBag.idLive} : new
+                                                                                   {
+                                                                                       id = ViewBag.idComentario})">
+            
         </div>
 
     </div>

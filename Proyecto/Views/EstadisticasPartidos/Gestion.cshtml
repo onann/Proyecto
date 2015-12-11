@@ -8,11 +8,11 @@
 
 <ul id="tabs" class="nav nav-tabs na" data-tabs="tabs">
 
-    <li>@Html.ActionLink("EstadisticasPartidos", "Index", "EstadisticasPartidos", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.ActionLink("<", "introResultados", "Partidos", null, new { @class = "btn btn-primary" })</li>
 
     @if (ViewBag.NuevaEstadisticaPartido == true)
     {
-        <li class="active"><a href="#general" data-toggle="tab">NuevaEstadisticaPartido</a></li>
+        <li class="active"><a href="#general" data-toggle="tab">Resultados del partido</a></li>
     }
 
 </ul>
@@ -21,8 +21,8 @@
 
     <div id="my-tab-content" class="tab-content">
 
-        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevaEstadisticaPartido ? "AjaxCreate" : "AjaxDetails", "EstadisticasPartidos", ViewBag.NuevaEstadisticaPartido ? new {id = ViewBag.idPartido} : new { id = ViewBag.idPartido@*, idCliente = ViewBag.idCliente *@})">
-            <img src="~/Content/images/indicator.white.gif" /> Cargando ...
+        <div class="tab-pane fade active in ajaxPartialContents" id="general" data-url="@Url.Action(ViewBag.NuevaEstadisticaPartido ? "AjaxCreate" : "AjaxDetails", "EstadisticasPartidos", ViewBag.NuevaEstadisticaPartido ? new {id = ViewBag.idPartido} : new { id = ViewBag.idPartido})">
+            
         </div>
 
     </div>

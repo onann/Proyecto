@@ -37,7 +37,7 @@
     <div class="panel-body">
         <br />
         <small>
-            @Html.Grid(Model).Columns(columns =>
+            @Html.Grid(Model).EmptyText("No hay datos que mostrar").Columns(columns =>
                        {
                            columns.Add(m => m.idLiga).Titled("#");
                            columns.Add(model => model.nombre).Titled("Nombre").Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(model => Html.ActionLink(model.nombre,
@@ -55,25 +55,10 @@
     </div>
 </div>
 
-@Html.ActionLink("Nueva Liga", "Gestion", "Ligas", new { id = -1 }, new { @class = "btn btn-primary" })
-
 
 @helper CustomRenderingOfColumn(int idLiga, string nombre)
 {
-    <div class="btn-group-xs">
-
-        @Html.ActionLink(" ", "Gestion", "Ligas", new { id = idLiga }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil", title = "Gestionar" })
-        @*@Html.ActionLink(" ", "AjaxDelete", "DataSQLS", new { idDataSQLS = idDataSQLS }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash" })*@
-
-        @Ajax.ActionLink(" ", "AjaxDelete", "DataSQLS", new { id = idLiga },
-                new AjaxOptions { UpdateTargetId = "modalContent", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ClearModal" },
-                new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", data_toggle = "modal", data_target = "#myModal", title = "Eliminar" })
-
-
-        @*@Ajax.ActionLink(" ", "AjaxDelete", "DataSQLS", new { id = idDataSQLS },
-            new AjaxOptions { UpdateTargetId = "modalContent", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ClearModal" },
-            new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", data_toggle = "modal", data_target = "#myModal", title = "Eliminar" })*@
-    </div>
+    
 }
 
 

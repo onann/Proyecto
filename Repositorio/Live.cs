@@ -22,6 +22,13 @@ namespace Repositorio
     
         public int idLive { get; set; }
         public Nullable<int> TiempoTranscurrido { get; set; }
+        public Nullable<int> idLocal { get; set; }
+        public Nullable<int> idVisitante { get; set; }
+        public Nullable<int> marcadorLocal { get; set; }
+        public Nullable<int> marcadorVisitante { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> idCampo { get; set; }
+        public Nullable<int> idArbitro { get; set; }
     
         public virtual ICollection<ComentariosLive> ComentariosLive { get; set; }
         public virtual ICollection<Partidos> Partidos { get; set; }

@@ -2,9 +2,11 @@
 
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.idJugador)
+
 <div class="col-md-12">
     <div class="col-md-3">
         @Html.TextBoxFor(m => m.idEquipo, new { @Value = ViewBag.idEquipo, @type = "hidden" })
+
         <div class="form-group input-group-sm">
             <small>
                 @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
@@ -14,16 +16,6 @@
                 @Html.ValidationMessageFor(model => model.Nombre)
             </small>
         </div>
-
-        @*<div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.idEquipo, new { @class = "control-label" })
-            </small>
-            @Html.DropDownListFor(model => model.idEquipo, new SelectList(ViewBag.Equipos, "idEquipo", "Nombre"))
-            <small>
-                @Html.ValidationMessageFor(model => model.idEquipo)
-            </small>
-        </div>*@
 
         <div class="form-group input-group-sm">
             <small>

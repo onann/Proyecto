@@ -11,7 +11,6 @@
 
 <ul id="tabs" class="nav nav-tabs na" data-tabs="tabs">
     <li>@Html.ActionLink("Ligas", "Index", "Ligas", null, new { @class = "btn btn-primary" })</li>
-    @*<li>@Html.ActionLink("Propiedades", "Properties", "Ligas", new { id = ViewBag.LigaId }, null)</li>*@
     <li class="active"><a href="#" data-toggle="tab">Clasificacion</a></li>
     <li>@Html.ActionLink("Calendario", "Calendario", "Partidos", new { idLiga = ViewBag.LigaId }, null)</li>
     <li>@Html.ActionLink("Resultados", "Resultados", "Partidos", new { idLiga = ViewBag.LigaId }, null)</li>
@@ -35,7 +34,7 @@
 
 <small>
 
-    @Html.Grid(Model).Columns(columns =>
+    @Html.Grid(Model).EmptyText("No hay datos que mostrar").Columns(columns =>
             {
 
                 columns.Add(model => model.Nombre).Titled("Nombre").Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(model => Html.ActionLink(model.Nombre,
@@ -44,8 +43,8 @@
                 columns.Add(m => m.Partidos_Ganados).Titled("Ganados");
                 columns.Add(m => m.Partidos_Perdidos).Titled("Perdidos");
                 columns.Add(m => m.Partidos_Empatados).Titled("Empatados");
-                columns.Add(m => m.Puntos_Encajados).Titled("Puntos a favor");
-                columns.Add(m => m.Puntos_Anotados).Titled("Puntos en contra");
+                columns.Add(m => m.Puntos_Anotados).Titled("Puntos a favor");
+                columns.Add(m => m.Puntos_Encajados).Titled("Puntos en contra");
                 columns.Add(m => m.Puntos).Titled("Puntos");
 
                 columns.Add()
@@ -53,60 +52,14 @@
                      .Sanitized(false)                     
                      .RenderValueAs(m => CustomRenderingOfColumnFicha(m));
 
-            }).WithPaging(20).Sortable(true) @* .SetRowCssClasses(m => (m.Deleted || !m.Enabled) ? "active" : "")*@
+            }).WithPaging(20).Sortable(true) 
 
 </small>
 
 @helper CustomRenderingOfColumnFicha(Domain.Singles.sEquipos datos)
 {
-    <div>
+    
 
-        @*@if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()) || User.IsInRole(Domain.Definitions.eRolesUsers.Supervisor.ToString()))
-        {
-            <div class="pull-right" style="text-align:right">
-
-                <div class="btn-group-xs">
-
-                    @if (datos.Deleted)
-                    {
-                        @Ajax.ActionLink(" ", "RegisterEnable", "Catalogs", new { id = datos.Id },
-                                 new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                            new { @class = "btn btn-default btn-xs glyphicon glyphicon-ok", title = "Habilitar" })
-                    }
-                    else
-                    {
-
-                        if (datos.Enabled)
-                        {
-                            @Ajax.ActionLink(" ", "RegisterDisable", "Catalogs", new { id = datos.Id },
-                                     new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                new { @class = "btn btn-default glyphicon glyphicon-remove", title = "Deshabilitar" })
-
-                        }
-                        else
-                        {
-                            @Ajax.ActionLink(" ", "RegisterEnable", "Catalogs", new { id = datos.Id },
-                                     new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                                new { @class = "btn btn-default glyphicon glyphicon-ok", title = "Habilitar" })
-
-                        }
-
-                        if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-                        {
-                            @Ajax.ActionLink(" ", "RegisterDelete", "Catalogs", new { id = datos.Id },
-                                 new AjaxOptions { HttpMethod = "POST", OnSuccess = "checkSuccess" },
-                            new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", title = "Eliminar" })
-
-                        }
-
-                    }
-
-                </div>
-
-            </div>
-        }*@
-
-    </div>
 
 
 }

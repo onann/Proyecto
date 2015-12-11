@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Domain.Singles.sLive>
+﻿@model IEnumerable<Domain.Singles.sPartidos>
 @using GridMvc.Html
 @{
     ViewBag.Title = "Partidos en directo";
@@ -27,7 +27,7 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        @using (Html.BeginForm("Index", "Clubes", FormMethod.Get, new { @class = "pull-right", role = "search" }))
+        @using (Html.BeginForm("Index", "Partidos", FormMethod.Get, new { @class = "pull-right", role = "search" }))
         {
             @Html.TextBox("searchStr", null, new { @class = "form-control input-sm", placeholder = "Buscar...", size = "40" })
         }
@@ -37,34 +37,32 @@
     <div class="panel-body">
         <br />
         <small>
-            @Html.Grid(Model).EmptyText("No hay datos que mostrar").Columns(columns =>
-                       {
-                           columns.Add(m => m.idLive).Titled("#");
-                           columns.Add(m => m.TiempoTranscurrido).Titled("TiempoTranscurrido");
-                           
+            @Html.Grid(Model).EmptyText("No hay datos que mostrar").EmptyText("No hay datos que mostrar").Columns(columns =>
+            {
+            columns.Add(m => m.ReturnDateForDisplay).Titled("Fecha");
+            columns.Add(m => m.nombreLocal).Titled("Local");
+            columns.Add(m => m.nombreVisitante).Titled("Local");
 
-                           columns.Add()
-                               .Encoded(false)
-                               .Sanitized(false)
-                               .RenderValueAs(m => CustomRenderingOfColumn(m.idLive));
 
-                       }).WithPaging(10).Sortable(true)
+            columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .RenderValueAs(m => CustomRenderingOfColumn(m.idPartido, (int)m.idLive));
+
+            }).WithPaging(10).Sortable(true)
         </small>
     </div>
 </div>
 
-@Html.ActionLink("Comenzar directo", "Gestion", "Live", new { id = -1 }, new { @class = "btn btn-primary" })
+@Html.ActionLink(" Iniciar directo", "selectorPartidos", "Live", null, new { @class = "btn btn-primary" })
 
 
-@helper CustomRenderingOfColumn(int idLive)
+@helper CustomRenderingOfColumn(int idPartido, int idLive)
 {
     <div class="btn-group-xs">
 
-        @Html.ActionLink(" ", "Gestion", "Live", new { id = idLive }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil", title = "Gestionar" })
-
-        @Ajax.ActionLink(" ", "AjaxDelete", "Live", new { id = idLive },
-                new AjaxOptions { UpdateTargetId = "modalContent", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ClearModal" },
-                new { @class = "btn btn-default btn-sm glyphicon glyphicon-trash", data_toggle = "modal", data_target = "#myModal", title = "Eliminar" })
+        @Html.ActionLink(" ", "partidoEnDirecto", "Live", new { idLive = idLive }, new { @class = "btn btn-default btn-sm glyphicon glyphicon glyphicon-play", title = "Ir al directo" })
+        @Html.ActionLink(" ", "borrarLive", "Live", new { id = idLive, idPartido = idPartido }, new { @class = "btn btn-default btn-sm glyphicon glyphicon-remove", title = "Borrar live" })
     </div>
 }
 

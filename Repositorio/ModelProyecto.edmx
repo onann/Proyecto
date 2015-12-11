@@ -50,7 +50,7 @@
           <Property Name="idComentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idLive" Type="int" />
           <Property Name="texto" Type="nchar" MaxLength="500" />
-          <Property Name="minuto" Type="int" />
+          <Property Name="horaPublicacion" Type="datetime" />
         </EntityType>
         <EntityType Name="Equipos">
           <Key>
@@ -111,6 +111,13 @@
           </Key>
           <Property Name="idLive" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TiempoTranscurrido" Type="int" />
+          <Property Name="idLocal" Type="int" />
+          <Property Name="idVisitante" Type="int" />
+          <Property Name="marcadorLocal" Type="int" />
+          <Property Name="marcadorVisitante" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="idCampo" Type="int" />
+          <Property Name="idArbitro" Type="int" />
         </EntityType>
         <EntityType Name="Partidos">
           <Key>
@@ -445,8 +452,8 @@
           <Property Name="idComentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idLive" Type="Int32" />
           <Property Name="texto" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-          <Property Name="minuto" Type="Int32" />
           <NavigationProperty Name="Live" Relationship="Self.FK_ComentariosLive_Live" FromRole="ComentariosLive" ToRole="Live" />
+          <Property Name="horaPublicacion" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Equipos">
           <Key>
@@ -522,6 +529,13 @@
           <Property Name="TiempoTranscurrido" Type="Int32" />
           <NavigationProperty Name="ComentariosLive" Relationship="Self.FK_ComentariosLive_Live" FromRole="Live" ToRole="ComentariosLive" />
           <NavigationProperty Name="Partidos" Relationship="Self.FK_Partidos_Live" FromRole="Live" ToRole="Partidos" />
+          <Property Name="idLocal" Type="Int32" />
+          <Property Name="idVisitante" Type="Int32" />
+          <Property Name="marcadorLocal" Type="Int32" />
+          <Property Name="marcadorVisitante" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="idCampo" Type="Int32" />
+          <Property Name="idArbitro" Type="Int32" />
         </EntityType>
         <EntityType Name="Partidos">
           <Key>
@@ -860,10 +874,10 @@
           <EntitySetMapping Name="ComentariosLive">
             <EntityTypeMapping TypeName="ProyectoModel.ComentariosLive">
               <MappingFragment StoreEntitySet="ComentariosLive">
+                <ScalarProperty Name="horaPublicacion" ColumnName="horaPublicacion" />
                 <ScalarProperty Name="idComentario" ColumnName="idComentario" />
                 <ScalarProperty Name="idLive" ColumnName="idLive" />
                 <ScalarProperty Name="texto" ColumnName="texto" />
-                <ScalarProperty Name="minuto" ColumnName="minuto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -927,6 +941,13 @@
           <EntitySetMapping Name="Live">
             <EntityTypeMapping TypeName="ProyectoModel.Live">
               <MappingFragment StoreEntitySet="Live">
+                <ScalarProperty Name="idArbitro" ColumnName="idArbitro" />
+                <ScalarProperty Name="idCampo" ColumnName="idCampo" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="marcadorVisitante" ColumnName="marcadorVisitante" />
+                <ScalarProperty Name="marcadorLocal" ColumnName="marcadorLocal" />
+                <ScalarProperty Name="idVisitante" ColumnName="idVisitante" />
+                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
                 <ScalarProperty Name="idLive" ColumnName="idLive" />
                 <ScalarProperty Name="TiempoTranscurrido" ColumnName="TiempoTranscurrido" />
               </MappingFragment>

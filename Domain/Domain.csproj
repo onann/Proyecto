@@ -87,6 +87,7 @@
     <Compile Include="Singles\sComentariosLive.cs" />
     <Compile Include="Singles\sEquipos.cs" />
     <Compile Include="Singles\sEstadisticasPartidos.cs" />
+    <Compile Include="Singles\singleLive.cs" />
     <Compile Include="Singles\sJugadores.cs" />
     <Compile Include="Singles\sLigas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,7 +121,9 @@
     <None Include="scripts\jquery-2.1.4.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

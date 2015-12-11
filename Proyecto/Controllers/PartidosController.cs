@@ -29,34 +29,20 @@ namespace Proyecto.Controllers
             modelo.isJugado = item.isJugado;
             return modelo;
         }
-
-
-        // GET: Clubes
         public ActionResult Index(string searchStr)
         {
             Domain.Collections.cPartidos coleccion = new Domain.Collections.cPartidos();
-
-            //if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-            //{
             return View(searchStr != null ? coleccion.showAllResults(searchStr) : coleccion.showAllResults());
-            //}
-            //else
-            //{
-            //    return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
-            //}
         }
 
-        // GET: /License/Selector
 
-        public ActionResult Selector(string searchStr /*,long idCliente*/)
+        public ActionResult Selector(string searchStr)
         {
-            //ViewBag.idCliente = idCliente;
             Domain.Collections.cPartidos coleccion = new Domain.Collections.cPartidos();
             ViewBag.Title = "Seleccionar partido";
             return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
         }
 
-        // GET: /License/Gestion
 
         public ActionResult Gestion(int id, int idLiga)
         {
@@ -76,7 +62,6 @@ namespace Proyecto.Controllers
             return View();
         }
 
-        // GET: /License/AjaxDetails/
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDetails(int id)
@@ -89,7 +74,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxDetails", item);
         }
 
-        // GET: /License/AjaxCreate
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxCreate(int id)
@@ -99,12 +83,9 @@ namespace Proyecto.Controllers
             ViewBag.Campos = new cCampos().showAllResults();
             ViewBag.Arbitros = new cArbitros().showAllResults();
             ViewBag.idLiga = id;
-
-            //if (!Request.IsAjaxRequest()) return HttpNotFound();
             return PartialView("_AjaxCreate", new Partidos());
         }
 
-        // POST: /License/AjaxCreate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -152,7 +133,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxCreate", modelo);
         }
 
-        // GET: /License/AjaxEdit
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxEdit(int idPartido)
@@ -165,7 +145,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxEdit", obtenerModelo(item));
         }
 
-        // POST: /License/AjaxEdit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -211,7 +190,6 @@ namespace Proyecto.Controllers
         }
 
 
-        // GET: /License/AjaxDelete
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDelete(int id)
@@ -226,8 +204,6 @@ namespace Proyecto.Controllers
             return PartialView("_Delete");
         }
 
-
-        // POST: /License/AjaxDelete
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -256,10 +232,17 @@ namespace Proyecto.Controllers
             return Json(result);
         }
 
+        public ActionResult borrarPartidoNoJugado(int id)
+        {
+            gPartidos gPartido = new gPartidos(id);
+            int idLiga = (int)gPartido.idLiga;
+            gPartido.Quitar(id);
+            return RedirectToAction("Calendario", "Partidos", new { idLiga = idLiga });
+        }
+
         public ActionResult Calendario(int idLiga)
         {
             ViewBag.LigaId = idLiga;
-            //ViewBag.ItemId = item;
 
             return View(new cPartidos().List(idLiga));
         }
@@ -267,7 +250,6 @@ namespace Proyecto.Controllers
         public ActionResult Resultados(int idLiga)
         {
             ViewBag.LigaId = idLiga;
-            //ViewBag.ItemId = item;
 
             return View(new cPartidos().ListResultados(idLiga));
         }
@@ -275,6 +257,11 @@ namespace Proyecto.Controllers
         public ActionResult introResultados()
         {
             return View(new cPartidos().listaSinJugar());
+        }
+
+        public ActionResult partidosLive()
+        {
+            return View(new cPartidos().listaConLive());
         }
     }
 }

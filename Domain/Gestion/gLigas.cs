@@ -67,10 +67,17 @@ namespace Domain.Gestion
             }
             catch (Exception ex)
             {
-                //logger.Error("Error al borrar la  Liga", ex);
                 return false;
             }
 
+        }
+
+        public String getNombreCategoria()
+        {
+            var query = (from d in _db.Categoria_Ligas
+                         where d.idCategoriaLiga == _ligas.idCategoriaLiga
+                         select d.NombreCategoria).FirstOrDefault();
+            return query;
         }
     }
 }

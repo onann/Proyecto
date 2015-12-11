@@ -77,6 +77,37 @@ namespace Domain.Gestion
             }
 
         }
+
+        public void actualizarEstadisticas(int idPartido)
+        {
+            var query = (from d in _db.EstadisticasPartidos
+                         join a in _db.Partidos on d.idPartido equals a.idPartido
+                         where d.idPartido == idPartido
+                         where a.idArbitro == _arbitros.idArbitro
+                         select d);
+            foreach (var i in query)
+            {
+                _arbitros.Partidos = _arbitros.Partidos ?? 0 + 1;
+                _arbitros.TarjetasAmarillas = _arbitros.TarjetasAmarillas ?? 0 + i.TarjetasAmarillas;
+                _arbitros.TarjetasRojas = _arbitros.TarjetasRojas ?? 0 + i.TarjetasRojas;
+            }
+
+        }
+
+        public void restarEstadisticas(int idPartido)
+        {
+            var query = (from d in _db.EstadisticasPartidos
+                         join a in _db.Partidos on d.idPartido equals a.idPartido
+                         where d.idPartido == idPartido
+                         where a.idArbitro == _arbitros.idArbitro
+                         select d);
+            foreach (var i in query)
+            {
+                _arbitros.Partidos = _arbitros.Partidos ?? 0 - 1;
+                _arbitros.TarjetasAmarillas = _arbitros.TarjetasAmarillas ?? 0 - i.TarjetasAmarillas;
+                _arbitros.TarjetasRojas = _arbitros.TarjetasRojas ?? 0 - i.TarjetasRojas;
+            }
+        }
     }
     }
 

@@ -23,43 +23,29 @@ namespace Proyecto.Controllers
             modelo.Nombre = item.Nombre;
             modelo.idLiga = item.idLiga;
             modelo.Puntos = item.Puntos;
-            modelo.Partidos_Jugados = item.Partidos_Jugados;
-            modelo.Partidos_Ganados = item.Partidos_Ganados;
-            modelo.Partidos_Perdidos = item.Partidos_Perdidos;
-            modelo.Partidos_Empatados = item.Partidos_Empatados;
-            modelo.Puntos_Encajados = item.Puntos_Encajados;
-            modelo.Puntos_Anotados = item.Puntos_Anotados;
+            modelo.Partidos_Jugados = item.Partidos_Jugados ?? 0;
+            modelo.Partidos_Ganados = item.Partidos_Ganados ?? 0;
+            modelo.Partidos_Perdidos = item.Partidos_Perdidos ?? 0;
+            modelo.Partidos_Empatados = item.Partidos_Empatados ?? 0;
+            modelo.Puntos_Encajados = item.Puntos_Encajados ?? 0;
+            modelo.Puntos_Anotados = item.Puntos_Anotados ?? 0;
 
             return modelo;
         }
 
-
-        // GET: Clubes
         public ActionResult Index(string searchStr)
         {
             Domain.Collections.cEquipos coleccion = new Domain.Collections.cEquipos();
-
-            //if (User.IsInRole(Domain.Definitions.eRolesUsers.Administrador.ToString()))
-            //{
             return View(searchStr != null ? coleccion.showAllResults(searchStr) : coleccion.showAllResults());
-            //}
-            //else
-            //{
-            //    return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
-            //}
         }
 
-        // GET: /License/Selector
 
-        public ActionResult Selector(string searchStr /*,long idCliente*/)
+        public ActionResult Selector(string searchStr)
         {
-            //ViewBag.idCliente = idCliente;
             Domain.Collections.cEquipos coleccion = new Domain.Collections.cEquipos();
             ViewBag.Title = "Seleccionar Equipo";
             return View(searchStr != null ? coleccion.showResults(searchStr) : coleccion.showResults());
         }
-
-        // GET: /License/Gestion
 
         public ActionResult Gestion(int id)
         {
@@ -79,7 +65,6 @@ namespace Proyecto.Controllers
             return View();
         }
 
-        // GET: /License/AjaxDetails/
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDetails(int id)
@@ -92,7 +77,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxDetails", item);
         }
 
-        // GET: /License/AjaxCreate
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxCreate()
@@ -105,7 +89,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxCreate", new Equipos());
         }
 
-        // POST: /License/AjaxCreate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -146,7 +129,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxCreate", modelo);
         }
 
-        // GET: /License/AjaxEdit
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxEdit(int id)
@@ -161,7 +143,6 @@ namespace Proyecto.Controllers
             return PartialView("_AjaxEdit", obtenerModelo(item));
         }
 
-        // POST: /License/AjaxEdit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -195,7 +176,7 @@ namespace Proyecto.Controllers
 
                     if (result.success)
                     {
-                        result.redirect = Url.Action("Gestion", "Equipos", new { id = item.idEquipo });
+                        result.redirect = Url.Action("Index", "Equipos", null);
                         return Json(result);
                     }
                     else
@@ -209,7 +190,6 @@ namespace Proyecto.Controllers
         }
 
 
-        // GET: /License/AjaxDelete
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AjaxDelete(int id)
@@ -225,7 +205,6 @@ namespace Proyecto.Controllers
         }
 
 
-        // POST: /License/AjaxDelete
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -254,14 +233,6 @@ namespace Proyecto.Controllers
             return Json(result);
         }
 
-        //public ActionResult AjaxByClient(int idLiga)
-        //{
-        //    if (!Request.IsAjaxRequest()) return HttpNotFound();
-
-        //    Domain.Collections.cEquipos Coleccion = new Domain.Collections.cEquipos();
-        //    return PartialView("_AjaxByClient", Coleccion.mostrarEquiposLiga(idLiga));
-        //}
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Lista(int idLiga)
         {
@@ -271,15 +242,12 @@ namespace Proyecto.Controllers
             if (!item.exist) return HttpNotFound();
 
             ViewBag.idLiga = item.idLiga;
-            //ViewBag.SoloLectura = item.deleted;
 
             Domain.Collections.cEquipos coleccion = new Domain.Collections.cEquipos();
 
             return PartialView("_Lista", coleccion.List(idLiga).OrderBy(m => m.Nombre));
         }
 
-
-        // GET : /Catalogs/HeadInfo/
 
         public ActionResult HeadInfo(int id)
         {
@@ -300,8 +268,6 @@ namespace Proyecto.Controllers
 
 
 
-        // GET : /Catalogs/Properties/
-
         public ActionResult Properties(int id)
         {
             var model = new Equipos();
@@ -309,9 +275,7 @@ namespace Proyecto.Controllers
             if (id < 0) return HttpNotFound();
 
             var item = new gEquipos(id);
-
-            //if (item.Deleted) return HttpNotFound();
-
+            
             model.idEquipo = item.idEquipo;
             model.idClub = item.idClub;
             model.Nombre = item.Nombre;
@@ -324,8 +288,6 @@ namespace Proyecto.Controllers
         }
 
 
-        // POST : /Catalogs/Properties/
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Properties(Equipos model)
@@ -336,8 +298,6 @@ namespace Proyecto.Controllers
                 item.idClub = model.idClub;
                 item.Nombre = model.Nombre;
 
-                //if (item.Save()) { return RedirectToAction("Index"); }
-                //else { ViewBag.MessageError = "No se ha podido completar la operación solicitada"; }
                 
                 if (item.save())
                 {
@@ -352,7 +312,6 @@ namespace Proyecto.Controllers
         public ActionResult listaJugadores(int idEquipo)
         {
             ViewBag.EquipoId = idEquipo;
-            //ViewBag.ItemId = item;
 
             return View(new cJugadores().List(idEquipo));
         }
@@ -360,7 +319,6 @@ namespace Proyecto.Controllers
         public ActionResult Estadisticas(int idEquipo)
         {
             ViewBag.EquipoId = idEquipo;
-            //ViewBag.ItemId = item;
 
             return View(new cEstadisticasPartidos().estadisticasEquipo(idEquipo));
         }
@@ -368,15 +326,12 @@ namespace Proyecto.Controllers
         public ActionResult Campos(int idEquipo)
         {
             ViewBag.EquipoId = idEquipo;
-            //ViewBag.ItemId = item;
 
             return View(new cCampos().camposEquipo(idEquipo));
         }
 
         public ActionResult FillEquipos(int idLiga)
         {
-            //ProyectoEntities1 db = new ProyectoEntities1();
-            //var equipos = db.Equipos.Where(c => c.idLiga == idLiga);
             var equipos = new cEquipos().List(idLiga);
             return Json(equipos, JsonRequestBehavior.AllowGet);
         }

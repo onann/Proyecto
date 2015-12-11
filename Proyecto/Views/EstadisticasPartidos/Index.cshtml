@@ -37,7 +37,7 @@
     <div class="panel-body">
         <br />
         <small>
-            @Html.Grid(Model).Columns(columns =>
+            @Html.Grid(Model).EmptyText("No hay datos que mostrar").Columns(columns =>
                        {
                            columns.Add(m => m.idClub).Titled("#");
                            columns.Add(m => m.Nombre).Titled("Nombre");

@@ -3,44 +3,40 @@
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.idComentario)
 
-<div class="col-md-12">
-    <div class="col-md-3">
-
-        <div class="form-group input-group-sm">
+<div class="">
+    <div class="row col-md-12">
+        @Html.TextBoxFor(m => m.idLive, new { @Value = ViewBag.idLive, @type = "hidden" })
+        <div class="form-group input-group-sm col-md-4 pull-left">
             <small>
-                @Html.LabelFor(model => model.idLive, new { @class = "control-label" })
+                @Html.LabelFor(model => model.marcadorLocal, new { @class = "control-label" })
             </small>
-            @Html.TextBoxFor(model => model.idLive, new { @class = "form-control input-sm ", style = "max-width: 100%;", placeholder = "Introduzca el idLive" })
+            @Html.TextBoxFor(model => model.marcadorLocal, new { @Value = (int)ViewBag.marcadorLocal, @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Dejar en blanco si el marcador no ha cambiado" })
             <small>
-                @Html.ValidationMessageFor(model => model.idLive)
-            </small>
-        </div>
-
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.minuto, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.minuto, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la minuto" })
-            <small>
-                @Html.ValidationMessageFor(model => model.minuto)
+                @Html.ValidationMessageFor(model => model.marcadorLocal)
             </small>
         </div>
-
-
+        <div class="form-group input-group-sm col-md-4 pull-right">
+            <small>
+               @Html.LabelFor(model => model.marcadorVisitatne, new { @class = "control-label" })
+            </small>
+            @Html.TextBoxFor(m => m.marcadorVisitatne, new { Value = (int)ViewBag.marcadorVisitante, @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Dejar en blanco si el marcador no ha cambiado" })
+            <small>
+                @Html.ValidationMessageFor(m => m.marcadorVisitatne)
+            </small>
+        </div>
     </div>
-    <div class="col-md-9">
-        <div class="form-group input-group-sm col-md-12">
-            <small>
-                @Html.LabelFor(m => m.texto)
-            </small>
-            @Html.TextAreaFor(m => m.texto, 8, 0, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca el texto" })
-            <small>
-                @Html.ValidationMessageFor(m => m.texto)
-            </small>
-        </div>
 
+    <div class="form-group input-group-sm">
+        <small>
+            @Html.LabelFor(model => model.texto, new { @class = "control-label" })
+        </small>
+        @Html.TextAreaFor(model => model.texto, new { @class = "form-control input-sm ", style = "max-width: 100%; height: 200px", placeholder = "Introduzce tu comentario" })
+        <small>
+            @Html.ValidationMessageFor(model => model.texto)
+        </small>
     </div>
 </div>
+
 
 
 @if (!string.IsNullOrEmpty(ViewBag.ErrorMensaje))

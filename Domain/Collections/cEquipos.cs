@@ -256,49 +256,8 @@ namespace Domain.Collections
                 return new List<sEquipos>();
             }
 
-        }
+        }        
 
-        
-
-        //public List<Singles.sEquipos> mostrarEquiposLiga(long idLiga)
-        //{
-        //    ProyectoEntities1 db = new ProyectoEntities1();
-        //    List<Singles.sEquipos> lList = new List<Singles.sEquipos>();
-        //    try
-        //    {
-        //        var query = from l in db.Ligas
-        //                    join equipo in db.Equipos on l.idLiga equals equipo.idLiga
-        //                    where l.idLiga == idLiga
-        //                    select new{
-        //                        equipo.idEquipo,
-        //                        equipo.Nombre,
-        //                        equipo.Partidos_Jugados,
-        //                        equipo.Partidos_Ganados,
-        //                        equipo.Partidos_Perdidos,
-        //                        equipo.Partidos_Empatados,
-        //                        equipo.Puntos,
-        //                    };
-
-        //        foreach (var i in query)
-        //        {
-        //            Singles.sEquipos l = new Singles.sEquipos();
-        //            l.idEquipo = i.idEquipo;
-        //            l.Nombre = i.Nombre;
-        //            l.Partidos_Jugados = i.Partidos_Jugados;
-        //            l.Partidos_Ganados = i.Partidos_Ganados;
-        //            l.Partidos_Perdidos = i.Partidos_Perdidos;
-        //            l.Partidos_Empatados = i.Partidos_Empatados;
-        //            l.Puntos = i.Puntos;
-        //            lList.Add(l);
-        //        }
-        //        return lList;
-
-                 
-                            
-        //    }
-        //    catch { return new List<Singles.sEquipos>(); }
-        //}
-
-
+       
     }
 }

@@ -223,21 +223,21 @@ namespace Domain.Collections
                      Conversiones = g.Sum(s => s.Conversiones),
                      Drops = g.Sum(s => s.Drops),
                      GolpesCastigo = g.Sum(s => s.GolpesCastigo),
-                     TarjetasRojas = g.Sum(s => s.TarjetasAmarillas),
-                     TarjetasAmarillas = g.Sum(s => s.Drops)
+                     TarjetasRojas = g.Sum(s => s.TarjetasRojas),
+                     TarjetasAmarillas = g.Sum(s => s.TarjetasAmarillas)
                  });
 
                 var item = new sEstadisticasPartidos();
                 foreach (var i in query2)
-                {          
+                {
                     item.marcador = (int)((i.Ensayos * 5) + (i.Conversiones * 2) + (i.Drops * 3) + (i.GolpesCastigo * 3));
-                    item.totalPuntos = ((i.Ensayos * 5) + (i.Conversiones * 2) + (i.Drops * 3) + (i.GolpesCastigo * 3));
-                    item.Ensayos = i.Ensayos;
-                    item.Conversiones = i.Conversiones;
-                    item.Drops = i.Drops;
-                    item.GolpesCastigo = i.GolpesCastigo;
-                    item.TarjetasAmarillas = i.TarjetasAmarillas;
-                    item.TarjetasRojas = i.TarjetasRojas;
+                    item.totalPuntos = ((i.Ensayos * 5) + (i.Conversiones * 2) + (i.Drops * 3) + (i.GolpesCastigo * 3)) ?? 0;
+                    item.Ensayos = i.Ensayos ?? 0;
+                    item.Conversiones = i.Conversiones ?? 0;
+                    item.Drops = i.Drops ?? 0;
+                    item.GolpesCastigo = i.GolpesCastigo ?? 0;
+                    item.TarjetasAmarillas = i.TarjetasAmarillas ?? 0;
+                    item.TarjetasRojas = i.TarjetasRojas ?? 0;
 
                     
                 }

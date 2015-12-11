@@ -17,7 +17,7 @@ namespace Repositorio
         public int idComentario { get; set; }
         public Nullable<int> idLive { get; set; }
         public string texto { get; set; }
-        public Nullable<int> minuto { get; set; }
+        public Nullable<System.DateTime> horaPublicacion { get; set; }
     
         public virtual Live Live { get; set; }
     }

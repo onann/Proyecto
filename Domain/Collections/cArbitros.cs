@@ -37,9 +37,9 @@ namespace Domain.Collections
                     e.Apellido1 = i.Apellido1;
                     e.Apellido2 = i.Apellido2;
                     e.Fecha_Nacimiento = i.Fecha_Nacimiento;
-                    e.Partidos = i.Partidos;
-                    e.TarjetasAmarillas = i.TarjetasAmarillas;    
-                     e.TarjetasRojas = i.TarjetasRojas;  
+                    e.Partidos = i.Partidos ?? 0;
+                    e.TarjetasAmarillas = i.TarjetasAmarillas ?? 0;    
+                    e.TarjetasRojas = i.TarjetasRojas ?? 0;  
                     eList.Add(e);
                 }
                 return eList;
@@ -84,9 +84,9 @@ namespace Domain.Collections
                     l.Apellido1 = i.Apellido1;
                     l.Apellido2 = i.Apellido2;
                     l.Fecha_Nacimiento = i.Fecha_Nacimiento;
-                    l.Partidos = i.Partidos;
-                    l.TarjetasAmarillas = i.TarjetasAmarillas;
-                    l.TarjetasRojas = i.TarjetasRojas;
+                    l.Partidos = i.Partidos ?? 0;
+                    l.TarjetasAmarillas = i.TarjetasAmarillas ?? 0;
+                    l.TarjetasRojas = i.TarjetasRojas ?? 0;
 
                     lList.Add(l);
                 }
@@ -124,9 +124,9 @@ namespace Domain.Collections
                     l.Apellido1 = i.Apellido1;
                     l.Apellido2 = i.Apellido2;
                     l.Fecha_Nacimiento = i.Fecha_Nacimiento;
-                    l.Partidos = i.Partidos;
-                    l.TarjetasAmarillas = i.TarjetasAmarillas;
-                    l.TarjetasRojas = i.TarjetasRojas;
+                    l.Partidos = i.Partidos ?? 0;
+                    l.TarjetasAmarillas = i.TarjetasAmarillas ?? 0;
+                    l.TarjetasRojas = i.TarjetasRojas ?? 0;
                     lList.Add(l);
                 }
 
@@ -172,9 +172,9 @@ namespace Domain.Collections
                     l.Apellido1 = i.Apellido1;
                     l.Apellido2 = i.Apellido2;
                     l.Fecha_Nacimiento = i.Fecha_Nacimiento;
-                    l.Partidos = i.Partidos;
-                    l.TarjetasAmarillas = i.TarjetasAmarillas;
-                    l.TarjetasRojas = i.TarjetasRojas;
+                    l.Partidos = i.Partidos ?? 0;
+                    l.TarjetasAmarillas = i.TarjetasAmarillas ?? 0;
+                    l.TarjetasRojas = i.TarjetasRojas ?? 0;
 
                     lList.Add(l);
                 }

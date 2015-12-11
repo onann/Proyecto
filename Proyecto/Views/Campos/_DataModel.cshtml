@@ -4,7 +4,24 @@
 
 <div class="col-md-12">
     <div class="col-md-3">
-
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
+            </small>
+            @Html.TextAreaFor(model => model.Nombre, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca el nombre" })
+            <small>
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </small>
+        </div>
+        <div class="form-group input-group-sm">
+            <small>
+                @Html.LabelFor(m => m.Direccion)
+            </small>
+            @Html.TextAreaFor(m => m.Direccion, 8, 0, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la dirección" })
+            <small>
+                @Html.ValidationMessageFor(m => m.Direccion)
+            </small>
+        </div>
         <div class="form-group input-group-sm">
             <small>
                 @Html.LabelFor(model => model.idEquipo, new { @class = "control-label" })
@@ -14,29 +31,13 @@
                 @Html.ValidationMessageFor(model => model.idEquipo)
             </small>
         </div>
-
-        <div class="form-group input-group-sm">
-            <small>
-                @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
-            </small>
-            @Html.TextAreaFor(model => model.Nombre, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca la Nombre" })
-            <small>
-                @Html.ValidationMessageFor(model => model.Nombre)
-            </small>
-        </div>
+        
+        
 
 
     </div>
     <div class="col-md-9">
-        <div class="form-group input-group-sm col-md-12">
-            <small>
-                @Html.LabelFor(m => m.Direccion)
-            </small>
-            @Html.TextAreaFor(m => m.Direccion, 8, 0, new { @class = "form-control ckeditor", style = "max-width: 100%;", placeholder = "Introduzca el Direccion" })
-            <small>
-                @Html.ValidationMessageFor(m => m.Direccion)
-            </small>
-        </div>
+        
 
     </div>
 </div>

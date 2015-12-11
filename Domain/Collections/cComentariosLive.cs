@@ -23,7 +23,7 @@ namespace Domain.Collections
                                 e.idComentario,
                                 e.idLive,
                                 e.texto,
-                                e.minuto
+                                e.horaPublicacion
                             };
                 foreach (var i in query)
                 {
@@ -31,7 +31,7 @@ namespace Domain.Collections
                     e.idComentario = i.idComentario;
                     e.idLive = i.idLive;
                     e.texto = i.texto;
-                    e.minuto = i.minuto;
+                    e.horaPublicacion = i.horaPublicacion;
                     eList.Add(e);
                 }
                 return eList;
@@ -50,13 +50,13 @@ namespace Domain.Collections
                             where (l.idComentario.ToString().Contains(searchStr) ||
                                 l.idLive.ToString().Contains(searchStr) ||
                                 l.texto.Contains(searchStr) ||
-                                l.minuto.ToString().Contains(searchStr))
+                                l.horaPublicacion.ToString().Contains(searchStr))
                             select new
                             {
                                 l.idComentario,
                                 l.idLive,
                                 l.texto,
-                                l.minuto
+                                l.horaPublicacion
                             };
 
                 foreach (var i in query)
@@ -65,7 +65,7 @@ namespace Domain.Collections
                     l.idComentario = i.idComentario;
                     l.idLive = i.idLive;
                     l.texto = i.texto;
-                    l.minuto = i.minuto;
+                    l.horaPublicacion = i.horaPublicacion;
 
                     lList.Add(l);
                 }
@@ -88,7 +88,7 @@ namespace Domain.Collections
                                 l.idComentario,
                                 l.idLive,
                                 l.texto,
-                                l.minuto
+                                l.horaPublicacion
                             };
 
                 foreach (var i in query)
@@ -97,7 +97,7 @@ namespace Domain.Collections
                     l.idComentario = i.idComentario;
                     l.idLive = i.idLive;
                     l.texto = i.texto;
-                    l.minuto = i.minuto;
+                    l.horaPublicacion = i.horaPublicacion;
 
                     lList.Add(l);
                 }
@@ -118,13 +118,13 @@ namespace Domain.Collections
                             where (l.idComentario.ToString().Contains(searchStr) ||
                                 l.idLive.ToString().Contains(searchStr) ||
                                 l.texto.Contains(searchStr) ||
-                                l.minuto.ToString().Contains(searchStr))
+                                l.horaPublicacion.ToString().Contains(searchStr))
                             select new
                             {
                                 l.idComentario,
                                 l.idLive,
                                 l.texto,
-                                l.minuto
+                                l.horaPublicacion
                             };
 
                 foreach (var i in query)
@@ -133,7 +133,7 @@ namespace Domain.Collections
                     l.idComentario = i.idComentario;
                     l.idLive = i.idLive;
                     l.texto = i.texto;
-                    l.minuto = i.minuto;
+                    l.horaPublicacion = i.horaPublicacion;
 
                     lList.Add(l);
                 }
@@ -143,5 +143,32 @@ namespace Domain.Collections
             catch { return new List<Singles.sComentariosLive>(); }
         }
 
+            public List<Singles.sComentariosLive> listaComentariosLive(int idLive)
+        {
+            ProyectoEntities1 db = new ProyectoEntities1();
+            List<Singles.sComentariosLive> lList = new List<Singles.sComentariosLive>();
+
+            try
+            {
+                var query = from l in db.ComentariosLive
+                            where l.idLive == idLive
+                            orderby l.horaPublicacion descending
+                            select l;
+
+                foreach (var i in query)
+                {
+                    Singles.sComentariosLive l = new Singles.sComentariosLive();
+                    l.idComentario = i.idComentario;
+                    l.idLive = i.idLive;
+                    l.texto = i.texto;
+                    l.horaPublicacion = i.horaPublicacion;
+
+                    lList.Add(l);
+                }
+
+                return lList;
+            }
+            catch { return new List<Singles.sComentariosLive>(); }
+        }
     }
 }
